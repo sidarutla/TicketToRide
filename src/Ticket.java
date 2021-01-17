@@ -1,8 +1,8 @@
 public class Ticket {
 
-    private String source;
-    private String destination;
-    private int value;
+    String source;
+    String destination;
+    int value;
 
     public Ticket(String source, String destination, int value) {
         this.source = source;
@@ -15,7 +15,7 @@ public class Ticket {
         return ticket;
     }
     public String toString(){
-        String string = source + ", " + destination + ", " + value;
+        String string = source + " to " + destination + " for " + value + " points";
         return string;
     }
 }

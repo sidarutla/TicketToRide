@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI">
+   <children>
+      <FlowPane layoutY="310.0" prefHeight="100.0" prefWidth="150.0">
+         <children>
+            <Rectangle arcHeight="0" arcWidth="0" fill="DODGERBLUE" height="120" stroke="BLACK" strokeType="INSIDE" width="150.0" />
+         </children></FlowPane>
+      <FlowPane layoutY="310.0" prefHeight="100.0" prefWidth="150.0">
+         <children>
+            <Label text="                    Player 1" />
+         </children></FlowPane>
+      <FlowPane layoutX="150.0" layoutY="310.0" prefHeight="100.0" prefWidth="150.0">
+         <children>
+            <Rectangle arcHeight="0" arcWidth="0" fill="DODGERBLUE" height="120" stroke="BLACK" strokeType="INSIDE" width="150.0" />
+         </children></FlowPane>
+      <FlowPane layoutX="150.0" layoutY="310.0" prefHeight="100.0" prefWidth="150.0">
+         <children>
+            <Label text="                    Player 2" />
+         </children></FlowPane>
+      <FlowPane layoutX="300.0" layoutY="310.0" prefHeight="100.0" prefWidth="150.0">
+         <children>
+            <Rectangle arcHeight="0" arcWidth="0" fill="DODGERBLUE" height="120" stroke="BLACK" strokeType="INSIDE" width="150.0" />
+         </children></FlowPane>
+      <FlowPane layoutX="300.0" layoutY="310.0" prefHeight="100.0" prefWidth="150.0">
+         <children>
+            <Label text="                    Player 3" />
+         </children></FlowPane>
+      <FlowPane layoutX="450.0" layoutY="310.0" prefHeight="100.0" prefWidth="150.0">
+         <children>
+            <Rectangle fill="DODGERBLUE" height="120" stroke="BLACK" strokeType="INSIDE" width="150.0" />
+         </children></FlowPane>
+      <FlowPane layoutX="450.0" layoutY="310.0" prefHeight="100.0" prefWidth="150.0">
+         <children>
+            <Label text="                    Player 4" />
+         </children></FlowPane>
+   </children>
+</AnchorPane>

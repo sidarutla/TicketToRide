@@ -53,7 +53,7 @@ public class Board {
     Connection cn44 = Connection.buildConnection("Oklahoma City", "Little Rock", false, 2, TrackColor.grey, null);
     Connection cn45 = Connection.buildConnection("Oklahoma City", "Dallas", true, 2, TrackColor.grey, TrackColor.grey);
     Connection cn46 = Connection.buildConnection("Dallas", "Little Rock", false, 2, TrackColor.grey, null);
-    Connection cn47 = Connection.buildConnection("Dallas", "Houston", true, 2, TrackColor.grey, TrackColor.grey);
+    Connection cn47 = Connection.buildConnection("Dallas", "Houston", true, 1, TrackColor.grey, TrackColor.grey);
     Connection cn48 = Connection.buildConnection("Houston", "New Orleans", false, 2, TrackColor.grey, TrackColor.grey);
     Connection cn49 = Connection.buildConnection("Saint St. Marie", "Montreal", false, 5, TrackColor.black, null);
     Connection cn50 = Connection.buildConnection("Saint St. Marie", "Toronto", false, 2, TrackColor.grey, null);
@@ -235,7 +235,7 @@ public class Board {
 
     private List<Card> cardList = new ArrayList<>(Arrays.asList(cd1, cd2, cd3, cd4, cd5, cd6, cd7, cd8, cd9, cd10, cd11, cd12, cd13, cd14, cd15, cd16, cd17, cd18, cd19, cd20, cd21, cd22, cd23, cd24, cd25, cd26, cd27, cd28, cd29, cd30, cd31, cd32, cd33, cd34, cd35, cd36, cd37, cd38, cd39, cd40, cd41, cd42, cd43, cd44, cd45, cd46, cd47, cd48, cd49, cd50, cd51, cd52, cd53, cd54, cd55, cd56, cd57, cd58, cd59, cd60, cd61, cd62, cd63, cd64, cd65, cd66, cd67, cd68, cd69, cd70, cd71, cd72, cd73, cd74, cd75, cd76, cd77, cd78, cd79, cd80, cd81, cd82, cd83, cd84, cd85, cd86, cd87, cd88, cd89, cd90, cd91, cd92, cd93, cd94, cd95, cd96, cd97, cd98, cd99, cd100, cd101, cd102, cd103, cd104, cd105, cd106, cd107, cd108, cd109, cd110));
 
-    private List<Card> fiveOpenCards = new ArrayList<>();
+    List<Card> fiveOpenCards = new ArrayList<>();
 
     public Board(List<Player> inputPlayers) {
 
@@ -282,6 +282,9 @@ public class Board {
 
         for (int i = 0; i < playerList.size(); i++){
                 playerList.get(i).firstTurnReturnTickets(ticketList);
+                for (int j = 0; j < 23; j++) {
+                    System.out.println();
+                }
             }
         }
 
@@ -299,19 +302,46 @@ public class Board {
         }
     }
     public void playYourTurn() {
-        for (int i = 0; i < playerList.size(); i++) {
-            while (playerList.get(i).tracks > 2) {
+        boolean isGamePlaying = true;
+        int i = 0;
+        List<Integer> scores = new ArrayList<>();
+        while (isGamePlaying == true) {
+            if (playerList.get(i).tracks <= 2) {
+                playerList.get(i).playTurn(this, ticketList, connectionList);
+                System.out.println(playerList.get(i));
                 for (int j = 0; j < playerList.size(); j++) {
-                    playerList.get(j).playTurn(this, ticketList, connectionList);
+                    for (int k = 0; k < playerList.get(j).tickets.size(); k++) {
+                        playerList.get(j).score -= playerList.get(j).tickets.get(k).value;
+                    }
+                    System.out.println("Player " + playerList.get(j).name + "'s score: " + playerList.get(j).score);
+                    scores.add(playerList.get(j).score);
+                }
+                int highestScore = Collections.max(scores);
+                boolean winningPlayerFound = false;
+                    for (int l = 0; l < playerList.size(); l++) {
+                        if (playerList.get(l).score == highestScore && winningPlayerFound == false) {
+                            System.out.println("Player " + playerList.get(l).name + " wins!");
+                            winningPlayerFound = true;
+                        }
+                    }
+                isGamePlaying = false;
+            } else {
+                playerList.get(i).playTurn(this, ticketList, connectionList);
+                if (i < playerList.size() - 1) {
+                    i++;
+                } else {
+                    i = 0;
+                }
                 }
             }
         }
-    }
 
     public void checkOpenCards() {
+        System.out.println("Open cards:");
         for (int i = 0; i < fiveOpenCards.size(); i++) {
             System.out.println(fiveOpenCards.get(i));
         }
+        System.out.println();
     }
 
     public Card getCard(TakeCard card) {
@@ -323,8 +353,6 @@ public class Board {
             fiveOpenCards.remove(cardIndex);
             fiveOpenCards.add(cardList.get(0));
             cardList.remove(0);
-            //Check for loco.. and discard and draw new five set...
-            //If there are not cards in the cardlist.. what do you do?
             return wantedCard;
         } else {
             Card wantedCard = cardList.get(0);
@@ -332,6 +360,7 @@ public class Board {
             return wantedCard;
         }
     }
+
     public boolean isTakeCardValid(TakeCard takeCard, boolean isFirstTurn){
         if (isFirstTurn == false && takeCard.ordinal() < 5 && fiveOpenCards.get(takeCard.ordinal()).isLocomotive() == true) {
             return false;
@@ -347,8 +376,6 @@ public class Board {
         distributeCards();
         openFiveCards();
         playYourTurn();
-        print();
-
     }
 }
 

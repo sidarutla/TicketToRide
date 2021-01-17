@@ -1,7 +1,7 @@
 public class Connection {
 
-    private String source;
-    private String destination;
+    String source;
+    String destination;
      Pathway pathway1;
      Pathway pathway2;
 
