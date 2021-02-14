@@ -11,9 +11,10 @@ public class Player {
 
     int tracks = 45;
     int score = 0;
-     ArrayList<Ticket> tickets;
-     ArrayList<Card> cards;
+    ArrayList<Ticket> tickets;
+    ArrayList<Card> cards;
     List<List<String>> connectedCities = new ArrayList<>();
+
     public Player(String inputName, PlayerColor inputColor) {
         this.name = inputName;
         this.playerColor = inputColor;
@@ -21,7 +22,7 @@ public class Player {
         this.cards = new ArrayList<>();
     }
 
-    public void print(){
+    public void print() {
         System.out.println("Player " + name + ", here are your stats:");
         System.out.println("score:");
         System.out.println(score);
@@ -81,7 +82,7 @@ public class Player {
         if (inputIndex == 1) {
             System.out.println("Player " + name + ", return a ticket:");
             for (int j = 0; j < 3; j++) {
-                System.out.println(j + 1 +" = " + tickets.get(j));
+                System.out.println(j + 1 + " = " + tickets.get(j));
             }
             boolean isValidInput2 = false;
             int inputIndex2 = -1;
@@ -125,7 +126,7 @@ public class Player {
         }
     }
 
-    public void addCards(List<Card> cardList){
+    public void addCards(List<Card> cardList) {
         for (int i = 0; i < 4; i++) {
             cards.add(cardList.get(0));
             cardList.remove(0);
@@ -196,7 +197,7 @@ public class Player {
                 while (!isValidInput2) {
                     System.out.println("Player " + name + ", return a ticket:");
                     for (int k = 0; k < drawnTickets.size(); k++) {
-                        System.out.println(k + 1 +" = " + drawnTickets.get(k));
+                        System.out.println(k + 1 + " = " + drawnTickets.get(k));
                     }
                     BufferedReader reader2 = new BufferedReader(new InputStreamReader(System.in));
                     try {
@@ -221,7 +222,7 @@ public class Player {
                 while (!isValidInput2) {
                     System.out.println("Player " + name + ", return a ticket:");
                     for (int k = 0; k < drawnTickets.size(); k++) {
-                        System.out.println(k + 1 +" = " + drawnTickets.get(k));
+                        System.out.println(k + 1 + " = " + drawnTickets.get(k));
                     }
                     BufferedReader reader2 = new BufferedReader(new InputStreamReader(System.in));
                     try {
@@ -240,7 +241,7 @@ public class Player {
                 while (!isValidInput4) {
                     System.out.println("Player " + name + ", return another ticket:");
                     for (int k = 0; k < drawnTickets.size(); k++) {
-                        System.out.println(k + 1 +" = " + drawnTickets.get(k));
+                        System.out.println(k + 1 + " = " + drawnTickets.get(k));
                     }
                     BufferedReader reader4 = new BufferedReader(new InputStreamReader(System.in));
                     try {
@@ -260,7 +261,7 @@ public class Player {
                     drawnTickets.remove(0);
                 }
             } else {
-                for (int i = 0; i < drawnTickets.size();) {
+                for (int i = 0; i < drawnTickets.size(); ) {
                     tickets.add(drawnTickets.get(0));
                     drawnTickets.remove(0);
                 }
@@ -487,44 +488,44 @@ public class Player {
                                             whiteCards.remove(0);
                                         }
                                     } else {
-                                            System.out.println("Player " + name + ", you do not have enough tracks to build on this pathway.");
-                                            for (int i = 0; i < redCards.size(); ) {
-                                                cards.add(redCards.get(0));
-                                                redCards.remove(0);
-                                            }
-                                            for (int i = 0; i < orangeCards.size(); ) {
-                                                cards.add(orangeCards.get(0));
-                                                orangeCards.remove(0);
-                                            }
-                                            for (int i = 0; i < yellowCards.size(); ) {
-                                                cards.add(yellowCards.get(0));
-                                                yellowCards.remove(0);
-                                            }
-                                            for (int i = 0; i < greenCards.size(); ) {
-                                                cards.add(greenCards.get(0));
-                                                greenCards.remove(0);
-                                            }
-                                            for (int i = 0; i < blueCards.size(); ) {
-                                                cards.add(blueCards.get(0));
-                                                blueCards.remove(0);
-                                            }
-                                            for (int i = 0; i < pinkCards.size(); ) {
-                                                cards.add(pinkCards.get(0));
-                                                pinkCards.remove(0);
-                                            }
-                                            for (int i = 0; i < blackCards.size(); ) {
-                                                cards.add(blackCards.get(0));
-                                                blackCards.remove(0);
-                                            }
-                                            for (int i = 0; i < whiteCards.size(); ) {
-                                                cards.add(whiteCards.get(0));
-                                                whiteCards.remove(0);
-                                            }
-                                            for (int i = 0; i < locoCards.size(); ) {
-                                                cards.add(locoCards.get(0));
-                                                locoCards.remove(0);
-                                            }
-                                            playTurn(board, ticketList, connectionList);
+                                        System.out.println("Player " + name + ", you do not have enough tracks to build on this pathway.");
+                                        for (int i = 0; i < redCards.size(); ) {
+                                            cards.add(redCards.get(0));
+                                            redCards.remove(0);
+                                        }
+                                        for (int i = 0; i < orangeCards.size(); ) {
+                                            cards.add(orangeCards.get(0));
+                                            orangeCards.remove(0);
+                                        }
+                                        for (int i = 0; i < yellowCards.size(); ) {
+                                            cards.add(yellowCards.get(0));
+                                            yellowCards.remove(0);
+                                        }
+                                        for (int i = 0; i < greenCards.size(); ) {
+                                            cards.add(greenCards.get(0));
+                                            greenCards.remove(0);
+                                        }
+                                        for (int i = 0; i < blueCards.size(); ) {
+                                            cards.add(blueCards.get(0));
+                                            blueCards.remove(0);
+                                        }
+                                        for (int i = 0; i < pinkCards.size(); ) {
+                                            cards.add(pinkCards.get(0));
+                                            pinkCards.remove(0);
+                                        }
+                                        for (int i = 0; i < blackCards.size(); ) {
+                                            cards.add(blackCards.get(0));
+                                            blackCards.remove(0);
+                                        }
+                                        for (int i = 0; i < whiteCards.size(); ) {
+                                            cards.add(whiteCards.get(0));
+                                            whiteCards.remove(0);
+                                        }
+                                        for (int i = 0; i < locoCards.size(); ) {
+                                            cards.add(locoCards.get(0));
+                                            locoCards.remove(0);
+                                        }
+                                        playTurn(board, ticketList, connectionList);
                                     }
                                 } else {
                                     System.out.println("Player " + name + ", you do not have enough of this type of card to build on this pathway.");
@@ -1067,10 +1068,10 @@ public class Player {
                             } else if (inputIndex3 == 5) {
                                 if (blueCards.size() + locoCards.size() >= connectionList.get(inputIndex - 1).pathway1.tracks) {
                                     if (tracks >= connectionList.get(inputIndex - 1).pathway1.tracks)
-                                    for (int i = 0; i < blueCards.size(); ) {
-                                        locoCards.add(blueCards.get(0));
-                                        blueCards.remove(0);
-                                    }
+                                        for (int i = 0; i < blueCards.size(); ) {
+                                            locoCards.add(blueCards.get(0));
+                                            blueCards.remove(0);
+                                        }
                                     while (locoCards.size() > connectionList.get(inputIndex - 1).pathway1.tracks) {
                                         cards.add(locoCards.get(0));
                                         locoCards.remove(0);
@@ -3651,14 +3652,14 @@ public class Player {
                     }
                 }
             } else {
-            System.out.println("Player " + name + ", that connection is not available.");
-            playTurn(board, ticketList, connectionList);
+                System.out.println("Player " + name + ", that connection is not available.");
+                playTurn(board, ticketList, connectionList);
+            }
         }
-    }
 
         for (int j = 0; j < connectedCities.size(); j++) {
             int connectedCitiesSize = connectedCities.get(j).size();
-            for (int k = 0; k < connectedCitiesSize; k++)  {
+            for (int k = 0; k < connectedCitiesSize; k++) {
                 for (int l = 0; l < connectedCities.size(); l++) {
                     if (l != j) {
                         for (int m = 0; m < connectedCities.size(); m++) {
@@ -3672,20 +3673,20 @@ public class Player {
                 }
             }
         }
-        for (int i = 0; i < tickets.size(); i++){
-                for (int j = 0; j < connectedCities.size(); j++) {
-                    for (int k = 0; k < connectedCities.get(j).size(); k++) {
-                        if (tickets.get(i).source == connectedCities.get(j).get(k)) {
-                            for (int l = 0; l < connectedCities.get(j).size(); l++) {
-                                if (tickets.get(i).destination == connectedCities.get(j).get(l)) {
-                                    score += tickets.get(i).value;
-                                    tickets.remove(i);
-                                }
+        for (int i = 0; i < tickets.size(); i++) {
+            for (int j = 0; j < connectedCities.size(); j++) {
+                for (int k = 0; k < connectedCities.get(j).size(); k++) {
+                    if (tickets.get(i).source == connectedCities.get(j).get(k)) {
+                        for (int l = 0; l < connectedCities.get(j).size(); l++) {
+                            if (tickets.get(i).destination == connectedCities.get(j).get(l)) {
+                                score += tickets.get(i).value;
+                                tickets.remove(i);
                             }
                         }
                     }
                 }
             }
+        }
 
         print();
         System.out.println("Player " + name + ", type 1 to end your turn.");
@@ -3711,7 +3712,7 @@ public class Player {
     private TakeCard getTakeCard(Board board) {
         boolean isValidInput = false;
         int inputIndex = -1;
-        while(!isValidInput) {
+        while (!isValidInput) {
 
             System.out.println("Player " + name + ", pick a card: ");
             for (int i = 0; i < 5; i++) {
@@ -3722,10 +3723,10 @@ public class Player {
             try {
                 String input = reader.readLine();
                 inputIndex = Integer.parseInt(input);
-                if(inputIndex < 7 && inputIndex >= 0) {
+                if (inputIndex < 7 && inputIndex >= 0) {
                     isValidInput = true;
                 }
-            }catch(Exception e){
+            } catch (Exception e) {
             }
         }
         return TakeCard.getTakeCard(inputIndex);
@@ -3735,7 +3736,7 @@ public class Player {
 
         boolean isValidInput = false;
         int inputIndex = -1;
-        while(!isValidInput) {
+        while (!isValidInput) {
 
             System.out.println("Player " + name + ", pick an action: ");
             System.out.println("1 = Draw Cards");
@@ -3746,10 +3747,10 @@ public class Player {
             try {
                 String input = reader.readLine();
                 inputIndex = Integer.parseInt(input);
-                if(inputIndex < 4 && inputIndex > 0) {
+                if (inputIndex < 4 && inputIndex > 0) {
                     isValidInput = true;
                 }
-            }catch(Exception e){
+            } catch (Exception e) {
             }
         }
         return PlayType.getPlayType(inputIndex);

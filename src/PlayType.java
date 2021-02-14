@@ -13,9 +13,9 @@ public enum PlayType {
     }
 
 
-    public static  PlayType getPlayType(int index) {
-        for(PlayType value : values()) {
-            if(value.getIndex() == index) {
+    public static PlayType getPlayType(int index) {
+        for (PlayType value : values()) {
+            if (value.getIndex() == index) {
                 return value;
             }
         }

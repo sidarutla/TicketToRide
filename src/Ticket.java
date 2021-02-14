@@ -14,7 +14,8 @@ public class Ticket {
         Ticket ticket = new Ticket(source, destination, value);
         return ticket;
     }
-    public String toString(){
+
+    public String toString() {
         String string = source + " to " + destination + " for " + value + " points";
         return string;
     }

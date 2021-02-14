@@ -1,106 +1,216 @@
-import javafx.fxml.FXMLLoader;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.StrokeType;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.application.Application;
 
-public class GUI extends Application{
-    
-    @Override
-    public void start(Stage stage) throws Exception {
-        double height = stage.getMaxHeight();
-        double width = stage.getMaxWidth();
-        ImageView imageView8 = new ImageView("resources/Board.jpg");
-        imageView8.setFitHeight(330);
-        imageView8.setFitWidth(440);
-        imageView8.setPickOnBounds(true);
-        imageView8.setPreserveRatio(true);
-        ImageView imageView6 = new ImageView("resources/CardBack.jpg");
-        imageView6.setFitHeight(107);
-        imageView6.setFitHeight(80);
-        imageView6.setPickOnBounds(true);
-        imageView6.setPreserveRatio(true);
-        ImageView imageView7 = new ImageView("resources/TicketBack.jpg");
-        imageView7.setFitHeight(107);
-        imageView7.setFitHeight(80);
-        imageView7.setPickOnBounds(true);
-        imageView7.setPreserveRatio(true);
-        VBox vbox2 = new VBox(imageView6, imageView7);
-        vbox2.setLayoutX(530);
-        vbox2.setLayoutY(105);
-        vbox2.setPrefHeight(185);
-        vbox2.setPrefWidth(70);
-        Label label2 = new Label("Player 1: 0 points");
-        label2.setFont(Font.font(18));
-        Label label3 = new Label("Player 2: 0 points");
-        label3.setFont(Font.font(18));
-        Label label4 = new Label("Player 2: 0 points");
-        label4.setFont(Font.font(18));
-        Label label5 = new Label("Player 2: 0 points");
-        label5.setFont(Font.font(18));
-        Label label = new Label();
-        label.setFont(Font.font(10));
-        ImageView imageView1 = new ImageView("resources/RedCard.jpg");
-        imageView1.setFitHeight(45);
-        imageView1.setFitWidth(60);
-        imageView1.setPickOnBounds(true);
-        imageView1.setPreserveRatio(true);
-        ImageView imageView2 = new ImageView("resources/OrangeCard.jpg");
-        imageView2.setFitHeight(45);
-        imageView2.setFitWidth(60);
-        imageView2.setPickOnBounds(true);
-        imageView2.setPreserveRatio(true);
-        ImageView imageView3 = new ImageView("resources/YellowCard.jpg");
-        imageView3.setFitHeight(45);
-        imageView3.setFitWidth(60);
-        imageView3.setPickOnBounds(true);
-        imageView3.setPreserveRatio(true);
-        ImageView imageView4 = new ImageView("resources/GreenCard.jpg");
-        imageView4.setFitHeight(45);
-        imageView4.setFitWidth(60);
-        imageView4.setPickOnBounds(true);
-        imageView4.setPreserveRatio(true);
-        ImageView imageView5 = new ImageView("resources/BlueCard.jpg");
-        imageView5.setFitHeight(45);
-        imageView5.setFitWidth(60);
-        imageView5.setPickOnBounds(true);
-        imageView5.setPreserveRatio(true);
-        VBox vbox1 = new VBox(label2, label3, label4, label5, label, imageView1, imageView2, imageView3, imageView4, imageView5);
-        vbox1.setLayoutX(450);
-        vbox1.setPrefHeight(310);
-        vbox1.setPrefWidth(150);
-        Label label1 = new Label("Player 1");
-        FlowPane flowPane2 = new FlowPane(label1);
-        flowPane2.setLayoutY(310);
-        flowPane2.setPrefHeight(100);
-        flowPane2.setPrefWidth(600);
-        Rectangle rectangle1 = new Rectangle();
-        rectangle1.setFill(Color.RED);
-        rectangle1.setHeight(120);
-        rectangle1.setWidth(600);
-        rectangle1.setStroke(Color.BLACK);
-        rectangle1.setStrokeType(StrokeType.INSIDE);
-        FlowPane flowPane1 = new FlowPane(rectangle1);
-        flowPane1.setLayoutY(300);
-        flowPane1.setPrefHeight(100);
-        flowPane1.setPrefWidth(600);
-        AnchorPane pane = new AnchorPane(flowPane1,flowPane2, vbox1, vbox2, imageView8);
-        pane.setPrefHeight(400);
-        pane.setPrefWidth(600);
+import java.util.ArrayList;
 
-        Scene scene = new Scene(pane);
+public class GUI extends Application {
+
+    Board board = MainClass.getBoard();
+    Button drawCards;
+
+    @Override
+    public void start(Stage stage) {
+
+        ImageView boardImageView = buildBoardImageView();
+
+        VBox cardPileContainer = buildCardPileContainer();
+
+        VBox scoreBoardAndOpenCardContainer = scoreBoardAndOpenCardContainer();
+
+        FlowPane playerActionsAreaContainer = buildPlayerAreaContainer();
+
+        FlowPane playerActionsContainer = buildPlayerActionsContainer();
+
+        AnchorPane mainPane = new AnchorPane(boardImageView, cardPileContainer, scoreBoardAndOpenCardContainer, playerActionsAreaContainer, playerActionsContainer);
+        mainPane.setPrefHeight(400);
+        mainPane.setPrefWidth(600);
+
+        Scene scene = new Scene(mainPane);
         stage.setTitle("Ticket To Ride");
         stage.setScene(scene);
         stage.show();
+
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+
+    public void drawTicketsForPlayer() {
+        drawCards.setText("player 1 button clicked");
+    }
+
+    private ImageView buildBoardImageView() {
+        ImageView boardImageView = new ImageView("resources/Board.png");
+        boardImageView.setFitHeight(1011);
+        boardImageView.setFitWidth(1348);
+        boardImageView.setPickOnBounds(true);
+        boardImageView.setPreserveRatio(true);
+        return boardImageView;
+    }
+
+    private VBox buildCardPileContainer() {
+
+        ImageView imageView6 = new ImageView("resources/CardBack.jpg");
+        imageView6.setFitHeight(400);
+        imageView6.setFitHeight(300);
+        imageView6.setPickOnBounds(true);
+        imageView6.setPreserveRatio(true);
+        Label spaceLabel = new Label();
+        spaceLabel.setFont(Font.font(10));
+        ImageView imageView7 = new ImageView("resources/TicketBack.jpg");
+        imageView7.setFitHeight(400);
+        imageView7.setFitHeight(300);
+        imageView7.setPickOnBounds(true);
+        imageView7.setPreserveRatio(true);
+        VBox cardPileContainer = new VBox(imageView6, spaceLabel, imageView7);
+        cardPileContainer.setLayoutX(1600);
+        cardPileContainer.setLayoutY(250);
+        cardPileContainer.setPrefWidth(70);
+
+        return cardPileContainer;
+    }
+
+    private VBox scoreBoardAndOpenCardContainer() {
+        ArrayList<Label> scoreboardList = new ArrayList<>();
+        for (int i = 0; i < board.playerList.size(); i++) {
+            Label label = new Label(board.playerList.get(i).name + ": " + board.playerList.get(i).score);
+            label.setFont(Font.font(50));
+            scoreboardList.add(label);
+        }
+        ArrayList<ImageView> imageViewList = new ArrayList<>();
+        for (int i = 0; i < 5; i++) {
+            if (board.fiveOpenCards.get(i).cardColor == CardColor.red) {
+                ImageView imageView1 = new ImageView("resources/RedCard.jpg");
+                imageView1.setFitHeight(147);
+                imageView1.setFitWidth(196);
+                imageView1.setPickOnBounds(true);
+                imageView1.setPreserveRatio(true);
+                imageViewList.add(imageView1);
+            } else if (board.fiveOpenCards.get(i).cardColor == CardColor.orange) {
+                ImageView imageView1 = new ImageView("resources/OrangeCard.jpg");
+                imageView1.setFitHeight(147);
+                imageView1.setFitWidth(196);
+                imageView1.setPickOnBounds(true);
+                imageView1.setPreserveRatio(true);
+                imageViewList.add(imageView1);
+            } else if (board.fiveOpenCards.get(i).cardColor == CardColor.yellow) {
+                ImageView imageView1 = new ImageView("resources/YellowCard.jpg");
+                imageView1.setFitHeight(147);
+                imageView1.setFitWidth(196);
+                imageView1.setPickOnBounds(true);
+                imageView1.setPreserveRatio(true);
+                imageViewList.add(imageView1);
+            } else if (board.fiveOpenCards.get(i).cardColor == CardColor.green) {
+                ImageView imageView1 = new ImageView("resources/GreenCard.jpg");
+                imageView1.setFitHeight(147);
+                imageView1.setFitWidth(196);
+                imageView1.setPickOnBounds(true);
+                imageView1.setPreserveRatio(true);
+                imageViewList.add(imageView1);
+            } else if (board.fiveOpenCards.get(i).cardColor == CardColor.blue) {
+                ImageView imageView1 = new ImageView("resources/BlueCard.jpg");
+                imageView1.setFitHeight(147);
+                imageView1.setFitWidth(196);
+                imageView1.setPickOnBounds(true);
+                imageView1.setPreserveRatio(true);
+                imageViewList.add(imageView1);
+            } else if (board.fiveOpenCards.get(i).cardColor == CardColor.pink) {
+                ImageView imageView1 = new ImageView("resources/PinkCard.jpg");
+                imageView1.setFitHeight(147);
+                imageView1.setFitWidth(196);
+                imageView1.setPickOnBounds(true);
+                imageView1.setPreserveRatio(true);
+                imageViewList.add(imageView1);
+            } else if (board.fiveOpenCards.get(i).cardColor == CardColor.black) {
+                ImageView imageView1 = new ImageView("resources/BlackCard.jpg");
+                imageView1.setFitHeight(147);
+                imageView1.setFitWidth(196);
+                imageView1.setPickOnBounds(true);
+                imageView1.setPreserveRatio(true);
+                imageViewList.add(imageView1);
+            } else if (board.fiveOpenCards.get(i).cardColor == CardColor.white) {
+                ImageView imageView1 = new ImageView("resources/WhiteCard.jpg");
+                imageView1.setFitHeight(147);
+                imageView1.setFitWidth(196);
+                imageView1.setPickOnBounds(true);
+                imageView1.setPreserveRatio(true);
+                imageViewList.add(imageView1);
+            } else {
+                ImageView imageView1 = new ImageView("resources/LocoCard.jpg");
+                imageView1.setFitHeight(147);
+                imageView1.setFitWidth(196);
+                imageView1.setPickOnBounds(true);
+                imageView1.setPreserveRatio(true);
+                imageViewList.add(imageView1);
+            }
+        }
+        VBox scoreBoardAndOpenCardContainer;
+        if (scoreboardList.size() == 2) {
+            VBox vbox1 = new VBox(scoreboardList.get(0), scoreboardList.get(1), imageViewList.get(0), imageViewList.get(1), imageViewList.get(2), imageViewList.get(3), imageViewList.get(4));
+            scoreBoardAndOpenCardContainer = vbox1;
+        } else if (scoreboardList.size() == 3) {
+            VBox vbox1 = new VBox(scoreboardList.get(0), scoreboardList.get(1), scoreboardList.get(2), imageViewList.get(0), imageViewList.get(1), imageViewList.get(2), imageViewList.get(3), imageViewList.get(4));
+            scoreBoardAndOpenCardContainer = vbox1;
+        } else if (scoreboardList.size() == 4) {
+            VBox vbox1 = new VBox(scoreboardList.get(0), scoreboardList.get(1), scoreboardList.get(2), scoreboardList.get(3), imageViewList.get(0), imageViewList.get(1), imageViewList.get(2), imageViewList.get(3), imageViewList.get(4));
+            scoreBoardAndOpenCardContainer = vbox1;
+        } else {
+            VBox vbox1 = new VBox(scoreboardList.get(0), scoreboardList.get(1), scoreboardList.get(2), scoreboardList.get(3), scoreboardList.get(4), imageViewList.get(0), imageViewList.get(1), imageViewList.get(2), imageViewList.get(3), imageViewList.get(4));
+            scoreBoardAndOpenCardContainer = vbox1;
+        }
+        scoreBoardAndOpenCardContainer.setLayoutX(1380);
+        scoreBoardAndOpenCardContainer.setPrefHeight(310);
+        return scoreBoardAndOpenCardContainer;
+    }
+
+    private FlowPane buildPlayerActionsContainer() {
+        Label label1 = new Label("Player 1");
+        label1.setFont(Font.font(30));
+        label1.setPrefWidth(1850);
+        label1.setAlignment(Pos.CENTER);
+        Button drawCards = new Button();
+        drawCards.setText("Draw Cards for player 1");
+        drawCards.setOnAction(new EventHandler<>() {
+            @Override
+            public void handle(ActionEvent event) {
+                drawTicketsForPlayer();
+            }
+        });
+        FlowPane flowPane2 = new FlowPane(label1, drawCards);
+        flowPane2.setLayoutY(870);
+        flowPane2.setPrefHeight(100);
+        flowPane2.setPrefWidth(600);
+
+        return flowPane2;
+    }
+
+    private FlowPane buildPlayerAreaContainer() {
+        Rectangle rectangle1 = new Rectangle();
+        rectangle1.setFill(Color.RED);
+        rectangle1.setHeight(287.5);
+        rectangle1.setWidth(1850);
+        rectangle1.setStroke(Color.BLACK);
+        rectangle1.setStrokeType(StrokeType.INSIDE);
+        FlowPane flowPane1 = new FlowPane(rectangle1);
+        flowPane1.setLayoutY(870);
+        flowPane1.setPrefHeight(100);
+        flowPane1.setPrefWidth(600);
+
+        return flowPane1;
     }
 }

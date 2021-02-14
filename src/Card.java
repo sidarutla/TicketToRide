@@ -1,10 +1,12 @@
 public class Card {
 
-     CardColor cardColor;
-    public Card(CardColor cardColor){
+    CardColor cardColor;
+
+    public Card(CardColor cardColor) {
         this.cardColor = cardColor;
     }
-    public String toString(){
+
+    public String toString() {
         String string = cardColor + "";
         return string;
     }

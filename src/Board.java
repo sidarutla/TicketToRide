@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Board {
 
-    private List<Player> playerList;
+    List<Player> playerList;
 
     Connection cn1 = Connection.buildConnection("Vancouver", "Seattle", true, 1, TrackColor.grey, TrackColor.grey);
     Connection cn2 = Connection.buildConnection("Vancouver", "Calgary", false, 3, TrackColor.grey, null);
@@ -21,7 +21,7 @@ public class Board {
     Connection cn12 = Connection.buildConnection("Los Angeles", "El Paso", false, 6, TrackColor.black, null);
     Connection cn13 = Connection.buildConnection("Las Vegas", "Salt Lake City", false, 3, TrackColor.orange, null);
     Connection cn14 = Connection.buildConnection("El Paso", "Santa Fe", false, 2, TrackColor.grey, null);
-    Connection cn15 = Connection.buildConnection("El Paso","Oklahoma City",false,5,TrackColor.yellow,null);
+    Connection cn15 = Connection.buildConnection("El Paso", "Oklahoma City", false, 5, TrackColor.yellow, null);
     Connection cn16 = Connection.buildConnection("El Paso", "Dallas", false, 4, TrackColor.red, null);
     Connection cn17 = Connection.buildConnection("El Paso", "Houston", false, 6, TrackColor.green, null);
     Connection cn18 = Connection.buildConnection("Calgary", "Winnipeg", false, 6, TrackColor.white, null);
@@ -40,7 +40,7 @@ public class Board {
     Connection cn31 = Connection.buildConnection("Denver", "Santa Fe", false, 2, TrackColor.grey, null);
     Connection cn32 = Connection.buildConnection("Denver", "Oklahoma City", false, 4, TrackColor.red, null);
     Connection cn33 = Connection.buildConnection("Denver", "Kansas City", true, 4, TrackColor.black, TrackColor.orange);
-    Connection cn34 = Connection.buildConnection("Denver","Omaha",false,4,TrackColor.pink,null);
+    Connection cn34 = Connection.buildConnection("Denver", "Omaha", false, 4, TrackColor.pink, null);
     Connection cn35 = Connection.buildConnection("Santa Fe", "Oklahoma City", false, 3, TrackColor.blue, null);
     Connection cn36 = Connection.buildConnection("Duluth", " Saint St. Marie", false, 3, TrackColor.grey, null);
     Connection cn37 = Connection.buildConnection("Duluth", "Toronto", false, 6, TrackColor.pink, null);
@@ -57,34 +57,34 @@ public class Board {
     Connection cn48 = Connection.buildConnection("Houston", "New Orleans", false, 2, TrackColor.grey, TrackColor.grey);
     Connection cn49 = Connection.buildConnection("Saint St. Marie", "Montreal", false, 5, TrackColor.black, null);
     Connection cn50 = Connection.buildConnection("Saint St. Marie", "Toronto", false, 2, TrackColor.grey, null);
-    Connection cn51 = Connection.buildConnection("Toronto","Chicago",false,4,TrackColor.white,null);
-    Connection cn52 = Connection.buildConnection("Toronto","Montreal",false,3,TrackColor.grey,null);
-    Connection cn53 = Connection.buildConnection("Toronto","Pittsburgh",false,2,TrackColor.grey,null);
-    Connection cn54 = Connection.buildConnection("Saint Louis","Chicago",true,2,TrackColor.green,TrackColor.white);
-    Connection cn55 = Connection.buildConnection("Chicago","Pittsburgh",true,3,TrackColor.orange,TrackColor.black);
-    Connection cn56 = Connection.buildConnection("Saint Louis","Little Rock",false,2,TrackColor.grey,null);
-    Connection cn57 = Connection.buildConnection("Saint Louis","Nashville",false,2,TrackColor.grey,null);
-    Connection cn58 = Connection.buildConnection("Saint Louis","Pittsburgh",false,5,TrackColor.green,null);
-    Connection cn59 = Connection.buildConnection("Little Rock","New Orleans",false,3,TrackColor.green,null);
-    Connection cn60 = Connection.buildConnection("Little Rock","Nashville",false,3,TrackColor.white,null);
-    Connection cn61 = Connection.buildConnection("New Orleans","Atlanta",true,4,TrackColor.yellow,TrackColor.orange);
-    Connection cn62 = Connection.buildConnection("Nashville","Pittsburgh",false,4,TrackColor.yellow,null);
-    Connection cn63 = Connection.buildConnection("Nashville","Raleigh",false,3,TrackColor.black,null);
-    Connection cn64 = Connection.buildConnection("Nashville","Atlanta",false,1,TrackColor.grey,null);
-    Connection cn65 = Connection.buildConnection("Pittsburgh","New York",true,2,TrackColor.white,TrackColor.green);
-    Connection cn66 = Connection.buildConnection("Pittsburgh","Washington",false,2,TrackColor.grey,null);
-    Connection cn67 = Connection.buildConnection("Pittsburgh","Raleigh",false,2,TrackColor.grey,null);
-    Connection cn68 = Connection.buildConnection("Raleigh","Atlanta",true,2,TrackColor.grey,TrackColor.grey);
-    Connection cn69 = Connection.buildConnection("Raleigh","Washington",true,2,TrackColor.grey,TrackColor.grey);
-    Connection cn70 = Connection.buildConnection("Raleigh","Charleston",false,2,TrackColor.grey,null);
-    Connection cn71 = Connection.buildConnection("Atlanta","Charleston",false,2,TrackColor.grey,null);
-    Connection cn72 = Connection.buildConnection("Atlanta","Miami",false,5,TrackColor.blue,null);
-    Connection cn73 = Connection.buildConnection("Miami","New Orleans",false,6,TrackColor.red,null);
-    Connection cn74 = Connection.buildConnection("Miami","Charleston",false,4,TrackColor.pink,null);
-    Connection cn75 = Connection.buildConnection("Washington","New York",true,2,TrackColor.orange,TrackColor.black);
-    Connection cn76 = Connection.buildConnection("New York","Montreal",false,3,TrackColor.blue,null);
-    Connection cn77 = Connection.buildConnection("New York","Boston",true,2,TrackColor.yellow,TrackColor.red);
-    Connection cn78 = Connection.buildConnection("Boston","Montreal",true,2,TrackColor.grey,TrackColor.grey);
+    Connection cn51 = Connection.buildConnection("Toronto", "Chicago", false, 4, TrackColor.white, null);
+    Connection cn52 = Connection.buildConnection("Toronto", "Montreal", false, 3, TrackColor.grey, null);
+    Connection cn53 = Connection.buildConnection("Toronto", "Pittsburgh", false, 2, TrackColor.grey, null);
+    Connection cn54 = Connection.buildConnection("Saint Louis", "Chicago", true, 2, TrackColor.green, TrackColor.white);
+    Connection cn55 = Connection.buildConnection("Chicago", "Pittsburgh", true, 3, TrackColor.orange, TrackColor.black);
+    Connection cn56 = Connection.buildConnection("Saint Louis", "Little Rock", false, 2, TrackColor.grey, null);
+    Connection cn57 = Connection.buildConnection("Saint Louis", "Nashville", false, 2, TrackColor.grey, null);
+    Connection cn58 = Connection.buildConnection("Saint Louis", "Pittsburgh", false, 5, TrackColor.green, null);
+    Connection cn59 = Connection.buildConnection("Little Rock", "New Orleans", false, 3, TrackColor.green, null);
+    Connection cn60 = Connection.buildConnection("Little Rock", "Nashville", false, 3, TrackColor.white, null);
+    Connection cn61 = Connection.buildConnection("New Orleans", "Atlanta", true, 4, TrackColor.yellow, TrackColor.orange);
+    Connection cn62 = Connection.buildConnection("Nashville", "Pittsburgh", false, 4, TrackColor.yellow, null);
+    Connection cn63 = Connection.buildConnection("Nashville", "Raleigh", false, 3, TrackColor.black, null);
+    Connection cn64 = Connection.buildConnection("Nashville", "Atlanta", false, 1, TrackColor.grey, null);
+    Connection cn65 = Connection.buildConnection("Pittsburgh", "New York", true, 2, TrackColor.white, TrackColor.green);
+    Connection cn66 = Connection.buildConnection("Pittsburgh", "Washington", false, 2, TrackColor.grey, null);
+    Connection cn67 = Connection.buildConnection("Pittsburgh", "Raleigh", false, 2, TrackColor.grey, null);
+    Connection cn68 = Connection.buildConnection("Raleigh", "Atlanta", true, 2, TrackColor.grey, TrackColor.grey);
+    Connection cn69 = Connection.buildConnection("Raleigh", "Washington", true, 2, TrackColor.grey, TrackColor.grey);
+    Connection cn70 = Connection.buildConnection("Raleigh", "Charleston", false, 2, TrackColor.grey, null);
+    Connection cn71 = Connection.buildConnection("Atlanta", "Charleston", false, 2, TrackColor.grey, null);
+    Connection cn72 = Connection.buildConnection("Atlanta", "Miami", false, 5, TrackColor.blue, null);
+    Connection cn73 = Connection.buildConnection("Miami", "New Orleans", false, 6, TrackColor.red, null);
+    Connection cn74 = Connection.buildConnection("Miami", "Charleston", false, 4, TrackColor.pink, null);
+    Connection cn75 = Connection.buildConnection("Washington", "New York", true, 2, TrackColor.orange, TrackColor.black);
+    Connection cn76 = Connection.buildConnection("New York", "Montreal", false, 3, TrackColor.blue, null);
+    Connection cn77 = Connection.buildConnection("New York", "Boston", true, 2, TrackColor.yellow, TrackColor.red);
+    Connection cn78 = Connection.buildConnection("Boston", "Montreal", true, 2, TrackColor.grey, TrackColor.grey);
 
 
     private List<Connection> connectionList = new ArrayList<>(Arrays.asList(cn1, cn2, cn3, cn4, cn5, cn6, cn7, cn8, cn9, cn10, cn11, cn12, cn13, cn14, cn15, cn16, cn17, cn18, cn19, cn20, cn21, cn22, cn23, cn24, cn25, cn26, cn27, cn28, cn29, cn30, cn31, cn32, cn33, cn34, cn35, cn36, cn37, cn38, cn39, cn40, cn41, cn42, cn43, cn44, cn45, cn46, cn47, cn48, cn49, cn50, cn51, cn52, cn53, cn54, cn55, cn56, cn57, cn58, cn59, cn60, cn61, cn62, cn63, cn64, cn65, cn66, cn67, cn68, cn69, cn70, cn71, cn72, cn73, cn74, cn75, cn76, cn77, cn78));
@@ -260,7 +260,7 @@ public class Board {
         }
         System.out.println();
         System.out.println("Open Cards:");
-        for (int i = 0; i < fiveOpenCards.size(); i++){
+        for (int i = 0; i < fiveOpenCards.size(); i++) {
             System.out.println(fiveOpenCards.get(i));
         }
         System.out.println();
@@ -278,29 +278,48 @@ public class Board {
         Collections.shuffle(cardList);
     }
 
-    public void distributeTickets(){
+    public void distributeTickets() {
 
-        for (int i = 0; i < playerList.size(); i++){
-                playerList.get(i).firstTurnReturnTickets(ticketList);
-                for (int j = 0; j < 23; j++) {
-                    System.out.println();
-                }
+        for (int i = 0; i < playerList.size(); i++) {
+            playerList.get(i).firstTurnReturnTickets(ticketList);
+            for (int j = 0; j < 23; j++) {
+                System.out.println();
             }
         }
+    }
 
-    public void distributeCards(){
+    public void distributeCards() {
 
-        for (int i = 0; i < playerList.size(); i++){
+        for (int i = 0; i < playerList.size(); i++) {
             playerList.get(i).addCards(cardList);
         }
     }
 
     public void openFiveCards() {
-        for (int i = 0; i < 5; i++) {
-            fiveOpenCards.add(cardList.get(0));
-            cardList.remove(0);
+        int locos = 0;
+        boolean threeLocos = true;
+        while (threeLocos == true) {
+            for (int i = 0; i < 5; i++) {
+                fiveOpenCards.add(cardList.get(i));
+                if (cardList.get(i).cardColor == CardColor.locomotive) {
+                    locos += 1;
+                }
+            }
+            if (locos < 3) {
+                threeLocos = false;
+                for (int i = 0; i < 5; i++) {
+                    cardList.remove(0);
+                }
+            } else {
+                for (int i = 0; i < 5; i++) {
+                    cardList.add(fiveOpenCards.get(0));
+                    fiveOpenCards.remove(0);
+                    shuffleCards();
+                }
+            }
         }
     }
+
     public void playYourTurn() {
         boolean isGamePlaying = true;
         int i = 0;
@@ -318,12 +337,12 @@ public class Board {
                 }
                 int highestScore = Collections.max(scores);
                 boolean winningPlayerFound = false;
-                    for (int l = 0; l < playerList.size(); l++) {
-                        if (playerList.get(l).score == highestScore && winningPlayerFound == false) {
-                            System.out.println("Player " + playerList.get(l).name + " wins!");
-                            winningPlayerFound = true;
-                        }
+                for (int l = 0; l < playerList.size(); l++) {
+                    if (playerList.get(l).score == highestScore && winningPlayerFound == false) {
+                        System.out.println("Player " + playerList.get(l).name + " wins!");
+                        winningPlayerFound = true;
                     }
+                }
                 isGamePlaying = false;
             } else {
                 playerList.get(i).playTurn(this, ticketList, connectionList);
@@ -332,9 +351,9 @@ public class Board {
                 } else {
                     i = 0;
                 }
-                }
             }
         }
+    }
 
     public void checkOpenCards() {
         System.out.println("Open cards:");
@@ -361,7 +380,7 @@ public class Board {
         }
     }
 
-    public boolean isTakeCardValid(TakeCard takeCard, boolean isFirstTurn){
+    public boolean isTakeCardValid(TakeCard takeCard, boolean isFirstTurn) {
         if (isFirstTurn == false && takeCard.ordinal() < 5 && fiveOpenCards.get(takeCard.ordinal()).isLocomotive() == true) {
             return false;
         } else {
@@ -369,7 +388,7 @@ public class Board {
         }
     }
 
-    public void start(){
+    public void start() {
         shuffleTickets();
         shuffleCards();
         distributeTickets();

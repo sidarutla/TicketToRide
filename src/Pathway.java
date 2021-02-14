@@ -1,12 +1,12 @@
 public class Pathway {
 
-     int tracks;
+    int tracks;
 
-     TrackColor color;
+    TrackColor color;
 
-     boolean open;
+    boolean open;
 
-     Player player;
+    Player player;
 
     public Pathway(int tracks, TrackColor color, boolean open, Player player) {
         this.tracks = tracks;
@@ -14,7 +14,8 @@ public class Pathway {
         this.open = open;
         this.player = player;
     }
-    public String toString(){
+
+    public String toString() {
         String string = tracks + ", " + color + ", ";
         if (open == true) {
             string += "open";

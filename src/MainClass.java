@@ -6,11 +6,15 @@ import java.util.List;
 
 public class MainClass {
 
-    public static void main(String[] args) throws Exception {
-
+    public static Board getBoard() {
         Player rama = new Player("Rama", PlayerColor.red);
-        Player sid = new Player("Sid",PlayerColor.green);
-        Player keerthi = new Player("Keerthi",PlayerColor.black);
-        List<Player> playerArray = Arrays.asList(rama, sid, keerthi);
+        Player sid = new Player("Sid", PlayerColor.green);
+        Player keerthi = new Player("Keerthi", PlayerColor.black);
+        Player harshu = new Player("Harshu", PlayerColor.blue);
+        List<Player> playerArray = Arrays.asList(rama, sid, keerthi, harshu);
+        Board board = new Board(playerArray);
+        board.shuffleCards();
+        board.openFiveCards();
+        return board;
     }
 }

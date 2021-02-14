@@ -13,9 +13,9 @@ public enum TakeCard {
     }
 
 
-    public static  TakeCard getTakeCard(int index) {
-        for(TakeCard value : values()) {
-            if(value.getIndex() == index) {
+    public static TakeCard getTakeCard(int index) {
+        for (TakeCard value : values()) {
+            if (value.getIndex() == index) {
                 return value;
             }
         }
