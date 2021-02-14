@@ -7,7 +7,7 @@ public class Player {
 
     final String name;
 
-    private final PlayerColor playerColor;
+    final PlayerColor playerColor;
 
     int tracks = 45;
     int score = 0;

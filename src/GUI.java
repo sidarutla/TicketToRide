@@ -16,11 +16,15 @@ import javafx.stage.Stage;
 import javafx.application.Application;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class GUI extends Application {
 
     Board board = MainClass.getBoard();
-    Button drawCards;
+    Button drawCardsButton = new Button();
+    Button drawTicketsButton = new Button();
+    Button buildTracksButton = new Button();
+    int turn = 0;
 
     @Override
     public void start(Stage stage) {
@@ -51,7 +55,7 @@ public class GUI extends Application {
     }
 
     public void drawTicketsForPlayer() {
-        drawCards.setText("player 1 button clicked");
+        drawCardsButton.setText("player 1 button clicked");
     }
 
     private ImageView buildBoardImageView() {
@@ -179,29 +183,139 @@ public class GUI extends Application {
     }
 
     private FlowPane buildPlayerActionsContainer() {
-        Label label1 = new Label("Player 1");
-        label1.setFont(Font.font(30));
+        Label label1 = new Label("Player " + board.playerList.get(turn).name);
         label1.setPrefWidth(1850);
         label1.setAlignment(Pos.CENTER);
-        Button drawCards = new Button();
-        drawCards.setText("Draw Cards for player 1");
-        drawCards.setOnAction(new EventHandler<>() {
-            @Override
-            public void handle(ActionEvent event) {
-                drawTicketsForPlayer();
+        label1.setFont(Font.font(50));
+        if (board.playerList.get(turn).playerColor == PlayerColor.black) {
+            label1.setTextFill(Color.WHITE);
+        } else {
+            label1.setTextFill(Color.BLACK);
+        }
+        Label spacerLabel1 = new Label();
+        spacerLabel1.setPrefWidth(1850);
+        spacerLabel1.setPrefHeight(50);
+        drawCardsButton.setText("Draw Cards");
+        drawCardsButton.setFont(Font.font(45));
+        drawCardsButton.setOnAction(event -> drawTicketsForPlayer());
+        Label spacerLabel2 = new Label();
+        spacerLabel2.setPrefWidth(20);
+        Label spacerLabel3 = new Label();
+        spacerLabel3.setPrefWidth(20);
+        drawTicketsButton.setText("Draw Tickets");
+        drawTicketsButton.setFont(Font.font(45));
+        buildTracksButton.setText("Build Tracks");
+        buildTracksButton.setFont(Font.font(45));
+        List<ImageView> playerCardsImages = new ArrayList<>();
+        for (int i = 0; i < board.playerList.get(turn).cards.size(); i++) {
+            if (board.playerList.get(turn).cards.get(i).cardColor == CardColor.red) {
+                ImageView imageView1 = new ImageView("resources/RedCard.jpg");
+                imageView1.setFitHeight(75);
+                imageView1.setFitWidth(100);
+                imageView1.setPickOnBounds(true);
+                imageView1.setPreserveRatio(true);
+                imageView1.setRotate(-90);
+                playerCardsImages.add(imageView1);
+            } else if (board.playerList.get(turn).cards.get(i).cardColor == CardColor.orange) {
+                ImageView imageView1 = new ImageView("resources/OrangeCard.jpg");
+                imageView1.setFitHeight(75);
+                imageView1.setFitWidth(100);
+                imageView1.setPickOnBounds(true);
+                imageView1.setPreserveRatio(true);
+                imageView1.setRotate(-90);
+                playerCardsImages.add(imageView1);
+            } else if (board.playerList.get(turn).cards.get(i).cardColor == CardColor.yellow) {
+                ImageView imageView1 = new ImageView("resources/YellowCard.jpg");
+                imageView1.setFitHeight(75);
+                imageView1.setFitWidth(100);
+                imageView1.setPickOnBounds(true);
+                imageView1.setPreserveRatio(true);
+                imageView1.setRotate(-90);
+                playerCardsImages.add(imageView1);
+            } else if (board.playerList.get(turn).cards.get(i).cardColor == CardColor.green) {
+                ImageView imageView1 = new ImageView("resources/GreenCard.jpg");
+                imageView1.setFitHeight(75);
+                imageView1.setFitWidth(100);
+                imageView1.setPickOnBounds(true);
+                imageView1.setPreserveRatio(true);
+                imageView1.setRotate(-90);
+                playerCardsImages.add(imageView1);
+            } else if (board.playerList.get(turn).cards.get(i).cardColor == CardColor.blue) {
+                ImageView imageView1 = new ImageView("resources/BlueCard.jpg");
+                imageView1.setFitHeight(75);
+                imageView1.setFitWidth(100);
+                imageView1.setPickOnBounds(true);
+                imageView1.setPreserveRatio(true);
+                imageView1.setRotate(-90);
+                playerCardsImages.add(imageView1);
+            } else if (board.playerList.get(turn).cards.get(i).cardColor == CardColor.pink) {
+                ImageView imageView1 = new ImageView("resources/PinkCard.jpg");
+                imageView1.setFitHeight(75);
+                imageView1.setFitWidth(100);
+                imageView1.setPickOnBounds(true);
+                imageView1.setPreserveRatio(true);
+                imageView1.setRotate(-90);
+                playerCardsImages.add(imageView1);
+            } else if (board.fiveOpenCards.get(i).cardColor == CardColor.black) {
+                ImageView imageView1 = new ImageView("resources/BlackCard.jpg");
+                imageView1.setFitHeight(75);
+                imageView1.setFitWidth(100);
+                imageView1.setPickOnBounds(true);
+                imageView1.setPreserveRatio(true);
+                imageView1.setRotate(-90);
+                playerCardsImages.add(imageView1);
+            } else if (board.fiveOpenCards.get(i).cardColor == CardColor.white) {
+                ImageView imageView1 = new ImageView("resources/WhiteCard.jpg");
+                imageView1.setFitHeight(75);
+                imageView1.setFitWidth(100);
+                imageView1.setPickOnBounds(true);
+                imageView1.setPreserveRatio(true);
+                imageView1.setRotate(-90);
+                playerCardsImages.add(imageView1);
+            } else {
+                ImageView imageView1 = new ImageView("resources/LocoCard.jpg");
+                imageView1.setFitHeight(75);
+                imageView1.setFitWidth(100);
+                imageView1.setPickOnBounds(true);
+                imageView1.setPreserveRatio(true);
+                imageView1.setRotate(-90);
+                playerCardsImages.add(imageView1);
             }
-        });
-        FlowPane flowPane2 = new FlowPane(label1, drawCards);
+        }
+        List<Label> ticketLabelList = new ArrayList<>();
+        for (int i = 0; i < board.playerList.get(turn).tickets.size(); i++) {
+            Label ticketLabel = new Label();
+            ticketLabel.setText(board.playerList.get(turn).tickets.get(i).source + " -> " + board.playerList.get(turn).tickets.get(i).destination + ", " + board.playerList.get(turn).tickets.get(i).value);
+            ticketLabel.setFont(Font.font(35));
+            ticketLabel.setStyle("-fx-background-color: white;");
+            ticketLabelList.add(ticketLabel);
+        }
+        FlowPane flowPane2 = new FlowPane(label1, spacerLabel1, drawCardsButton, spacerLabel2, drawTicketsButton, spacerLabel3, buildTracksButton);
         flowPane2.setLayoutY(870);
-        flowPane2.setPrefHeight(100);
-        flowPane2.setPrefWidth(600);
-
+        flowPane2.setPrefHeight(287.5);
+        flowPane2.setPrefWidth(1850);
+        for (int i = 0; i < playerCardsImages.size(); i++) {
+            flowPane2.getChildren().add(playerCardsImages.get(i));
+        }
+        for (int i = 0; i < ticketLabelList.size(); i++) {
+            flowPane2.getChildren().add(ticketLabelList.get(i));
+        }
         return flowPane2;
     }
 
     private FlowPane buildPlayerAreaContainer() {
         Rectangle rectangle1 = new Rectangle();
-        rectangle1.setFill(Color.RED);
+        if (board.playerList.get(turn).playerColor == PlayerColor.black) {
+            rectangle1.setFill(Color.BLACK);
+        } else if (board.playerList.get(turn).playerColor == PlayerColor.blue) {
+            rectangle1.setFill(Color.BLUE);
+        } else if (board.playerList.get(turn).playerColor == PlayerColor.red) {
+            rectangle1.setFill(Color.RED);
+        } else if (board.playerList.get(turn).playerColor == PlayerColor.green) {
+            rectangle1.setFill(Color.GREEN);
+        } else {
+            rectangle1.setFill(Color.YELLOW);
+        }
         rectangle1.setHeight(287.5);
         rectangle1.setWidth(1850);
         rectangle1.setStroke(Color.BLACK);
