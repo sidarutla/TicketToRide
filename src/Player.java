@@ -43,86 +43,11 @@ public class Player {
     }
 
 
-    public void firstTurnReturnTickets(List<Ticket> ticketList) {
-        System.out.println("Player " + name + ", type 1 to begin your turn.");
-        boolean isValidInput3 = false;
-        int inputIndex3 = -1;
-        while (!isValidInput3) {
-
-            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-            try {
-                String input = reader.readLine();
-                inputIndex3 = Integer.parseInt(input);
-                if (inputIndex3 == 1) {
-                    isValidInput3 = true;
-                }
-            } catch (Exception e) {
-            }
-        }
-        System.out.println("Player " + name + ", how many tickets would you like to return?");
+    public void drawTickets(List<Ticket> ticketList) {
         for (int i = 0; i < 3; i++) {
             tickets.add(ticketList.get(0));
             ticketList.remove(0);
             System.out.println(tickets.get(i));
-        }
-        boolean isValidInput = false;
-        int inputIndex = -1;
-        while (!isValidInput) {
-
-            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-            try {
-                String input = reader.readLine();
-                inputIndex = Integer.parseInt(input);
-                if (inputIndex < 2 && inputIndex > -1) {
-                    isValidInput = true;
-                }
-            } catch (Exception e) {
-            }
-        }
-        if (inputIndex == 1) {
-            System.out.println("Player " + name + ", return a ticket:");
-            for (int j = 0; j < 3; j++) {
-                System.out.println(j + 1 + " = " + tickets.get(j));
-            }
-            boolean isValidInput2 = false;
-            int inputIndex2 = -1;
-            while (!isValidInput2) {
-
-                BufferedReader reader2 = new BufferedReader(new InputStreamReader(System.in));
-                try {
-                    String input2 = reader2.readLine();
-                    inputIndex2 = Integer.parseInt(input2);
-                    if (inputIndex2 < 4 && inputIndex2 > 0) {
-                        isValidInput2 = true;
-                    }
-                } catch (Exception e) {
-                }
-            }
-            if (inputIndex2 == 1) {
-                ticketList.add(tickets.get(0));
-                tickets.remove(0);
-            } else if (inputIndex2 == 2) {
-                ticketList.add(tickets.get(1));
-                tickets.remove(1);
-            } else {
-                ticketList.add(tickets.get(2));
-                tickets.remove(2);
-            }
-        }
-        System.out.println("Player " + name + ", type 1 to end your turn.");
-        boolean isValidInput4 = false;
-        int inputIndex4 = -1;
-        while (!isValidInput4) {
-
-            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-            try {
-                String input = reader.readLine();
-                inputIndex4 = Integer.parseInt(input);
-                if (inputIndex4 == 1) {
-                    isValidInput4 = true;
-                }
-            } catch (Exception e) {
-            }
         }
     }
 

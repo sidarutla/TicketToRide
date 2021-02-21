@@ -120,7 +120,7 @@ public class Board {
     Ticket t29 = Ticket.buildTicket("Winnipeg", "Houston", 12);
     Ticket t30 = Ticket.buildTicket("Winnipeg", "Little Rock", 11);
 
-    private List<Ticket> ticketList = new ArrayList<>(Arrays.asList(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17, t18, t19, t20, t21, t22, t23, t24, t25, t26, t27, t28, t29, t30));
+     List<Ticket> ticketList = new ArrayList<>(Arrays.asList(t23, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17, t18, t19, t20, t21, t22, t23, t24, t25, t26, t27, t28, t29, t30));
 
     Card cd1 = new Card(CardColor.red);
     Card cd2 = new Card(CardColor.red);
@@ -281,7 +281,7 @@ public class Board {
     public void distributeTickets() {
 
         for (int i = 0; i < playerList.size(); i++) {
-            playerList.get(i).firstTurnReturnTickets(ticketList);
+            playerList.get(i).drawTickets(ticketList);
             for (int j = 0; j < 23; j++) {
                 System.out.println();
             }
@@ -357,8 +357,8 @@ public class Board {
 
     public void checkOpenCards() {
         System.out.println("Open cards:");
-        for (int i = 0; i < fiveOpenCards.size(); i++) {
-            System.out.println(fiveOpenCards.get(i));
+        for (Card fiveOpenCard : fiveOpenCards) {
+            System.out.println(fiveOpenCard);
         }
         System.out.println();
     }
@@ -381,11 +381,7 @@ public class Board {
     }
 
     public boolean isTakeCardValid(TakeCard takeCard, boolean isFirstTurn) {
-        if (isFirstTurn == false && takeCard.ordinal() < 5 && fiveOpenCards.get(takeCard.ordinal()).isLocomotive() == true) {
-            return false;
-        } else {
-            return true;
-        }
+        return isFirstTurn || takeCard.ordinal() >= 5 || !fiveOpenCards.get(takeCard.ordinal()).isLocomotive();
     }
 
     public void start() {
