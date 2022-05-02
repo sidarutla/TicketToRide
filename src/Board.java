@@ -87,7 +87,7 @@ public class Board {
     Connection cn78 = Connection.buildConnection("Boston", "Montreal", true, 2, TrackColor.grey, TrackColor.grey);
 
 
-    private List<Connection> connectionList = new ArrayList<>(Arrays.asList(cn1, cn2, cn3, cn4, cn5, cn6, cn7, cn8, cn9, cn10, cn11, cn12, cn13, cn14, cn15, cn16, cn17, cn18, cn19, cn20, cn21, cn22, cn23, cn24, cn25, cn26, cn27, cn28, cn29, cn30, cn31, cn32, cn33, cn34, cn35, cn36, cn37, cn38, cn39, cn40, cn41, cn42, cn43, cn44, cn45, cn46, cn47, cn48, cn49, cn50, cn51, cn52, cn53, cn54, cn55, cn56, cn57, cn58, cn59, cn60, cn61, cn62, cn63, cn64, cn65, cn66, cn67, cn68, cn69, cn70, cn71, cn72, cn73, cn74, cn75, cn76, cn77, cn78));
+    private final List<Connection> connectionList = new ArrayList<>(Arrays.asList(cn1, cn2, cn3, cn4, cn5, cn6, cn7, cn8, cn9, cn10, cn11, cn12, cn13, cn14, cn15, cn16, cn17, cn18, cn19, cn20, cn21, cn22, cn23, cn24, cn25, cn26, cn27, cn28, cn29, cn30, cn31, cn32, cn33, cn34, cn35, cn36, cn37, cn38, cn39, cn40, cn41, cn42, cn43, cn44, cn45, cn46, cn47, cn48, cn49, cn50, cn51, cn52, cn53, cn54, cn55, cn56, cn57, cn58, cn59, cn60, cn61, cn62, cn63, cn64, cn65, cn66, cn67, cn68, cn69, cn70, cn71, cn72, cn73, cn74, cn75, cn76, cn77, cn78));
 
     Ticket t1 = Ticket.buildTicket("Boston", "Miami", 12);
     Ticket t2 = Ticket.buildTicket("Calgary", "Phoenix", 13);
@@ -120,7 +120,7 @@ public class Board {
     Ticket t29 = Ticket.buildTicket("Winnipeg", "Houston", 12);
     Ticket t30 = Ticket.buildTicket("Winnipeg", "Little Rock", 11);
 
-     List<Ticket> ticketList = new ArrayList<>(Arrays.asList(t23, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17, t18, t19, t20, t21, t22, t23, t24, t25, t26, t27, t28, t29, t30));
+    List<Ticket> ticketList = new ArrayList<>(Arrays.asList(t23, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17, t18, t19, t20, t21, t22, t23, t24, t25, t26, t27, t28, t29, t30));
 
     Card cd1 = new Card(CardColor.red);
     Card cd2 = new Card(CardColor.red);
@@ -233,7 +233,7 @@ public class Board {
     Card cd109 = new Card(CardColor.locomotive);
     Card cd110 = new Card(CardColor.locomotive);
 
-    private List<Card> cardList = new ArrayList<>(Arrays.asList(cd1, cd2, cd3, cd4, cd5, cd6, cd7, cd8, cd9, cd10, cd11, cd12, cd13, cd14, cd15, cd16, cd17, cd18, cd19, cd20, cd21, cd22, cd23, cd24, cd25, cd26, cd27, cd28, cd29, cd30, cd31, cd32, cd33, cd34, cd35, cd36, cd37, cd38, cd39, cd40, cd41, cd42, cd43, cd44, cd45, cd46, cd47, cd48, cd49, cd50, cd51, cd52, cd53, cd54, cd55, cd56, cd57, cd58, cd59, cd60, cd61, cd62, cd63, cd64, cd65, cd66, cd67, cd68, cd69, cd70, cd71, cd72, cd73, cd74, cd75, cd76, cd77, cd78, cd79, cd80, cd81, cd82, cd83, cd84, cd85, cd86, cd87, cd88, cd89, cd90, cd91, cd92, cd93, cd94, cd95, cd96, cd97, cd98, cd99, cd100, cd101, cd102, cd103, cd104, cd105, cd106, cd107, cd108, cd109, cd110));
+    List<Card> cardList = new ArrayList<>(Arrays.asList(cd1, cd2, cd3, cd4, cd5, cd6, cd7, cd8, cd9, cd10, cd11, cd12, cd13, cd14, cd15, cd16, cd17, cd18, cd19, cd20, cd21, cd22, cd23, cd24, cd25, cd26, cd27, cd28, cd29, cd30, cd31, cd32, cd33, cd34, cd35, cd36, cd37, cd38, cd39, cd40, cd41, cd42, cd43, cd44, cd45, cd46, cd47, cd48, cd49, cd50, cd51, cd52, cd53, cd54, cd55, cd56, cd57, cd58, cd59, cd60, cd61, cd62, cd63, cd64, cd65, cd66, cd67, cd68, cd69, cd70, cd71, cd72, cd73, cd74, cd75, cd76, cd77, cd78, cd79, cd80, cd81, cd82, cd83, cd84, cd85, cd86, cd87, cd88, cd89, cd90, cd91, cd92, cd93, cd94, cd95, cd96, cd97, cd98, cd99, cd100, cd101, cd102, cd103, cd104, cd105, cd106, cd107, cd108, cd109, cd110));
 
     List<Card> fiveOpenCards = new ArrayList<>();
 
@@ -241,33 +241,6 @@ public class Board {
 
         this.playerList = inputPlayers;
 
-    }
-
-    public void print() {
-        System.out.println("Players:");
-        for (int i = 0; i < playerList.size(); i++) {
-            System.out.println(playerList.get(i));
-        }
-        System.out.println();
-        System.out.println("Connections:");
-        for (int i = 0; i < connectionList.size(); i++) {
-            System.out.println(connectionList.get(i));
-        }
-        System.out.println();
-        System.out.println("Tickets:");
-        for (int i = 0; i < ticketList.size(); i++) {
-            System.out.println(ticketList.get(i));
-        }
-        System.out.println();
-        System.out.println("Open Cards:");
-        for (int i = 0; i < fiveOpenCards.size(); i++) {
-            System.out.println(fiveOpenCards.get(i));
-        }
-        System.out.println();
-        System.out.println("Card Pile:");
-        for (int i = 0; i < cardList.size(); i++) {
-            System.out.println(cardList.get(i));
-        }
     }
 
     public void shuffleTickets() {
@@ -280,8 +253,8 @@ public class Board {
 
     public void distributeTickets() {
 
-        for (int i = 0; i < playerList.size(); i++) {
-            playerList.get(i).drawTickets(ticketList);
+        for (Player player : playerList) {
+            player.drawTickets(ticketList);
             for (int j = 0; j < 23; j++) {
                 System.out.println();
             }
@@ -290,15 +263,15 @@ public class Board {
 
     public void distributeCards() {
 
-        for (int i = 0; i < playerList.size(); i++) {
-            playerList.get(i).addCards(cardList);
+        for (Player player : playerList) {
+            player.addCards(cardList);
         }
     }
 
     public void openFiveCards() {
         int locos = 0;
         boolean threeLocos = true;
-        while (threeLocos == true) {
+        while (threeLocos) {
             for (int i = 0; i < 5; i++) {
                 fiveOpenCards.add(cardList.get(i));
                 if (cardList.get(i).cardColor == CardColor.locomotive) {
@@ -307,9 +280,7 @@ public class Board {
             }
             if (locos < 3) {
                 threeLocos = false;
-                for (int i = 0; i < 5; i++) {
-                    cardList.remove(0);
-                }
+                cardList.subList(0, 5).clear();
             } else {
                 for (int i = 0; i < 5; i++) {
                     cardList.add(fiveOpenCards.get(0));
@@ -324,22 +295,22 @@ public class Board {
         boolean isGamePlaying = true;
         int i = 0;
         List<Integer> scores = new ArrayList<>();
-        while (isGamePlaying == true) {
+        while (isGamePlaying) {
             if (playerList.get(i).tracks <= 2) {
                 playerList.get(i).playTurn(this, ticketList, connectionList);
                 System.out.println(playerList.get(i));
-                for (int j = 0; j < playerList.size(); j++) {
-                    for (int k = 0; k < playerList.get(j).tickets.size(); k++) {
-                        playerList.get(j).score -= playerList.get(j).tickets.get(k).value;
+                for (Player player : playerList) {
+                    for (int k = 0; k < player.tickets.size(); k++) {
+                        player.score -= player.tickets.get(k).value;
                     }
-                    System.out.println("Player " + playerList.get(j).name + "'s score: " + playerList.get(j).score);
-                    scores.add(playerList.get(j).score);
+                    System.out.println("Player " + player.name + "'s score: " + player.score);
+                    scores.add(player.score);
                 }
                 int highestScore = Collections.max(scores);
                 boolean winningPlayerFound = false;
-                for (int l = 0; l < playerList.size(); l++) {
-                    if (playerList.get(l).score == highestScore && winningPlayerFound == false) {
-                        System.out.println("Player " + playerList.get(l).name + " wins!");
+                for (Player player : playerList) {
+                    if (player.score == highestScore && !winningPlayerFound) {
+                        System.out.println("Player " + player.name + " wins!");
                         winningPlayerFound = true;
                     }
                 }

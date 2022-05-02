@@ -31,13 +31,13 @@ public class Player {
         System.out.println(tracks);
         System.out.println();
         System.out.println("tickets:");
-        for (int i = 0; i < tickets.size(); i++) {
-            System.out.println(tickets.get(i));
+        for (Ticket ticket : tickets) {
+            System.out.println(ticket);
         }
         System.out.println();
         System.out.println("cards:");
-        for (int i = 0; i < cards.size(); i++) {
-            System.out.println(cards.get(i));
+        for (Card card : cards) {
+            System.out.println(card);
         }
         System.out.println();
     }
