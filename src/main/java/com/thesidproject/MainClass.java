@@ -1,3 +1,6 @@
+package com.thesidproject;
+
+import com.thesidproject.Board;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;

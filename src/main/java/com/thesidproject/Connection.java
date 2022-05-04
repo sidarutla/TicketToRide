@@ -1,3 +1,6 @@
+package com.thesidproject;
+
+
 public class Connection {
 
     String source;

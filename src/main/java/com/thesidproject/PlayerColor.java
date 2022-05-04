@@ -1,4 +1,4 @@
-
+package com.thesidproject;
 
 
 public enum PlayerColor {

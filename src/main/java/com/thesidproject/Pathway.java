@@ -1,3 +1,5 @@
+package com.thesidproject;
+
 public class Pathway {
 
     int tracks;

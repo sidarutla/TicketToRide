@@ -1,3 +1,5 @@
+package com.thesidproject;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -177,24 +179,16 @@ public class Board {
 
     public void openFiveCards() {
         int locos = 0;
-        boolean threeLocos = false;
-
-        do {
-            ///
-        }while(threeLocos == true);
-
-
-
-
-
+        boolean threeLocos = true;
 
         while (threeLocos) {
 
-            fiveOpenCards = cardList.subList(0, 5);
+            fiveOpenCards = new ArrayList<>(cardList.subList(0, 5));
             cardList.removeAll(fiveOpenCards);
 
             for (int i = 0; i < 5; i++) {
-                if (fiveOpenCards.get(i).cardColor == CardColor.locomotive) {
+                Card card = fiveOpenCards.get(i);
+                if (card.cardColor == CardColor.locomotive) {
                     locos += 1;
                 }
             }

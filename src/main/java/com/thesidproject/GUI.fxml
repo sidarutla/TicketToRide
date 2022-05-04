@@ -40,31 +40,31 @@
             </font>
         </Label>
         <ImageView fitHeight="45" fitWidth="60" pickOnBounds="true" preserveRatio="true">
-            <Image url="resources/RedCard.jpg"/>
+            <Image url="../../../resources/RedCard.jpg"/>
         </ImageView>
         <ImageView fitHeight="45" fitWidth="60" layoutX="10.0" layoutY="156.0" pickOnBounds="true" preserveRatio="true">
-            <Image url="resources/RedCard.jpg"/>
+            <Image url="../../../resources/RedCard.jpg"/>
         </ImageView>
         <ImageView fitHeight="45" fitWidth="60" layoutX="10.0" layoutY="206.0" pickOnBounds="true" preserveRatio="true">
-            <Image url="resources/RedCard.jpg"/>
+            <Image url="../../../resources/RedCard.jpg"/>
         </ImageView>
         <ImageView fitHeight="45" fitWidth="60" layoutX="10.0" layoutY="216.0" pickOnBounds="true" preserveRatio="true">
-            <Image url="resources/RedCard.jpg"/>
+            <Image url="../../../resources/RedCard.jpg"/>
         </ImageView>
         <ImageView fitHeight="45" fitWidth="60" layoutX="10.0" layoutY="133.0" pickOnBounds="true" preserveRatio="true">
-            <Image url="resources/RedCard.jpg"/>
+            <Image url="../../../resources/RedCard.jpg"/>
         </ImageView>
     </VBox>
     <VBox layoutX="530" layoutY="105" prefHeight="185.0" prefWidth="70.0">
         <ImageView fitHeight="80" fitWidth="107" pickOnBounds="true" preserveRatio="true">
-            <Image url="resources/CardBack.jpg"/>
+            <Image url="../../../resources/CardBack.jpg"/>
         </ImageView>
         <Label/>
         <ImageView fitHeight="80" fitWidth="107" pickOnBounds="true" preserveRatio="true">
-            <Image url="resources/TicketBack.jpg"/>
+            <Image url="../../../resources/TicketBack.jpg"/>
         </ImageView>
     </VBox>
     <ImageView fitHeight="330" fitWidth="440" pickOnBounds="true" preserveRatio="true">
-        <Image url="resources/Board.png"/>
+        <Image url="../../../resources/Board.png"/>
     </ImageView>
 </AnchorPane>

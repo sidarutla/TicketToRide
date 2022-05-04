@@ -1,10 +1,12 @@
-public enum PlayType {
+package com.thesidproject;
 
-    drawCards(1), buildTracks(2), drawTickets(3);
+public enum TakeCard {
+
+    card1(1), card2(2), card3(3), card4(4), card5(5), drawpile(6);
 
     private int index;
 
-    PlayType(int index) {
+    TakeCard(int index) {
         this.index = index;
     }
 
@@ -13,8 +15,8 @@ public enum PlayType {
     }
 
 
-    public static PlayType getPlayType(int index) {
-        for (PlayType value : values()) {
+    public static TakeCard getTakeCard(int index) {
+        for (TakeCard value : values()) {
             if (value.getIndex() == index) {
                 return value;
             }
