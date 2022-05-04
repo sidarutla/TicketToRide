@@ -9,6 +9,7 @@ public class Board {
 
     List<Player> playerList;
 
+    //TODO: SID - Move this code to separate class. In the new class, read the connections.csf file from reource folder initialize all the connections.
     Connection cn1 = Connection.buildConnection("Vancouver", "Seattle", true, 1, TrackColor.grey, TrackColor.grey);
     Connection cn2 = Connection.buildConnection("Vancouver", "Calgary", false, 3, TrackColor.grey, null);
     Connection cn3 = Connection.buildConnection("Seattle", "Portland", true, 1, TrackColor.grey, TrackColor.grey);
@@ -88,6 +89,8 @@ public class Board {
     Connection cn77 = Connection.buildConnection("New York", "Boston", true, 2, TrackColor.yellow, TrackColor.red);
     Connection cn78 = Connection.buildConnection("Boston", "Montreal", true, 2, TrackColor.grey, TrackColor.grey);
 
+
+    // TODO: SID- Same as above. Create a new file called tickets.csv in resources folder and do same.
     Ticket t1 = Ticket.buildTicket("Boston", "Miami", 12);
     Ticket t2 = Ticket.buildTicket("Calgary", "Phoenix", 13);
     Ticket t3 = Ticket.buildTicket("Calgary", "Salt Lake City", 7);
