@@ -7,8 +7,7 @@ public class Card {
     }
 
     public String toString() {
-        String string = cardColor + "";
-        return string;
+        return cardColor + "";
     }
 
     public boolean isLocomotive() {

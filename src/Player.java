@@ -79,30 +79,29 @@ public class Player {
 
         if (playType == PlayType.drawCards) {
             TakeCard takeCard = getTakeCard(board);
-            Card drawnCard = board.getCard(takeCard);
-            cards.add(drawnCard);
-            System.out.println("Player " + name + ", you got a " + drawnCard.cardColor + ".");
+            Card firstCard = board.getCard(takeCard);
+            cards.add(firstCard);
+            System.out.println("Player " + name + ", you got a " + firstCard.cardColor + ".");
             System.out.println();
 
-            if (takeCard.ordinal() > 4 || !drawnCard.isLocomotive()) {
+            if (takeCard.ordinal() > 4 || !firstCard.isLocomotive()) {
                 //Can't take locomotive..
                 takeCard = getTakeCard(board);
-                while (board.isTakeCardValid(takeCard, false) == false) {
+                while (!board.isTakeCardValid(takeCard, false)) {
                     takeCard = getTakeCard(board);
                 }
                 Card secondCard = board.getCard(takeCard);
                 cards.add(secondCard);
-                System.out.println("Player " + name + ", you got a " + drawnCard.cardColor + ".");
+                System.out.println("Player " + name + ", you got a " + secondCard.cardColor + ".");
                 System.out.println();
             }
         } else if (playType == PlayType.drawTickets) {
             List<Ticket> drawnTickets = new ArrayList<>();
             System.out.println("Player " + name + ", how many tickets would you like to return? ");
-            for (int i = 0; i < 3; i++) {
-                drawnTickets.add(ticketList.get(i));
-                System.out.println(ticketList.get(i));
-                ticketList.remove(i);
-            }
+             drawnTickets = ticketList.subList(0, 3);
+                System.out.println(ticketList);
+                ticketList.removeAll(drawnTickets);
+            //stopped here
             boolean isValidInput = false;
             int inputIndex = -1;
             while (!isValidInput) {

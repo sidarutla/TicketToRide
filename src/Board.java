@@ -86,9 +86,6 @@ public class Board {
     Connection cn77 = Connection.buildConnection("New York", "Boston", true, 2, TrackColor.yellow, TrackColor.red);
     Connection cn78 = Connection.buildConnection("Boston", "Montreal", true, 2, TrackColor.grey, TrackColor.grey);
 
-
-    private final List<Connection> connectionList = new ArrayList<>(Arrays.asList(cn1, cn2, cn3, cn4, cn5, cn6, cn7, cn8, cn9, cn10, cn11, cn12, cn13, cn14, cn15, cn16, cn17, cn18, cn19, cn20, cn21, cn22, cn23, cn24, cn25, cn26, cn27, cn28, cn29, cn30, cn31, cn32, cn33, cn34, cn35, cn36, cn37, cn38, cn39, cn40, cn41, cn42, cn43, cn44, cn45, cn46, cn47, cn48, cn49, cn50, cn51, cn52, cn53, cn54, cn55, cn56, cn57, cn58, cn59, cn60, cn61, cn62, cn63, cn64, cn65, cn66, cn67, cn68, cn69, cn70, cn71, cn72, cn73, cn74, cn75, cn76, cn77, cn78));
-
     Ticket t1 = Ticket.buildTicket("Boston", "Miami", 12);
     Ticket t2 = Ticket.buildTicket("Calgary", "Phoenix", 13);
     Ticket t3 = Ticket.buildTicket("Calgary", "Salt Lake City", 7);
@@ -120,127 +117,37 @@ public class Board {
     Ticket t29 = Ticket.buildTicket("Winnipeg", "Houston", 12);
     Ticket t30 = Ticket.buildTicket("Winnipeg", "Little Rock", 11);
 
+    public List<Card> createCards() {
+
+        List<Card> cardList = new ArrayList<>();
+
+        for (int i = 0; i < 12; i++) {
+            Card c1 = new Card(CardColor.red);
+            Card c2 = new Card(CardColor.orange);
+            Card c3 = new Card(CardColor.yellow);
+            Card c4 = new Card(CardColor.green);
+            Card c5 = new Card(CardColor.blue);
+            Card c6 = new Card(CardColor.pink);
+            Card c7 = new Card(CardColor.white);
+            Card c8 = new Card(CardColor.black);
+            Collections.addAll(cardList, c1, c2, c3, c4, c5, c6, c7, c8);
+        }
+
+        for (int i = 0; i < 14; i++) {
+            Card c9 = new Card(CardColor.locomotive);
+            cardList.add(c9);
+        }
+
+        return cardList;
+    }
+
+    List<Connection> connectionList = new ArrayList<>(Arrays.asList(cn1, cn2, cn3, cn4, cn5, cn6, cn7, cn8, cn9, cn10, cn11, cn12, cn13, cn14, cn15, cn16, cn17, cn18, cn19, cn20, cn21, cn22, cn23, cn24, cn25, cn26, cn27, cn28, cn29, cn30, cn31, cn32, cn33, cn34, cn35, cn36, cn37, cn38, cn39, cn40, cn41, cn42, cn43, cn44, cn45, cn46, cn47, cn48, cn49, cn50, cn51, cn52, cn53, cn54, cn55, cn56, cn57, cn58, cn59, cn60, cn61, cn62, cn63, cn64, cn65, cn66, cn67, cn68, cn69, cn70, cn71, cn72, cn73, cn74, cn75, cn76, cn77, cn78));
     List<Ticket> ticketList = new ArrayList<>(Arrays.asList(t23, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17, t18, t19, t20, t21, t22, t23, t24, t25, t26, t27, t28, t29, t30));
-
-    Card cd1 = new Card(CardColor.red);
-    Card cd2 = new Card(CardColor.red);
-    Card cd3 = new Card(CardColor.red);
-    Card cd4 = new Card(CardColor.red);
-    Card cd5 = new Card(CardColor.red);
-    Card cd6 = new Card(CardColor.red);
-    Card cd7 = new Card(CardColor.red);
-    Card cd8 = new Card(CardColor.red);
-    Card cd9 = new Card(CardColor.red);
-    Card cd10 = new Card(CardColor.red);
-    Card cd11 = new Card(CardColor.red);
-    Card cd12 = new Card(CardColor.red);
-    Card cd13 = new Card(CardColor.orange);
-    Card cd14 = new Card(CardColor.orange);
-    Card cd15 = new Card(CardColor.orange);
-    Card cd16 = new Card(CardColor.orange);
-    Card cd17 = new Card(CardColor.orange);
-    Card cd18 = new Card(CardColor.orange);
-    Card cd19 = new Card(CardColor.orange);
-    Card cd20 = new Card(CardColor.orange);
-    Card cd21 = new Card(CardColor.orange);
-    Card cd22 = new Card(CardColor.orange);
-    Card cd23 = new Card(CardColor.orange);
-    Card cd24 = new Card(CardColor.orange);
-    Card cd25 = new Card(CardColor.yellow);
-    Card cd26 = new Card(CardColor.yellow);
-    Card cd27 = new Card(CardColor.yellow);
-    Card cd28 = new Card(CardColor.yellow);
-    Card cd29 = new Card(CardColor.yellow);
-    Card cd30 = new Card(CardColor.yellow);
-    Card cd31 = new Card(CardColor.yellow);
-    Card cd32 = new Card(CardColor.yellow);
-    Card cd33 = new Card(CardColor.yellow);
-    Card cd34 = new Card(CardColor.yellow);
-    Card cd35 = new Card(CardColor.yellow);
-    Card cd36 = new Card(CardColor.yellow);
-    Card cd37 = new Card(CardColor.green);
-    Card cd38 = new Card(CardColor.green);
-    Card cd39 = new Card(CardColor.green);
-    Card cd40 = new Card(CardColor.green);
-    Card cd41 = new Card(CardColor.green);
-    Card cd42 = new Card(CardColor.green);
-    Card cd43 = new Card(CardColor.green);
-    Card cd44 = new Card(CardColor.green);
-    Card cd45 = new Card(CardColor.green);
-    Card cd46 = new Card(CardColor.green);
-    Card cd47 = new Card(CardColor.green);
-    Card cd48 = new Card(CardColor.green);
-    Card cd49 = new Card(CardColor.blue);
-    Card cd50 = new Card(CardColor.blue);
-    Card cd51 = new Card(CardColor.blue);
-    Card cd52 = new Card(CardColor.blue);
-    Card cd53 = new Card(CardColor.blue);
-    Card cd54 = new Card(CardColor.blue);
-    Card cd55 = new Card(CardColor.blue);
-    Card cd56 = new Card(CardColor.blue);
-    Card cd57 = new Card(CardColor.blue);
-    Card cd58 = new Card(CardColor.blue);
-    Card cd59 = new Card(CardColor.blue);
-    Card cd60 = new Card(CardColor.blue);
-    Card cd61 = new Card(CardColor.pink);
-    Card cd62 = new Card(CardColor.pink);
-    Card cd63 = new Card(CardColor.pink);
-    Card cd64 = new Card(CardColor.pink);
-    Card cd65 = new Card(CardColor.pink);
-    Card cd66 = new Card(CardColor.pink);
-    Card cd67 = new Card(CardColor.pink);
-    Card cd68 = new Card(CardColor.pink);
-    Card cd69 = new Card(CardColor.pink);
-    Card cd70 = new Card(CardColor.pink);
-    Card cd71 = new Card(CardColor.pink);
-    Card cd72 = new Card(CardColor.pink);
-    Card cd73 = new Card(CardColor.black);
-    Card cd74 = new Card(CardColor.black);
-    Card cd75 = new Card(CardColor.black);
-    Card cd76 = new Card(CardColor.black);
-    Card cd77 = new Card(CardColor.black);
-    Card cd78 = new Card(CardColor.black);
-    Card cd79 = new Card(CardColor.black);
-    Card cd80 = new Card(CardColor.black);
-    Card cd81 = new Card(CardColor.black);
-    Card cd82 = new Card(CardColor.black);
-    Card cd83 = new Card(CardColor.black);
-    Card cd84 = new Card(CardColor.black);
-    Card cd85 = new Card(CardColor.white);
-    Card cd86 = new Card(CardColor.white);
-    Card cd87 = new Card(CardColor.white);
-    Card cd88 = new Card(CardColor.white);
-    Card cd89 = new Card(CardColor.white);
-    Card cd90 = new Card(CardColor.white);
-    Card cd91 = new Card(CardColor.white);
-    Card cd92 = new Card(CardColor.white);
-    Card cd93 = new Card(CardColor.white);
-    Card cd94 = new Card(CardColor.white);
-    Card cd95 = new Card(CardColor.white);
-    Card cd96 = new Card(CardColor.white);
-    Card cd97 = new Card(CardColor.locomotive);
-    Card cd98 = new Card(CardColor.locomotive);
-    Card cd99 = new Card(CardColor.locomotive);
-    Card cd100 = new Card(CardColor.locomotive);
-    Card cd101 = new Card(CardColor.locomotive);
-    Card cd102 = new Card(CardColor.locomotive);
-    Card cd103 = new Card(CardColor.locomotive);
-    Card cd104 = new Card(CardColor.locomotive);
-    Card cd105 = new Card(CardColor.locomotive);
-    Card cd106 = new Card(CardColor.locomotive);
-    Card cd107 = new Card(CardColor.locomotive);
-    Card cd108 = new Card(CardColor.locomotive);
-    Card cd109 = new Card(CardColor.locomotive);
-    Card cd110 = new Card(CardColor.locomotive);
-
-    List<Card> cardList = new ArrayList<>(Arrays.asList(cd1, cd2, cd3, cd4, cd5, cd6, cd7, cd8, cd9, cd10, cd11, cd12, cd13, cd14, cd15, cd16, cd17, cd18, cd19, cd20, cd21, cd22, cd23, cd24, cd25, cd26, cd27, cd28, cd29, cd30, cd31, cd32, cd33, cd34, cd35, cd36, cd37, cd38, cd39, cd40, cd41, cd42, cd43, cd44, cd45, cd46, cd47, cd48, cd49, cd50, cd51, cd52, cd53, cd54, cd55, cd56, cd57, cd58, cd59, cd60, cd61, cd62, cd63, cd64, cd65, cd66, cd67, cd68, cd69, cd70, cd71, cd72, cd73, cd74, cd75, cd76, cd77, cd78, cd79, cd80, cd81, cd82, cd83, cd84, cd85, cd86, cd87, cd88, cd89, cd90, cd91, cd92, cd93, cd94, cd95, cd96, cd97, cd98, cd99, cd100, cd101, cd102, cd103, cd104, cd105, cd106, cd107, cd108, cd109, cd110));
-
     List<Card> fiveOpenCards = new ArrayList<>();
+    List<Card> cardList = createCards();
 
     public Board(List<Player> inputPlayers) {
-
         this.playerList = inputPlayers;
-
     }
 
     public void shuffleTickets() {
@@ -270,23 +177,32 @@ public class Board {
 
     public void openFiveCards() {
         int locos = 0;
-        boolean threeLocos = true;
+        boolean threeLocos = false;
+
+        do {
+            ///
+        }while(threeLocos == true);
+
+
+
+
+
+
         while (threeLocos) {
+
+            fiveOpenCards = cardList.subList(0, 5);
+            cardList.removeAll(fiveOpenCards);
+
             for (int i = 0; i < 5; i++) {
-                fiveOpenCards.add(cardList.get(i));
-                if (cardList.get(i).cardColor == CardColor.locomotive) {
+                if (fiveOpenCards.get(i).cardColor == CardColor.locomotive) {
                     locos += 1;
                 }
             }
             if (locos < 3) {
                 threeLocos = false;
-                cardList.subList(0, 5).clear();
             } else {
-                for (int i = 0; i < 5; i++) {
-                    cardList.add(fiveOpenCards.get(0));
-                    fiveOpenCards.remove(0);
-                    shuffleCards();
-                }
+                cardList.addAll(fiveOpenCards);
+                shuffleCards();
             }
         }
     }

@@ -16,8 +16,7 @@ public class Connection {
         Pathway pathway1 = new Pathway(tracks, color1, true, null);
         Pathway pathway2 = new Pathway(tracks, color2, true, null);
 
-        Connection connection = new Connection(source, destination, pathway1, doubleTracks ? pathway2 : null);
-        return connection;
+        return new Connection(source, destination, pathway1, doubleTracks ? pathway2 : null);
     }
 
     public String toString() {

@@ -17,7 +17,7 @@ public class Pathway {
 
     public String toString() {
         String string = tracks + ", " + color + ", ";
-        if (open == true) {
+        if (open) {
             string += "open";
         } else {
             string += "closed";

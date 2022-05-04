@@ -65,6 +65,6 @@
         </ImageView>
     </VBox>
     <ImageView fitHeight="330" fitWidth="440" pickOnBounds="true" preserveRatio="true">
-        <Image url="resources/Board.jpg"/>
+        <Image url="resources/Board.png"/>
     </ImageView>
 </AnchorPane>
