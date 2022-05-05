@@ -79,79 +79,32 @@ public class GUI extends Application {
         VBox ticketContainer2 = new VBox();
         List<ImageView> playerCardsImages = new ArrayList<>();
         for (int i = 0; i < board.playerList.get(turn).cards.size(); i++) {
+            ImageView imageView1 = new ImageView();
             if (board.playerList.get(turn).cards.get(i).cardColor == CardColor.red) {
-                ImageView imageView1 = new ImageView("RedCard.jpg");
-                imageView1.setFitHeight(100);
-                imageView1.setFitWidth(75);
-                imageView1.setPickOnBounds(true);
-                imageView1.setPreserveRatio(true);
-                imageView1.setRotate(-90);
-                playerCardsImages.add(imageView1);
+                imageView1 = new ImageView("RedCard.jpg");
             } else if (board.playerList.get(turn).cards.get(i).cardColor == CardColor.orange) {
-                ImageView imageView1 = new ImageView("OrangeCard.jpg");
-                imageView1.setFitHeight(100);
-                imageView1.setFitWidth(75);
-                imageView1.setPickOnBounds(true);
-                imageView1.setPreserveRatio(true);
-                imageView1.setRotate(-90);
-                playerCardsImages.add(imageView1);
+                imageView1 = new ImageView("OrangeCard.jpg");
             } else if (board.playerList.get(turn).cards.get(i).cardColor == CardColor.yellow) {
-                ImageView imageView1 = new ImageView("YellowCard.jpg");
-                imageView1.setFitHeight(100);
-                imageView1.setFitWidth(75);
-                imageView1.setPickOnBounds(true);
-                imageView1.setPreserveRatio(true);
-                imageView1.setRotate(-90);
-                playerCardsImages.add(imageView1);
+                imageView1 = new ImageView("YellowCard.jpg");
             } else if (board.playerList.get(turn).cards.get(i).cardColor == CardColor.green) {
-                ImageView imageView1 = new ImageView("GreenCard.jpg");
-                imageView1.setFitHeight(100);
-                imageView1.setFitWidth(75);
-                imageView1.setPickOnBounds(true);
-                imageView1.setPreserveRatio(true);
-                imageView1.setRotate(-90);
-                playerCardsImages.add(imageView1);
+                imageView1 = new ImageView("GreenCard.jpg");
             } else if (board.playerList.get(turn).cards.get(i).cardColor == CardColor.blue) {
-                ImageView imageView1 = new ImageView("BlueCard.jpg");
-                imageView1.setFitHeight(100);
-                imageView1.setFitWidth(75);
-                imageView1.setPickOnBounds(true);
-                imageView1.setPreserveRatio(true);
-                imageView1.setRotate(-90);
-                playerCardsImages.add(imageView1);
+                imageView1 = new ImageView("BlueCard.jpg");
             } else if (board.playerList.get(turn).cards.get(i).cardColor == CardColor.pink) {
-                ImageView imageView1 = new ImageView("PinkCard.jpg");
-                imageView1.setFitHeight(100);
-                imageView1.setFitWidth(75);
-                imageView1.setPickOnBounds(true);
-                imageView1.setPreserveRatio(true);
-                imageView1.setRotate(-90);
-                playerCardsImages.add(imageView1);
+                imageView1 = new ImageView("PinkCard.jpg");
             } else if (board.playerList.get(turn).cards.get(i).cardColor == CardColor.black) {
-                ImageView imageView1 = new ImageView("BlackCard.jpg");
-                imageView1.setFitHeight(100);
-                imageView1.setFitWidth(75);
-                imageView1.setPickOnBounds(true);
-                imageView1.setPreserveRatio(true);
-                imageView1.setRotate(-90);
-                playerCardsImages.add(imageView1);
+                imageView1 = new ImageView("BlackCard.jpg");
             } else if (board.playerList.get(turn).cards.get(i).cardColor == CardColor.white) {
-                ImageView imageView1 = new ImageView("WhiteCard.jpg");
-                imageView1.setFitHeight(100);
-                imageView1.setFitWidth(75);
-                imageView1.setPickOnBounds(true);
-                imageView1.setPreserveRatio(true);
-                imageView1.setRotate(-90);
-                playerCardsImages.add(imageView1);
+                imageView1 = new ImageView("WhiteCard.jpg");
             } else {
-                ImageView imageView1 = new ImageView("LocoCard.jpg");
-                imageView1.setFitHeight(100);
-                imageView1.setFitWidth(75);
-                imageView1.setPickOnBounds(true);
-                imageView1.setPreserveRatio(true);
-                imageView1.setRotate(-90);
-                playerCardsImages.add(imageView1);
+                imageView1 = new ImageView("LocoCard.jpg");
             }
+            imageView1.setFitHeight(100);
+            imageView1.setFitWidth(75);
+            imageView1.setPickOnBounds(true);
+            imageView1.setPreserveRatio(true);
+            imageView1.setRotate(-90);
+            playerCardsImages.add(imageView1);
         }
         List<Label> ticketLabelList = new ArrayList<>();
         for (int i = 0; i < board.playerList.get(turn).tickets.size(); i++) {
@@ -270,14 +223,14 @@ public class GUI extends Application {
     public void setOpenCardAction(Button openCard, int position, VBox openCardContainer) {
         openCard.setOnAction(event -> addCard(position, openCardContainer));
     }
+
     public void addCard(int position, VBox openCardContainer) {
         if (drawCardsClicked && normalCardsDrawn < 2 && locosDrawn < 1 && (normalCardsDrawn != 1 || board.fiveOpenCards.get(position).cardColor != CardColor.locomotive)) {
             board.playerList.get(turn).cards.add(board.fiveOpenCards.get(position));
             if (board.fiveOpenCards.get(position).cardColor == CardColor.locomotive) {
                 locosDrawn += 1;
-            }
-            else {
-                normalCardsDrawn +=1;
+            } else {
+                normalCardsDrawn += 1;
             }
             board.fiveOpenCards.remove(position);
             board.fiveOpenCards.add(board.cardList.get(0));
@@ -294,64 +247,33 @@ public class GUI extends Application {
             label.setFont(Font.font(50));
             scoreboardList.add(label);
         }
-        ArrayList<Button> openCardList = new ArrayList<>();
+        ArrayList<ImageView> openCardList = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
+            ImageView openCard = new ImageView();
             if (board.fiveOpenCards.get(i).cardColor == CardColor.red) {
-                Button openCard = new Button("RedCard.jpg");
-                openCard.setPrefHeight(147);
-                openCard.setPrefWidth(196);
-                openCard.setPickOnBounds(true);
-                openCardList.add(openCard);
-                setOpenCardAction(openCard, i, scoreBoardAndOpenCardContainer);
+                openCard = new ImageView("RedCard.jpg");
             } else if (board.fiveOpenCards.get(i).cardColor == CardColor.orange) {
-                Button openCard = new Button("OrangeCard.jpg");
-                openCard.setPrefHeight(147);
-                openCard.setPrefWidth(196);
-                openCard.setPickOnBounds(true);
-                openCardList.add(openCard);
+                openCard = new ImageView("OrangeCard.jpg");
             } else if (board.fiveOpenCards.get(i).cardColor == CardColor.yellow) {
-                Button openCard = new Button("YellowCard.jpg");
-                openCard.setPrefHeight(147);
-                openCard.setPrefWidth(196);
-                openCard.setPickOnBounds(true);
-                openCardList.add(openCard);
+                openCard = new ImageView("YellowCard.jpg");
             } else if (board.fiveOpenCards.get(i).cardColor == CardColor.green) {
-                Button openCard = new Button("GreenCard.jpg");
-                openCard.setPrefHeight(147);
-                openCard.setPrefWidth(196);
-                openCard.setPickOnBounds(true);
-                openCardList.add(openCard);
+                openCard = new ImageView("GreenCard.jpg");
             } else if (board.fiveOpenCards.get(i).cardColor == CardColor.blue) {
-                Button openCard = new Button("BlueCard.jpg");
-                openCard.setPrefHeight(147);
-                openCard.setPrefWidth(196);
-                openCard.setPickOnBounds(true);
-                openCardList.add(openCard);
+                openCard = new ImageView("BlueCard.jpg");
             } else if (board.fiveOpenCards.get(i).cardColor == CardColor.pink) {
-                Button openCard = new Button("PinkCard.jpg");
-                openCard.setPrefHeight(147);
-                openCard.setPrefWidth(196);
-                openCard.setPickOnBounds(true);
-                openCardList.add(openCard);
+                openCard = new ImageView("PinkCard.jpg");
             } else if (board.fiveOpenCards.get(i).cardColor == CardColor.black) {
-                Button openCard = new Button("BlackCard.jpg");
-                openCard.setPrefHeight(147);
-                openCard.setPrefWidth(196);
-                openCard.setPickOnBounds(true);
-                openCardList.add(openCard);
+                openCard = new ImageView("BlackCard.jpg");
             } else if (board.fiveOpenCards.get(i).cardColor == CardColor.white) {
-                Button openCard = new Button("WhiteCard.jpg");
-                openCard.setPrefHeight(147);
-                openCard.setPrefWidth(196);
-                openCard.setPickOnBounds(true);
-                openCardList.add(openCard);
+                openCard = new ImageView("WhiteCard.jpg");
             } else {
-                Button openCard = new Button("LocoCard.jpg");
-                openCard.setPrefHeight(147);
-                openCard.setPrefWidth(196);
-                openCard.setPickOnBounds(true);
-                openCardList.add(openCard);
+                openCard = new ImageView("LocoCard.jpg");
             }
+            openCard.setFitHeight(147);
+            openCard.setFitWidth(196);
+            openCard.setPickOnBounds(true);
+            openCardList.add(openCard);
+//            setOpenCardAction(openCard, i, scoreBoardAndOpenCardContainer);
         }
         if (scoreboardList.size() == 2) {
             scoreBoardAndOpenCardContainer = new VBox(scoreboardList.get(0), scoreboardList.get(1), openCardList.get(0), openCardList.get(1), openCardList.get(2), openCardList.get(3), openCardList.get(4));
@@ -398,79 +320,34 @@ public class GUI extends Application {
         VBox ticketContainer2 = new VBox();
         List<ImageView> playerCardsImages = new ArrayList<>();
         for (int i = 0; i < board.playerList.get(turn).cards.size(); i++) {
+            ImageView imageView1 = new ImageView();
             if (board.playerList.get(turn).cards.get(i).cardColor == CardColor.red) {
-                ImageView imageView1 = new ImageView("resources/RedCard.jpg");
-                imageView1.setFitHeight(100);
-                imageView1.setFitWidth(75);
-                imageView1.setPickOnBounds(true);
-                imageView1.setPreserveRatio(true);
-                imageView1.setRotate(-90);
-                playerCardsImages.add(imageView1);
+                imageView1 = new ImageView("resources/RedCard.jpg");
             } else if (board.playerList.get(turn).cards.get(i).cardColor == CardColor.orange) {
-                ImageView imageView1 = new ImageView("resources/OrangeCard.jpg");
-                imageView1.setFitHeight(100);
-                imageView1.setFitWidth(75);
-                imageView1.setPickOnBounds(true);
-                imageView1.setPreserveRatio(true);
-                imageView1.setRotate(-90);
-                playerCardsImages.add(imageView1);
+                imageView1 = new ImageView("resources/OrangeCard.jpg");
+
             } else if (board.playerList.get(turn).cards.get(i).cardColor == CardColor.yellow) {
-                ImageView imageView1 = new ImageView("resources/YellowCard.jpg");
-                imageView1.setFitHeight(100);
-                imageView1.setFitWidth(75);
-                imageView1.setPickOnBounds(true);
-                imageView1.setPreserveRatio(true);
-                imageView1.setRotate(-90);
+                imageView1 = new ImageView("resources/YellowCard.jpg");
                 playerCardsImages.add(imageView1);
             } else if (board.playerList.get(turn).cards.get(i).cardColor == CardColor.green) {
-                ImageView imageView1 = new ImageView("resources/GreenCard.jpg");
-                imageView1.setFitHeight(100);
-                imageView1.setFitWidth(75);
-                imageView1.setPickOnBounds(true);
-                imageView1.setPreserveRatio(true);
-                imageView1.setRotate(-90);
-                playerCardsImages.add(imageView1);
+                imageView1 = new ImageView("resources/GreenCard.jpg");
             } else if (board.playerList.get(turn).cards.get(i).cardColor == CardColor.blue) {
-                ImageView imageView1 = new ImageView("resources/BlueCard.jpg");
-                imageView1.setFitHeight(100);
-                imageView1.setFitWidth(75);
-                imageView1.setPickOnBounds(true);
-                imageView1.setPreserveRatio(true);
-                imageView1.setRotate(-90);
-                playerCardsImages.add(imageView1);
+                imageView1 = new ImageView("resources/BlueCard.jpg");
             } else if (board.playerList.get(turn).cards.get(i).cardColor == CardColor.pink) {
-                ImageView imageView1 = new ImageView("resources/PinkCard.jpg");
-                imageView1.setFitHeight(100);
-                imageView1.setFitWidth(75);
-                imageView1.setPickOnBounds(true);
-                imageView1.setPreserveRatio(true);
-                imageView1.setRotate(-90);
-                playerCardsImages.add(imageView1);
+                imageView1 = new ImageView("resources/PinkCard.jpg");
             } else if (board.playerList.get(turn).cards.get(i).cardColor == CardColor.black) {
-                ImageView imageView1 = new ImageView("resources/BlackCard.jpg");
-                imageView1.setFitHeight(100);
-                imageView1.setFitWidth(75);
-                imageView1.setPickOnBounds(true);
-                imageView1.setPreserveRatio(true);
-                imageView1.setRotate(-90);
-                playerCardsImages.add(imageView1);
+                imageView1 = new ImageView("resources/BlackCard.jpg");
             } else if (board.playerList.get(turn).cards.get(i).cardColor == CardColor.white) {
-                ImageView imageView1 = new ImageView("resources/WhiteCard.jpg");
-                imageView1.setFitHeight(100);
-                imageView1.setFitWidth(75);
-                imageView1.setPickOnBounds(true);
-                imageView1.setPreserveRatio(true);
-                imageView1.setRotate(-90);
-                playerCardsImages.add(imageView1);
+                imageView1 = new ImageView("resources/WhiteCard.jpg");
             } else {
-                ImageView imageView1 = new ImageView("resources/LocoCard.jpg");
-                imageView1.setFitHeight(100);
-                imageView1.setFitWidth(75);
-                imageView1.setPickOnBounds(true);
-                imageView1.setPreserveRatio(true);
-                imageView1.setRotate(-90);
-                playerCardsImages.add(imageView1);
+                imageView1 = new ImageView("resources/LocoCard.jpg");
             }
+            imageView1.setFitHeight(100);
+            imageView1.setFitWidth(75);
+            imageView1.setPickOnBounds(true);
+            imageView1.setPreserveRatio(true);
+            imageView1.setRotate(-90);
+            playerCardsImages.add(imageView1);
         }
         List<Label> ticketLabelList = new ArrayList<>();
         for (int i = 0; i < board.playerList.get(turn).tickets.size(); i++) {
@@ -588,79 +465,32 @@ public class GUI extends Application {
         FlowPane cardContainer = new FlowPane();
         List<ImageView> playerCardsImages = new ArrayList<>();
         for (int i = 0; i < board.playerList.get(turn).cards.size(); i++) {
+            ImageView imageView1 = new ImageView();
             if (board.playerList.get(turn).cards.get(i).cardColor == CardColor.red) {
-                ImageView imageView1 = new ImageView("resources/RedCard.jpg");
-                imageView1.setFitHeight(100);
-                imageView1.setFitWidth(75);
-                imageView1.setPickOnBounds(true);
-                imageView1.setPreserveRatio(true);
-                imageView1.setRotate(-90);
-                playerCardsImages.add(imageView1);
+                imageView1 = new ImageView("resources/RedCard.jpg");
             } else if (board.playerList.get(turn).cards.get(i).cardColor == CardColor.orange) {
-                ImageView imageView1 = new ImageView("resources/OrangeCard.jpg");
-                imageView1.setFitHeight(100);
-                imageView1.setFitWidth(75);
-                imageView1.setPickOnBounds(true);
-                imageView1.setPreserveRatio(true);
-                imageView1.setRotate(-90);
-                playerCardsImages.add(imageView1);
+                imageView1 = new ImageView("resources/OrangeCard.jpg");
             } else if (board.playerList.get(turn).cards.get(i).cardColor == CardColor.yellow) {
-                ImageView imageView1 = new ImageView("resources/YellowCard.jpg");
-                imageView1.setFitHeight(100);
-                imageView1.setFitWidth(75);
-                imageView1.setPickOnBounds(true);
-                imageView1.setPreserveRatio(true);
-                imageView1.setRotate(-90);
-                playerCardsImages.add(imageView1);
+                imageView1 = new ImageView("resources/YellowCard.jpg");
             } else if (board.playerList.get(turn).cards.get(i).cardColor == CardColor.green) {
-                ImageView imageView1 = new ImageView("resources/GreenCard.jpg");
-                imageView1.setFitHeight(100);
-                imageView1.setFitWidth(75);
-                imageView1.setPickOnBounds(true);
-                imageView1.setPreserveRatio(true);
-                imageView1.setRotate(-90);
-                playerCardsImages.add(imageView1);
+                imageView1 = new ImageView("resources/GreenCard.jpg");
             } else if (board.playerList.get(turn).cards.get(i).cardColor == CardColor.blue) {
-                ImageView imageView1 = new ImageView("resources/BlueCard.jpg");
-                imageView1.setFitHeight(100);
-                imageView1.setFitWidth(75);
-                imageView1.setPickOnBounds(true);
-                imageView1.setPreserveRatio(true);
-                imageView1.setRotate(-90);
-                playerCardsImages.add(imageView1);
+                imageView1 = new ImageView("resources/BlueCard.jpg");
             } else if (board.playerList.get(turn).cards.get(i).cardColor == CardColor.pink) {
-                ImageView imageView1 = new ImageView("resources/PinkCard.jpg");
-                imageView1.setFitHeight(100);
-                imageView1.setFitWidth(75);
-                imageView1.setPickOnBounds(true);
-                imageView1.setPreserveRatio(true);
-                imageView1.setRotate(-90);
-                playerCardsImages.add(imageView1);
+                imageView1 = new ImageView("resources/PinkCard.jpg");
             } else if (board.playerList.get(turn).cards.get(i).cardColor == CardColor.black) {
-                ImageView imageView1 = new ImageView("resources/BlackCard.jpg");
-                imageView1.setFitHeight(100);
-                imageView1.setFitWidth(75);
-                imageView1.setPickOnBounds(true);
-                imageView1.setPreserveRatio(true);
-                imageView1.setRotate(-90);
-                playerCardsImages.add(imageView1);
+                imageView1 = new ImageView("resources/BlackCard.jpg");
             } else if (board.playerList.get(turn).cards.get(i).cardColor == CardColor.white) {
-                ImageView imageView1 = new ImageView("resources/WhiteCard.jpg");
-                imageView1.setFitHeight(100);
-                imageView1.setFitWidth(75);
-                imageView1.setPickOnBounds(true);
-                imageView1.setPreserveRatio(true);
-                imageView1.setRotate(-90);
-                playerCardsImages.add(imageView1);
+                imageView1 = new ImageView("resources/WhiteCard.jpg");
             } else {
-                ImageView imageView1 = new ImageView("resources/LocoCard.jpg");
-                imageView1.setFitHeight(100);
-                imageView1.setFitWidth(75);
-                imageView1.setPickOnBounds(true);
-                imageView1.setPreserveRatio(true);
-                imageView1.setRotate(-90);
-                playerCardsImages.add(imageView1);
+                imageView1 = new ImageView("resources/LocoCard.jpg");
             }
+            imageView1.setFitHeight(100);
+            imageView1.setFitWidth(75);
+            imageView1.setPickOnBounds(true);
+            imageView1.setPreserveRatio(true);
+            imageView1.setRotate(-90);
+            playerCardsImages.add(imageView1);
         }
         for (ImageView playerCardsImage : playerCardsImages) {
             cardContainer.getChildren().add(playerCardsImage);
