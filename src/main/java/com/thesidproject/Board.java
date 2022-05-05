@@ -122,34 +122,12 @@ public class Board {
     Ticket t29 = Ticket.buildTicket("Winnipeg", "Houston", 12);
     Ticket t30 = Ticket.buildTicket("Winnipeg", "Little Rock", 11);
 
-    public List<Card> createCards() {
 
-        List<Card> cardList = new ArrayList<>();
-
-        for (int i = 0; i < 12; i++) {
-            Card c1 = new Card(CardColor.red);
-            Card c2 = new Card(CardColor.orange);
-            Card c3 = new Card(CardColor.yellow);
-            Card c4 = new Card(CardColor.green);
-            Card c5 = new Card(CardColor.blue);
-            Card c6 = new Card(CardColor.pink);
-            Card c7 = new Card(CardColor.white);
-            Card c8 = new Card(CardColor.black);
-            Collections.addAll(cardList, c1, c2, c3, c4, c5, c6, c7, c8);
-        }
-
-        for (int i = 0; i < 14; i++) {
-            Card c9 = new Card(CardColor.locomotive);
-            cardList.add(c9);
-        }
-
-        return cardList;
-    }
 
     List<Connection> connectionList = new ArrayList<>(Arrays.asList(cn1, cn2, cn3, cn4, cn5, cn6, cn7, cn8, cn9, cn10, cn11, cn12, cn13, cn14, cn15, cn16, cn17, cn18, cn19, cn20, cn21, cn22, cn23, cn24, cn25, cn26, cn27, cn28, cn29, cn30, cn31, cn32, cn33, cn34, cn35, cn36, cn37, cn38, cn39, cn40, cn41, cn42, cn43, cn44, cn45, cn46, cn47, cn48, cn49, cn50, cn51, cn52, cn53, cn54, cn55, cn56, cn57, cn58, cn59, cn60, cn61, cn62, cn63, cn64, cn65, cn66, cn67, cn68, cn69, cn70, cn71, cn72, cn73, cn74, cn75, cn76, cn77, cn78));
     List<Ticket> ticketList = new ArrayList<>(Arrays.asList(t23, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17, t18, t19, t20, t21, t22, t23, t24, t25, t26, t27, t28, t29, t30));
     List<Card> fiveOpenCards = new ArrayList<>();
-    List<Card> cardList = createCards();
+    List<Card> cardList = new BoardBuilder().createCards();
 
     public Board(List<Player> inputPlayers) {
         this.playerList = inputPlayers;
