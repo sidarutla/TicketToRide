@@ -1,7 +1,5 @@
 package com.thesidproject;
 
-import com.thesidproject.Board;
-import com.thesidproject.CardColor;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -80,21 +78,21 @@ public class GUI extends Application {
         List<ImageView> playerCardsImages = new ArrayList<>();
         for (int i = 0; i < board.playerList.get(turn).cards.size(); i++) {
             ImageView imageView1 = new ImageView();
-            if (board.playerList.get(turn).cards.get(i).cardColor == CardColor.red) {
+            if (board.playerList.get(turn).cards.get(i).gameColor == GameColor.red) {
                 imageView1 = new ImageView("RedCard.jpg");
-            } else if (board.playerList.get(turn).cards.get(i).cardColor == CardColor.orange) {
+            } else if (board.playerList.get(turn).cards.get(i).gameColor == GameColor.orange) {
                 imageView1 = new ImageView("OrangeCard.jpg");
-            } else if (board.playerList.get(turn).cards.get(i).cardColor == CardColor.yellow) {
+            } else if (board.playerList.get(turn).cards.get(i).gameColor == GameColor.yellow) {
                 imageView1 = new ImageView("YellowCard.jpg");
-            } else if (board.playerList.get(turn).cards.get(i).cardColor == CardColor.green) {
+            } else if (board.playerList.get(turn).cards.get(i).gameColor == GameColor.green) {
                 imageView1 = new ImageView("GreenCard.jpg");
-            } else if (board.playerList.get(turn).cards.get(i).cardColor == CardColor.blue) {
+            } else if (board.playerList.get(turn).cards.get(i).gameColor == GameColor.blue) {
                 imageView1 = new ImageView("BlueCard.jpg");
-            } else if (board.playerList.get(turn).cards.get(i).cardColor == CardColor.pink) {
+            } else if (board.playerList.get(turn).cards.get(i).gameColor == GameColor.pink) {
                 imageView1 = new ImageView("PinkCard.jpg");
-            } else if (board.playerList.get(turn).cards.get(i).cardColor == CardColor.black) {
+            } else if (board.playerList.get(turn).cards.get(i).gameColor == GameColor.black) {
                 imageView1 = new ImageView("BlackCard.jpg");
-            } else if (board.playerList.get(turn).cards.get(i).cardColor == CardColor.white) {
+            } else if (board.playerList.get(turn).cards.get(i).gameColor == GameColor.white) {
                 imageView1 = new ImageView("WhiteCard.jpg");
             } else {
                 imageView1 = new ImageView("LocoCard.jpg");
@@ -225,9 +223,9 @@ public class GUI extends Application {
     }
 
     public void addCard(int position, VBox openCardContainer) {
-        if (drawCardsClicked && normalCardsDrawn < 2 && locosDrawn < 1 && (normalCardsDrawn != 1 || board.fiveOpenCards.get(position).cardColor != CardColor.locomotive)) {
+        if (drawCardsClicked && normalCardsDrawn < 2 && locosDrawn < 1 && (normalCardsDrawn != 1 || board.fiveOpenCards.get(position).gameColor != GameColor.any)) {
             board.playerList.get(turn).cards.add(board.fiveOpenCards.get(position));
-            if (board.fiveOpenCards.get(position).cardColor == CardColor.locomotive) {
+            if (board.fiveOpenCards.get(position).gameColor == GameColor.any) {
                 locosDrawn += 1;
             } else {
                 normalCardsDrawn += 1;
@@ -250,21 +248,21 @@ public class GUI extends Application {
         ArrayList<ImageView> openCardList = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
             ImageView openCard = new ImageView();
-            if (board.fiveOpenCards.get(i).cardColor == CardColor.red) {
+            if (board.fiveOpenCards.get(i).gameColor == GameColor.red) {
                 openCard = new ImageView("RedCard.jpg");
-            } else if (board.fiveOpenCards.get(i).cardColor == CardColor.orange) {
+            } else if (board.fiveOpenCards.get(i).gameColor == GameColor.orange) {
                 openCard = new ImageView("OrangeCard.jpg");
-            } else if (board.fiveOpenCards.get(i).cardColor == CardColor.yellow) {
+            } else if (board.fiveOpenCards.get(i).gameColor == GameColor.yellow) {
                 openCard = new ImageView("YellowCard.jpg");
-            } else if (board.fiveOpenCards.get(i).cardColor == CardColor.green) {
+            } else if (board.fiveOpenCards.get(i).gameColor == GameColor.green) {
                 openCard = new ImageView("GreenCard.jpg");
-            } else if (board.fiveOpenCards.get(i).cardColor == CardColor.blue) {
+            } else if (board.fiveOpenCards.get(i).gameColor == GameColor.blue) {
                 openCard = new ImageView("BlueCard.jpg");
-            } else if (board.fiveOpenCards.get(i).cardColor == CardColor.pink) {
+            } else if (board.fiveOpenCards.get(i).gameColor == GameColor.pink) {
                 openCard = new ImageView("PinkCard.jpg");
-            } else if (board.fiveOpenCards.get(i).cardColor == CardColor.black) {
+            } else if (board.fiveOpenCards.get(i).gameColor == GameColor.black) {
                 openCard = new ImageView("BlackCard.jpg");
-            } else if (board.fiveOpenCards.get(i).cardColor == CardColor.white) {
+            } else if (board.fiveOpenCards.get(i).gameColor == GameColor.white) {
                 openCard = new ImageView("WhiteCard.jpg");
             } else {
                 openCard = new ImageView("LocoCard.jpg");
@@ -321,23 +319,21 @@ public class GUI extends Application {
         List<ImageView> playerCardsImages = new ArrayList<>();
         for (int i = 0; i < board.playerList.get(turn).cards.size(); i++) {
             ImageView imageView1 = new ImageView();
-            if (board.playerList.get(turn).cards.get(i).cardColor == CardColor.red) {
+            if (board.playerList.get(turn).cards.get(i).gameColor == GameColor.red) {
                 imageView1 = new ImageView("resources/RedCard.jpg");
-            } else if (board.playerList.get(turn).cards.get(i).cardColor == CardColor.orange) {
+            } else if (board.playerList.get(turn).cards.get(i).gameColor == GameColor.orange) {
                 imageView1 = new ImageView("resources/OrangeCard.jpg");
-
-            } else if (board.playerList.get(turn).cards.get(i).cardColor == CardColor.yellow) {
+            } else if (board.playerList.get(turn).cards.get(i).gameColor == GameColor.yellow) {
                 imageView1 = new ImageView("resources/YellowCard.jpg");
-                playerCardsImages.add(imageView1);
-            } else if (board.playerList.get(turn).cards.get(i).cardColor == CardColor.green) {
+            } else if (board.playerList.get(turn).cards.get(i).gameColor == GameColor.green) {
                 imageView1 = new ImageView("resources/GreenCard.jpg");
-            } else if (board.playerList.get(turn).cards.get(i).cardColor == CardColor.blue) {
+            } else if (board.playerList.get(turn).cards.get(i).gameColor == GameColor.blue) {
                 imageView1 = new ImageView("resources/BlueCard.jpg");
-            } else if (board.playerList.get(turn).cards.get(i).cardColor == CardColor.pink) {
+            } else if (board.playerList.get(turn).cards.get(i).gameColor == GameColor.pink) {
                 imageView1 = new ImageView("resources/PinkCard.jpg");
-            } else if (board.playerList.get(turn).cards.get(i).cardColor == CardColor.black) {
+            } else if (board.playerList.get(turn).cards.get(i).gameColor == GameColor.black) {
                 imageView1 = new ImageView("resources/BlackCard.jpg");
-            } else if (board.playerList.get(turn).cards.get(i).cardColor == CardColor.white) {
+            } else if (board.playerList.get(turn).cards.get(i).gameColor == GameColor.white) {
                 imageView1 = new ImageView("resources/WhiteCard.jpg");
             } else {
                 imageView1 = new ImageView("resources/LocoCard.jpg");
@@ -466,21 +462,21 @@ public class GUI extends Application {
         List<ImageView> playerCardsImages = new ArrayList<>();
         for (int i = 0; i < board.playerList.get(turn).cards.size(); i++) {
             ImageView imageView1 = new ImageView();
-            if (board.playerList.get(turn).cards.get(i).cardColor == CardColor.red) {
+            if (board.playerList.get(turn).cards.get(i).gameColor == GameColor.red) {
                 imageView1 = new ImageView("resources/RedCard.jpg");
-            } else if (board.playerList.get(turn).cards.get(i).cardColor == CardColor.orange) {
+            } else if (board.playerList.get(turn).cards.get(i).gameColor == GameColor.orange) {
                 imageView1 = new ImageView("resources/OrangeCard.jpg");
-            } else if (board.playerList.get(turn).cards.get(i).cardColor == CardColor.yellow) {
+            } else if (board.playerList.get(turn).cards.get(i).gameColor == GameColor.yellow) {
                 imageView1 = new ImageView("resources/YellowCard.jpg");
-            } else if (board.playerList.get(turn).cards.get(i).cardColor == CardColor.green) {
+            } else if (board.playerList.get(turn).cards.get(i).gameColor == GameColor.green) {
                 imageView1 = new ImageView("resources/GreenCard.jpg");
-            } else if (board.playerList.get(turn).cards.get(i).cardColor == CardColor.blue) {
+            } else if (board.playerList.get(turn).cards.get(i).gameColor == GameColor.blue) {
                 imageView1 = new ImageView("resources/BlueCard.jpg");
-            } else if (board.playerList.get(turn).cards.get(i).cardColor == CardColor.pink) {
+            } else if (board.playerList.get(turn).cards.get(i).gameColor == GameColor.pink) {
                 imageView1 = new ImageView("resources/PinkCard.jpg");
-            } else if (board.playerList.get(turn).cards.get(i).cardColor == CardColor.black) {
+            } else if (board.playerList.get(turn).cards.get(i).gameColor == GameColor.black) {
                 imageView1 = new ImageView("resources/BlackCard.jpg");
-            } else if (board.playerList.get(turn).cards.get(i).cardColor == CardColor.white) {
+            } else if (board.playerList.get(turn).cards.get(i).gameColor == GameColor.white) {
                 imageView1 = new ImageView("resources/WhiteCard.jpg");
             } else {
                 imageView1 = new ImageView("resources/LocoCard.jpg");

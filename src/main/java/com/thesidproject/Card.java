@@ -2,39 +2,25 @@ package com.thesidproject;
 
 public class Card {
 
-    CardColor cardColor;
+    GameColor gameColor;
 
-    public Card(CardColor cardColor) {
-        this.cardColor = cardColor;
+    public Card(GameColor gameColor) {
+        this.gameColor = gameColor;
     }
 
     public String toString() {
-        return cardColor + "";
+        return gameColor + "";
     }
 
     public boolean isLocomotive() {
-        return cardColor == CardColor.locomotive;
+        return gameColor == GameColor.any;
     }
 
     public boolean isColorMatching(Pathway pathway) {
         if (pathway != null) {
-            if (pathway.color == TrackColor.grey) {
+            if (pathway.color == GameColor.any || gameColor == GameColor.any) {
                 return true;
-            } else if (pathway.color == TrackColor.black && cardColor == CardColor.black) {
-                return true;
-            } else if (pathway.color == TrackColor.blue && cardColor == CardColor.blue) {
-                return true;
-            } else if (pathway.color == TrackColor.green && cardColor == CardColor.green) {
-                return true;
-            } else if (pathway.color == TrackColor.orange && cardColor == CardColor.orange) {
-                return true;
-            } else if (pathway.color == TrackColor.pink && cardColor == CardColor.pink) {
-                return true;
-            } else if (pathway.color == TrackColor.red && cardColor == CardColor.red) {
-                return true;
-            } else if (pathway.color == TrackColor.white && cardColor == CardColor.white) {
-                return true;
-            } else if (pathway.color == TrackColor.yellow && cardColor == CardColor.yellow) {
+            } else if (pathway.color == gameColor) {
                 return true;
             } else {
                 return false;

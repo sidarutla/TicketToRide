@@ -15,7 +15,7 @@ public class Connection {
         this.pathway2 = pathway2;
     }
 
-    public static Connection buildConnection(String source, String destination, boolean doubleTracks, int tracks, TrackColor color1, TrackColor color2) {
+    public static Connection buildConnection(String source, String destination, boolean doubleTracks, int tracks, GameColor color1, GameColor color2) {
         Pathway pathway1 = new Pathway(tracks, color1, true, null);
         Pathway pathway2 = new Pathway(tracks, color2, true, null);
 

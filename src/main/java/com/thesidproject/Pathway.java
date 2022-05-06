@@ -4,13 +4,13 @@ public class Pathway {
 
     int tracks;
 
-    TrackColor color;
+    GameColor color;
 
     boolean open;
 
     Player player;
 
-    public Pathway(int tracks, TrackColor color, boolean open, Player player) {
+    public Pathway(int tracks, GameColor color, boolean open, Player player) {
         this.tracks = tracks;
         this.color = color;
         this.open = open;

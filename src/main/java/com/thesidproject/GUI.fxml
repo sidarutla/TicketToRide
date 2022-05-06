@@ -6,7 +6,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 <AnchorPane prefHeight="400" prefWidth="600" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="GUI">
+<!--            fx:controller="GUI">-->
     <StackPane layoutY="300.0" prefHeight="100.0" prefWidth="600">
         <Rectangle fill="Red" height="120" stroke="BLACK" strokeType="INSIDE" width="600"/>
     </StackPane>

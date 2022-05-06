@@ -83,7 +83,7 @@ public class Player {
             TakeCard takeCard = getTakeCard(board);
             Card firstCard = board.getCard(takeCard);
             cards.add(firstCard);
-            System.out.println("Player " + name + ", you got a " + firstCard.cardColor + ".");
+            System.out.println("Player " + name + ", you got a " + firstCard.gameColor + ".");
             System.out.println();
 
             if (takeCard.ordinal() > 4 || !firstCard.isLocomotive()) {
@@ -94,19 +94,18 @@ public class Player {
                 }
                 Card secondCard = board.getCard(takeCard);
                 cards.add(secondCard);
-                System.out.println("Player " + name + ", you got a " + secondCard.cardColor + ".");
+                System.out.println("Player " + name + ", you got a " + secondCard.gameColor + ".");
                 System.out.println();
             }
         } else if (playType == PlayType.drawTickets) {
             List<Ticket> drawnTickets = new ArrayList<>();
-            System.out.println("Player " + name + ", how many tickets would you like to return? ");
+            System.out.println("Player " + name + ", how many tickets would you like to keep? ");
              drawnTickets = ticketList.subList(0, 3);
                 System.out.println(ticketList);
                 ticketList.removeAll(drawnTickets);
-            //stopped here
-            boolean isValidInput = false;
-            int inputIndex = -1;
-            while (!isValidInput) {
+                boolean isValidInput = false;
+                int inputIndex = -1;
+                while (!isValidInput) {
                 BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
                 try {
                     String input = reader.readLine();
@@ -117,7 +116,7 @@ public class Player {
                 } catch (Exception e) {
                 }
             }
-            if (inputIndex == 1) {
+            while (inputIndex != drawnTickets.size()) {
                 boolean isValidInput2 = false;
                 int inputIndex2 = -1;
                 while (!isValidInput2) {
@@ -129,7 +128,7 @@ public class Player {
                     try {
                         String input = reader2.readLine();
                         inputIndex2 = Integer.parseInt(input);
-                        if (inputIndex2 < 4 && inputIndex2 > -1) {
+                        if (inputIndex2 < drawnTickets.size() && inputIndex2 > 0) {
                             isValidInput2 = true;
                         }
                     } catch (Exception e) {
@@ -137,60 +136,6 @@ public class Player {
                 }
                 ticketList.add(drawnTickets.get(inputIndex2 - 1));
                 drawnTickets.remove(inputIndex2 - 1);
-                int size = drawnTickets.size();
-                for (int j = 0; j < size; j++) {
-                    tickets.add(drawnTickets.get(0));
-                    drawnTickets.remove(0);
-                }
-            } else if (inputIndex == 2) {
-                boolean isValidInput2 = false;
-                int inputIndex2 = -1;
-                while (!isValidInput2) {
-                    System.out.println("Player " + name + ", return a ticket:");
-                    for (int k = 0; k < drawnTickets.size(); k++) {
-                        System.out.println(k + 1 + " = " + drawnTickets.get(k));
-                    }
-                    BufferedReader reader2 = new BufferedReader(new InputStreamReader(System.in));
-                    try {
-                        String input = reader2.readLine();
-                        inputIndex2 = Integer.parseInt(input);
-                        if (inputIndex2 < 4 && inputIndex2 > 0) {
-                            isValidInput2 = true;
-                        }
-                    } catch (Exception e) {
-                    }
-                }
-                ticketList.add(drawnTickets.get(inputIndex2 - 1));
-                drawnTickets.remove(inputIndex2 - 1);
-                boolean isValidInput4 = false;
-                int inputIndex4 = -1;
-                while (!isValidInput4) {
-                    System.out.println("Player " + name + ", return another ticket:");
-                    for (int k = 0; k < drawnTickets.size(); k++) {
-                        System.out.println(k + 1 + " = " + drawnTickets.get(k));
-                    }
-                    BufferedReader reader4 = new BufferedReader(new InputStreamReader(System.in));
-                    try {
-                        String input = reader4.readLine();
-                        inputIndex4 = Integer.parseInt(input);
-                        if (inputIndex4 < 3 && inputIndex4 > 0) {
-                            isValidInput4 = true;
-                        }
-                    } catch (Exception e) {
-                    }
-                }
-                ticketList.add(drawnTickets.get(inputIndex4 - 1));
-                drawnTickets.remove(inputIndex4 - 1);
-                int size3 = drawnTickets.size();
-                for (int j = 0; j < size3; j++) {
-                    tickets.add(drawnTickets.get(0));
-                    drawnTickets.remove(0);
-                }
-            } else {
-                for (int i = 0; i < drawnTickets.size(); ) {
-                    tickets.add(drawnTickets.get(0));
-                    drawnTickets.remove(0);
-                }
             }
         } else if (playType == PlayType.buildTracks) {
             boolean isValidInput = false;
@@ -242,7 +187,7 @@ public class Player {
                 List<Card> usableCards = new ArrayList<>();
                 if (inputIndex2 == 1 && connectionList.get(inputIndex - 1).pathway1.open == true) {
                     for (int i = 0; i < cards.size(); i++) {
-                        if (cards.get(i).cardColor == CardColor.locomotive) {
+                        if (cards.get(i).gameColor == GameColor.any) {
                             usableCards.add(cards.get(i));
                             cards.remove(i);
                             i -= 1;
@@ -256,7 +201,7 @@ public class Player {
                         }
                     }
                     int usableCardSize = usableCards.size();
-                    if (connectionList.get(inputIndex - 1).pathway1.color == TrackColor.grey) {
+                    if (connectionList.get(inputIndex - 1).pathway1.color == GameColor.any) {
                         for (int i = 0; i < usableCardSize; i++) {
                             cards.add(usableCards.get(0));
                             usableCards.remove(0);
@@ -272,28 +217,28 @@ public class Player {
                         List<Card> locoCards = new ArrayList<>();
                         int cardSize = cards.size();
                         for (int i = 0; i < cardSize; i++) {
-                            if (cards.get(0).cardColor == CardColor.red) {
+                            if (cards.get(0).gameColor == GameColor.red) {
                                 redCards.add(cards.get(0));
                                 cards.remove(0);
-                            } else if (cards.get(0).cardColor == CardColor.orange) {
+                            } else if (cards.get(0).gameColor == GameColor.orange) {
                                 orangeCards.add(cards.get(0));
                                 cards.remove(0);
-                            } else if (cards.get(0).cardColor == CardColor.yellow) {
+                            } else if (cards.get(0).gameColor == GameColor.yellow) {
                                 yellowCards.add(cards.get(0));
                                 cards.remove(0);
-                            } else if (cards.get(0).cardColor == CardColor.green) {
+                            } else if (cards.get(0).gameColor == GameColor.green) {
                                 greenCards.add(cards.get(0));
                                 cards.remove(0);
-                            } else if (cards.get(0).cardColor == CardColor.blue) {
+                            } else if (cards.get(0).gameColor == GameColor.blue) {
                                 blueCards.add(cards.get(0));
                                 cards.remove(0);
-                            } else if (cards.get(0).cardColor == CardColor.pink) {
+                            } else if (cards.get(0).gameColor == GameColor.pink) {
                                 pinkCards.add(cards.get(0));
                                 cards.remove(0);
-                            } else if (cards.get(0).cardColor == CardColor.black) {
+                            } else if (cards.get(0).gameColor == GameColor.black) {
                                 blackCards.add(cards.get(0));
                                 cards.remove(0);
-                            } else if (cards.get(0).cardColor == CardColor.white) {
+                            } else if (cards.get(0).gameColor == GameColor.white) {
                                 whiteCards.add(cards.get(0));
                                 cards.remove(0);
                             } else {
@@ -1891,7 +1836,7 @@ public class Player {
 
                 } else {
                     for (int i = 0; i < cards.size(); i++) {
-                        if (cards.get(i).cardColor == CardColor.locomotive) {
+                        if (cards.get(i).gameColor == GameColor.any) {
                             usableCards.add(cards.get(i));
                             cards.remove(i);
                             i -= 1;
@@ -1905,7 +1850,7 @@ public class Player {
                         }
                     }
                     int usableCardSize = usableCards.size();
-                    if (connectionList.get(inputIndex - 1).pathway2.color == TrackColor.grey) {
+                    if (connectionList.get(inputIndex - 1).pathway2.color == GameColor.any) {
                         for (int i = 0; i < usableCardSize; i++) {
                             cards.add(usableCards.get(0));
                             usableCards.remove(0);
@@ -1921,28 +1866,28 @@ public class Player {
                         List<Card> locoCards = new ArrayList<>();
                         int cardSize = cards.size();
                         for (int i = 0; i < cardSize; i++) {
-                            if (cards.get(0).cardColor == CardColor.red) {
+                            if (cards.get(0).gameColor == GameColor.red) {
                                 redCards.add(cards.get(0));
                                 cards.remove(0);
-                            } else if (cards.get(0).cardColor == CardColor.orange) {
+                            } else if (cards.get(0).gameColor == GameColor.orange) {
                                 orangeCards.add(cards.get(0));
                                 cards.remove(0);
-                            } else if (cards.get(0).cardColor == CardColor.yellow) {
+                            } else if (cards.get(0).gameColor == GameColor.yellow) {
                                 yellowCards.add(cards.get(0));
                                 cards.remove(0);
-                            } else if (cards.get(0).cardColor == CardColor.green) {
+                            } else if (cards.get(0).gameColor == GameColor.green) {
                                 greenCards.add(cards.get(0));
                                 cards.remove(0);
-                            } else if (cards.get(0).cardColor == CardColor.blue) {
+                            } else if (cards.get(0).gameColor == GameColor.blue) {
                                 blueCards.add(cards.get(0));
                                 cards.remove(0);
-                            } else if (cards.get(0).cardColor == CardColor.pink) {
+                            } else if (cards.get(0).gameColor == GameColor.pink) {
                                 pinkCards.add(cards.get(0));
                                 cards.remove(0);
-                            } else if (cards.get(0).cardColor == CardColor.black) {
+                            } else if (cards.get(0).gameColor == GameColor.black) {
                                 blackCards.add(cards.get(0));
                                 cards.remove(0);
-                            } else if (cards.get(0).cardColor == CardColor.white) {
+                            } else if (cards.get(0).gameColor == GameColor.white) {
                                 whiteCards.add(cards.get(0));
                                 cards.remove(0);
                             } else {
