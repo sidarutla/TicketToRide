@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:3001", maxAge = 3600)
+@CrossOrigin(origins = {"http://localhost:3001", "http://192.168.86.105:3001"}, maxAge = 3600)
 @RestController
 @Controller
 public class BoardController {
