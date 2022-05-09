@@ -77,14 +77,15 @@ public class BoardController {
     }
 
 
-    @PutMapping("/game/start")
-    public String startGame(String boardId, String playerId) {
-        Board board = boardManager.startGame(boardId, playerId);
+    @PutMapping("/boards/{boardId}/players/{playerId}/start")
+    public ResponseEntity<?> startGame(@PathVariable("boardId")String boardId, @PathVariable("playerId") String playerId) {
+        MockBoard board = boardManager.startGame(boardId, playerId);
         if (board != null) {
-//            boardcastBoard(board);
-            return "";
+            boardcastBoard(board);
+            boardcastBoardState(board);
+            return ResponseEntity.ok(board);
         } else {
-            return "Error message";
+            return returnErrorResponse("Couldnot find board");
         }
     }
 

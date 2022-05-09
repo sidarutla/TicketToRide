@@ -1,5 +1,7 @@
 package com.thesidproject.ttr.app;
 
+import com.thesidproject.GameState;
+
 import java.util.List;
 import java.util.UUID;
 
@@ -8,17 +10,23 @@ public class MockBoard {
     private String boardName;
     private String owningPlayerId;
     private List<PlayerData> players;
+    private GameState gameState;
 
     public MockBoard(String boardName, MockPlayer owningPlayer) {
         this.boardId = UUID.randomUUID().toString();
         this.boardName = boardName;
         this.owningPlayerId = owningPlayer.getPlayerId();
         this.players = new java.util.ArrayList<>();
+        this.gameState = GameState.initializing;
         PlayerData player = new PlayerData(owningPlayer.getPlayerId(),owningPlayer.getPlayerName(), "Red");
         this.players.add(player);
     }
 
     public boolean addPlayer(MockPlayer newPlayer) {
+        if(this.gameState != GameState.initializing) {
+            return false;
+        }
+
         PlayerData thePlayer = players.stream().filter(p -> p.getPlayerId().equalsIgnoreCase(newPlayer.getPlayerId())).findFirst().orElse(null);
         if(thePlayer != null) {
             return true;
@@ -29,6 +37,23 @@ public class MockBoard {
             players.add(player);
             return true;
         }
+    }
+
+    public boolean startGame(String playerId) {
+        if(this.gameState != GameState.initializing) {
+            return false;
+        }
+
+        if(!this.owningPlayerId.equalsIgnoreCase(playerId)) {
+            return false;
+        }
+
+        if(this.players == null || this.players.size() < 2) {
+            return false;
+        }
+
+        this.gameState = GameState.started;
+        return true;
     }
 
     public String getBoardId() {
@@ -61,6 +86,14 @@ public class MockBoard {
 
     public void setPlayers(List<PlayerData> players) {
         this.players = players;
+    }
+
+    public GameState getGameState() {
+        return gameState;
+    }
+
+    public void setGameState(GameState gameState) {
+        this.gameState = gameState;
     }
 }
 

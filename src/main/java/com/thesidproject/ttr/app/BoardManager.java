@@ -49,7 +49,19 @@ public class BoardManager {
         return null;
     }
 
-    public Board startGame(String boardId, String playerId) {
+    public MockBoard startGame(String boardId, String playerId) {
+        MockPlayer player = playerManager.getPlayer(playerId);
+        if (player == null) {
+            return null;
+        }
+
+        MockBoard board = boards.get(boardId);
+        if (board != null) {
+           boolean started = board.startGame(playerId);
+           if (started) {
+               return board;
+           }
+        }
         return null;
     }
 
