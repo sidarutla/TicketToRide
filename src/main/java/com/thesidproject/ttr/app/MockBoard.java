@@ -1,5 +1,8 @@
 package com.thesidproject.ttr.app;
 
+import com.thesidproject.Board;
+import com.thesidproject.BoardBuilder;
+import com.thesidproject.GameColor;
 import com.thesidproject.GameState;
 
 import java.util.List;
@@ -18,25 +21,32 @@ public class MockBoard {
         this.owningPlayerId = owningPlayer.getPlayerId();
         this.players = new java.util.ArrayList<>();
         this.gameState = GameState.initializing;
-        PlayerData player = new PlayerData(owningPlayer.getPlayerId(),owningPlayer.getPlayerName(), "Red");
+        PlayerData player = new PlayerData(owningPlayer.getPlayerId(),owningPlayer.getPlayerName(), GameColor.yellow);
         this.players.add(player);
     }
 
     public boolean addPlayer(MockPlayer newPlayer) {
+        PlayerData thePlayer = players.stream().filter(p -> p.getPlayerId().equalsIgnoreCase(newPlayer.getPlayerId())).findFirst().orElse(null);
+        if(thePlayer != null) {
+            return true;
+        }
+
+
         if(this.gameState != GameState.initializing) {
             return false;
         }
 
-        PlayerData thePlayer = players.stream().filter(p -> p.getPlayerId().equalsIgnoreCase(newPlayer.getPlayerId())).findFirst().orElse(null);
-        if(thePlayer != null) {
-            return true;
-        } else if(players.size() >= 4) {
+        if(players.size() >= 4) {
             return false;
-        } else {
-            PlayerData player = new PlayerData(newPlayer.getPlayerId(), newPlayer.getPlayerName(), "Red");
-            players.add(player);
-            return true;
         }
+
+        BoardBuilder boardBuilder = new BoardBuilder();
+        List<GameColor> usedColors = players.stream().map(p -> p.getPlayerColor()).collect(java.util.stream.Collectors.toList());
+        GameColor usedColor = boardBuilder.getUnusedColor(usedColors);
+        PlayerData player = new PlayerData(newPlayer.getPlayerId(), newPlayer.getPlayerName(), usedColor);
+        players.add(player);
+        return true;
+
     }
 
     public boolean startGame(String playerId) {

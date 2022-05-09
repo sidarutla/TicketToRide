@@ -1,12 +1,14 @@
 package com.thesidproject.ttr.app;
 
+import com.thesidproject.GameColor;
+
 public class PlayerData {
 
     private String playerId;
     private String playerName;
-    private String playerColor;
+    private GameColor playerColor;
 
-    public PlayerData(String playerId, String playerName, String playerColor) {
+    public PlayerData(String playerId, String playerName, GameColor playerColor) {
         this.playerId = playerId;
         this.playerName = playerName;
         this.playerColor = playerColor;
@@ -28,11 +30,11 @@ public class PlayerData {
         this.playerName = playerName;
     }
 
-    public String getPlayerColor() {
+    public GameColor getPlayerColor() {
         return playerColor;
     }
 
-    public void setPlayerColor(String playerColor) {
+    public void setPlayerColor(GameColor playerColor) {
         this.playerColor = playerColor;
     }
 }
