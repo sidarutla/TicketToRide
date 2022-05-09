@@ -76,23 +76,23 @@ public class GUI extends Application {
         VBox ticketContainer1 = new VBox();
         VBox ticketContainer2 = new VBox();
         List<ImageView> playerCardsImages = new ArrayList<>();
-        for (int i = 0; i < board.playerList.get(turn).cards.size(); i++) {
+        for (int i = 0; i < board.gamePlayerList.get(turn).cards.size(); i++) {
             ImageView imageView1 = new ImageView();
-            if (board.playerList.get(turn).cards.get(i).gameColor == GameColor.red) {
+            if (board.gamePlayerList.get(turn).cards.get(i).gameColor == GameColor.red) {
                 imageView1 = new ImageView("RedCard.jpg");
-            } else if (board.playerList.get(turn).cards.get(i).gameColor == GameColor.orange) {
+            } else if (board.gamePlayerList.get(turn).cards.get(i).gameColor == GameColor.orange) {
                 imageView1 = new ImageView("OrangeCard.jpg");
-            } else if (board.playerList.get(turn).cards.get(i).gameColor == GameColor.yellow) {
+            } else if (board.gamePlayerList.get(turn).cards.get(i).gameColor == GameColor.yellow) {
                 imageView1 = new ImageView("YellowCard.jpg");
-            } else if (board.playerList.get(turn).cards.get(i).gameColor == GameColor.green) {
+            } else if (board.gamePlayerList.get(turn).cards.get(i).gameColor == GameColor.green) {
                 imageView1 = new ImageView("GreenCard.jpg");
-            } else if (board.playerList.get(turn).cards.get(i).gameColor == GameColor.blue) {
+            } else if (board.gamePlayerList.get(turn).cards.get(i).gameColor == GameColor.blue) {
                 imageView1 = new ImageView("BlueCard.jpg");
-            } else if (board.playerList.get(turn).cards.get(i).gameColor == GameColor.pink) {
+            } else if (board.gamePlayerList.get(turn).cards.get(i).gameColor == GameColor.pink) {
                 imageView1 = new ImageView("PinkCard.jpg");
-            } else if (board.playerList.get(turn).cards.get(i).gameColor == GameColor.black) {
+            } else if (board.gamePlayerList.get(turn).cards.get(i).gameColor == GameColor.black) {
                 imageView1 = new ImageView("BlackCard.jpg");
-            } else if (board.playerList.get(turn).cards.get(i).gameColor == GameColor.white) {
+            } else if (board.gamePlayerList.get(turn).cards.get(i).gameColor == GameColor.white) {
                 imageView1 = new ImageView("WhiteCard.jpg");
             } else {
                 imageView1 = new ImageView("LocoCard.jpg");
@@ -105,9 +105,9 @@ public class GUI extends Application {
             playerCardsImages.add(imageView1);
         }
         List<Label> ticketLabelList = new ArrayList<>();
-        for (int i = 0; i < board.playerList.get(turn).tickets.size(); i++) {
+        for (int i = 0; i < board.gamePlayerList.get(turn).tickets.size(); i++) {
             Label ticketLabel = new Label();
-            ticketLabel.setText(board.playerList.get(turn).tickets.get(i).source + " -> " + board.playerList.get(turn).tickets.get(i).destination + ", " + board.playerList.get(turn).tickets.get(i).value);
+            ticketLabel.setText(board.gamePlayerList.get(turn).tickets.get(i).source + " -> " + board.gamePlayerList.get(turn).tickets.get(i).destination + ", " + board.gamePlayerList.get(turn).tickets.get(i).value);
             ticketLabel.setStyle("-fx-background-color: white;");
             ticketLabelList.add(ticketLabel);
         }
@@ -143,27 +143,27 @@ public class GUI extends Application {
     }
 
     private FlowPane buildPlayerAreaContainer() {
-        Label playerName = new Label(board.playerList.get(turn).name);
+        Label playerName = new Label(board.gamePlayerList.get(turn).name);
         playerName.setPrefWidth(1850);
         playerName.setAlignment(Pos.CENTER);
         playerName.setFont(Font.font(50));
-        if (board.playerList.get(turn).playerColor == PlayerColor.black) {
+        if (board.gamePlayerList.get(turn).playerColor == PlayerColor.black) {
             playerName.setTextFill(Color.WHITE);
         } else {
             playerName.setTextFill(Color.BLACK);
         }
 
         Rectangle playerArea = new Rectangle();
-        if (board.playerList.get(turn).playerColor == PlayerColor.black) {
+        if (board.gamePlayerList.get(turn).playerColor == PlayerColor.black) {
             playerArea.setFill(Color.BLACK);
             playerName.setStyle("-fx-background-color: black;");
-        } else if (board.playerList.get(turn).playerColor == PlayerColor.blue) {
+        } else if (board.gamePlayerList.get(turn).playerColor == PlayerColor.blue) {
             playerArea.setFill(Color.BLUE);
             playerName.setStyle("-fx-background-color: blue;");
-        } else if (board.playerList.get(turn).playerColor == PlayerColor.red) {
+        } else if (board.gamePlayerList.get(turn).playerColor == PlayerColor.red) {
             playerArea.setFill(Color.RED);
             playerName.setStyle("-fx-background-color: red;");
-        } else if (board.playerList.get(turn).playerColor == PlayerColor.green) {
+        } else if (board.gamePlayerList.get(turn).playerColor == PlayerColor.green) {
             playerArea.setFill(Color.GREEN);
             playerName.setStyle("-fx-background-color: green;");
         } else {
@@ -224,7 +224,7 @@ public class GUI extends Application {
 
     public void addCard(int position, VBox openCardContainer) {
         if (drawCardsClicked && normalCardsDrawn < 2 && locosDrawn < 1 && (normalCardsDrawn != 1 || board.fiveOpenCards.get(position).gameColor != GameColor.any)) {
-            board.playerList.get(turn).cards.add(board.fiveOpenCards.get(position));
+            board.gamePlayerList.get(turn).cards.add(board.fiveOpenCards.get(position));
             if (board.fiveOpenCards.get(position).gameColor == GameColor.any) {
                 locosDrawn += 1;
             } else {
@@ -240,8 +240,8 @@ public class GUI extends Application {
         VBox scoreBoardAndOpenCardContainer = new VBox();
         int position = 0;
         ArrayList<Label> scoreboardList = new ArrayList<>();
-        for (int i = 0; i < board.playerList.size(); i++) {
-            Label label = new Label(board.playerList.get(i).name + ": " + board.playerList.get(i).score);
+        for (int i = 0; i < board.gamePlayerList.size(); i++) {
+            Label label = new Label(board.gamePlayerList.get(i).name + ": " + board.gamePlayerList.get(i).score);
             label.setFont(Font.font(50));
             scoreboardList.add(label);
         }
@@ -289,7 +289,7 @@ public class GUI extends Application {
 
     public void moveToNextPlayer(FlowPane actionFlowPane) {
         turn += 1;
-        if (turn > board.playerList.size() - 1) {
+        if (turn > board.gamePlayerList.size() - 1) {
             turn = 0;
         }
         int actionFlowPaneSize = actionFlowPane.getChildren().size();
@@ -317,23 +317,23 @@ public class GUI extends Application {
         VBox ticketContainer1 = new VBox();
         VBox ticketContainer2 = new VBox();
         List<ImageView> playerCardsImages = new ArrayList<>();
-        for (int i = 0; i < board.playerList.get(turn).cards.size(); i++) {
+        for (int i = 0; i < board.gamePlayerList.get(turn).cards.size(); i++) {
             ImageView imageView1 = new ImageView();
-            if (board.playerList.get(turn).cards.get(i).gameColor == GameColor.red) {
+            if (board.gamePlayerList.get(turn).cards.get(i).gameColor == GameColor.red) {
                 imageView1 = new ImageView("resources/RedCard.jpg");
-            } else if (board.playerList.get(turn).cards.get(i).gameColor == GameColor.orange) {
+            } else if (board.gamePlayerList.get(turn).cards.get(i).gameColor == GameColor.orange) {
                 imageView1 = new ImageView("resources/OrangeCard.jpg");
-            } else if (board.playerList.get(turn).cards.get(i).gameColor == GameColor.yellow) {
+            } else if (board.gamePlayerList.get(turn).cards.get(i).gameColor == GameColor.yellow) {
                 imageView1 = new ImageView("resources/YellowCard.jpg");
-            } else if (board.playerList.get(turn).cards.get(i).gameColor == GameColor.green) {
+            } else if (board.gamePlayerList.get(turn).cards.get(i).gameColor == GameColor.green) {
                 imageView1 = new ImageView("resources/GreenCard.jpg");
-            } else if (board.playerList.get(turn).cards.get(i).gameColor == GameColor.blue) {
+            } else if (board.gamePlayerList.get(turn).cards.get(i).gameColor == GameColor.blue) {
                 imageView1 = new ImageView("resources/BlueCard.jpg");
-            } else if (board.playerList.get(turn).cards.get(i).gameColor == GameColor.pink) {
+            } else if (board.gamePlayerList.get(turn).cards.get(i).gameColor == GameColor.pink) {
                 imageView1 = new ImageView("resources/PinkCard.jpg");
-            } else if (board.playerList.get(turn).cards.get(i).gameColor == GameColor.black) {
+            } else if (board.gamePlayerList.get(turn).cards.get(i).gameColor == GameColor.black) {
                 imageView1 = new ImageView("resources/BlackCard.jpg");
-            } else if (board.playerList.get(turn).cards.get(i).gameColor == GameColor.white) {
+            } else if (board.gamePlayerList.get(turn).cards.get(i).gameColor == GameColor.white) {
                 imageView1 = new ImageView("resources/WhiteCard.jpg");
             } else {
                 imageView1 = new ImageView("resources/LocoCard.jpg");
@@ -346,9 +346,9 @@ public class GUI extends Application {
             playerCardsImages.add(imageView1);
         }
         List<Label> ticketLabelList = new ArrayList<>();
-        for (int i = 0; i < board.playerList.get(turn).tickets.size(); i++) {
+        for (int i = 0; i < board.gamePlayerList.get(turn).tickets.size(); i++) {
             Label ticketLabel = new Label();
-            ticketLabel.setText(board.playerList.get(turn).tickets.get(i).source + " -> " + board.playerList.get(turn).tickets.get(i).destination + ", " + board.playerList.get(turn).tickets.get(i).value);
+            ticketLabel.setText(board.gamePlayerList.get(turn).tickets.get(i).source + " -> " + board.gamePlayerList.get(turn).tickets.get(i).destination + ", " + board.gamePlayerList.get(turn).tickets.get(i).value);
             ticketLabel.setStyle("-fx-background-color: white;");
             ticketLabelList.add(ticketLabel);
         }
@@ -400,27 +400,27 @@ public class GUI extends Application {
         if (areaFlowPaneSize > 0) {
             playerAreaContainer.getChildren().subList(0, areaFlowPaneSize).clear();
         }
-        Label playerName = new Label(board.playerList.get(turn).name);
+        Label playerName = new Label(board.gamePlayerList.get(turn).name);
         playerName.setPrefWidth(1850);
         playerName.setAlignment(Pos.CENTER);
         playerName.setFont(Font.font(50));
-        if (board.playerList.get(turn).playerColor == PlayerColor.black) {
+        if (board.gamePlayerList.get(turn).playerColor == PlayerColor.black) {
             playerName.setTextFill(Color.WHITE);
         } else {
             playerName.setTextFill(Color.BLACK);
         }
 
         Rectangle playerArea = new Rectangle();
-        if (board.playerList.get(turn).playerColor == PlayerColor.black) {
+        if (board.gamePlayerList.get(turn).playerColor == PlayerColor.black) {
             playerArea.setFill(Color.BLACK);
             playerName.setStyle("-fx-background-color: black;");
-        } else if (board.playerList.get(turn).playerColor == PlayerColor.blue) {
+        } else if (board.gamePlayerList.get(turn).playerColor == PlayerColor.blue) {
             playerArea.setFill(Color.BLUE);
             playerName.setStyle("-fx-background-color: blue;");
-        } else if (board.playerList.get(turn).playerColor == PlayerColor.red) {
+        } else if (board.gamePlayerList.get(turn).playerColor == PlayerColor.red) {
             playerArea.setFill(Color.RED);
             playerName.setStyle("-fx-background-color: red;");
-        } else if (board.playerList.get(turn).playerColor == PlayerColor.green) {
+        } else if (board.gamePlayerList.get(turn).playerColor == PlayerColor.green) {
             playerArea.setFill(Color.GREEN);
             playerName.setStyle("-fx-background-color: green;");
         } else {
@@ -444,8 +444,8 @@ public class GUI extends Application {
     public void discardTicket(VBox vbox, Button drawnTicket, int ticketPosition) {
         if (discardedTickets < 2) {
             vbox.getChildren().remove(drawnTicket);
-            board.ticketList.add(board.playerList.get(turn).tickets.get(ticketPosition));
-            board.playerList.get(turn).tickets.remove(ticketPosition);
+            board.ticketList.add(board.gamePlayerList.get(turn).tickets.get(ticketPosition));
+            board.gamePlayerList.get(turn).tickets.remove(ticketPosition);
             discardedTickets += 1;
         }
     }
@@ -460,23 +460,23 @@ public class GUI extends Application {
         spacerLabel1.setPrefHeight(90);
         FlowPane cardContainer = new FlowPane();
         List<ImageView> playerCardsImages = new ArrayList<>();
-        for (int i = 0; i < board.playerList.get(turn).cards.size(); i++) {
+        for (int i = 0; i < board.gamePlayerList.get(turn).cards.size(); i++) {
             ImageView imageView1 = new ImageView();
-            if (board.playerList.get(turn).cards.get(i).gameColor == GameColor.red) {
+            if (board.gamePlayerList.get(turn).cards.get(i).gameColor == GameColor.red) {
                 imageView1 = new ImageView("resources/RedCard.jpg");
-            } else if (board.playerList.get(turn).cards.get(i).gameColor == GameColor.orange) {
+            } else if (board.gamePlayerList.get(turn).cards.get(i).gameColor == GameColor.orange) {
                 imageView1 = new ImageView("resources/OrangeCard.jpg");
-            } else if (board.playerList.get(turn).cards.get(i).gameColor == GameColor.yellow) {
+            } else if (board.gamePlayerList.get(turn).cards.get(i).gameColor == GameColor.yellow) {
                 imageView1 = new ImageView("resources/YellowCard.jpg");
-            } else if (board.playerList.get(turn).cards.get(i).gameColor == GameColor.green) {
+            } else if (board.gamePlayerList.get(turn).cards.get(i).gameColor == GameColor.green) {
                 imageView1 = new ImageView("resources/GreenCard.jpg");
-            } else if (board.playerList.get(turn).cards.get(i).gameColor == GameColor.blue) {
+            } else if (board.gamePlayerList.get(turn).cards.get(i).gameColor == GameColor.blue) {
                 imageView1 = new ImageView("resources/BlueCard.jpg");
-            } else if (board.playerList.get(turn).cards.get(i).gameColor == GameColor.pink) {
+            } else if (board.gamePlayerList.get(turn).cards.get(i).gameColor == GameColor.pink) {
                 imageView1 = new ImageView("resources/PinkCard.jpg");
-            } else if (board.playerList.get(turn).cards.get(i).gameColor == GameColor.black) {
+            } else if (board.gamePlayerList.get(turn).cards.get(i).gameColor == GameColor.black) {
                 imageView1 = new ImageView("resources/BlackCard.jpg");
-            } else if (board.playerList.get(turn).cards.get(i).gameColor == GameColor.white) {
+            } else if (board.gamePlayerList.get(turn).cards.get(i).gameColor == GameColor.white) {
                 imageView1 = new ImageView("resources/WhiteCard.jpg");
             } else {
                 imageView1 = new ImageView("resources/LocoCard.jpg");
@@ -494,9 +494,9 @@ public class GUI extends Application {
         actionFlowPane.getChildren().add(spacerLabel1);
         actionFlowPane.getChildren().add(cardContainer);
         List<Label> ticketLabelList = new ArrayList<>();
-        for (int i = 0; i < board.playerList.get(turn).tickets.size(); i++) {
+        for (int i = 0; i < board.gamePlayerList.get(turn).tickets.size(); i++) {
             Label ticketLabel = new Label();
-            ticketLabel.setText(board.playerList.get(turn).tickets.get(i).source + " -> " + board.playerList.get(turn).tickets.get(i).destination + ", " + board.playerList.get(turn).tickets.get(i).value);
+            ticketLabel.setText(board.gamePlayerList.get(turn).tickets.get(i).source + " -> " + board.gamePlayerList.get(turn).tickets.get(i).destination + ", " + board.gamePlayerList.get(turn).tickets.get(i).value);
             ticketLabel.setStyle("-fx-background-color: white;");
             ticketLabelList.add(ticketLabel);
         }
@@ -562,7 +562,7 @@ public class GUI extends Application {
         actionFlowPane.getChildren().remove(drawCardsButton);
         actionFlowPane.getChildren().remove(drawTicketsButton);
         actionFlowPane.getChildren().remove(buildTracksButton);
-        board.playerList.get(turn).drawTickets(board.ticketList);
+        board.gamePlayerList.get(turn).drawTickets(board.ticketList);
         VBox drawnTicketsContainer = new VBox();
         Label heading = new Label();
         heading.setText("New Tickets:");
@@ -571,8 +571,8 @@ public class GUI extends Application {
         drawnTicketsContainer.getChildren().add(heading);
         for (int i = 1; i < 4; i++) {
             Button drawnTicket = new Button();
-            drawnTicket.setText(board.playerList.get(turn).tickets.get(board.playerList.get(turn).tickets.size() - i).source + " -> " + board.playerList.get(turn).tickets.get(board.playerList.get(turn).tickets.size() - i).destination + ", " + board.playerList.get(turn).tickets.get(board.playerList.get(turn).tickets.size() - i).value);
-            int ticketPosition = board.playerList.get(turn).tickets.size() - i;
+            drawnTicket.setText(board.gamePlayerList.get(turn).tickets.get(board.gamePlayerList.get(turn).tickets.size() - i).source + " -> " + board.gamePlayerList.get(turn).tickets.get(board.gamePlayerList.get(turn).tickets.size() - i).destination + ", " + board.gamePlayerList.get(turn).tickets.get(board.gamePlayerList.get(turn).tickets.size() - i).value);
+            int ticketPosition = board.gamePlayerList.get(turn).tickets.size() - i;
             drawnTicket.setFont(Font.font(20));
             drawnTicketsContainer.getChildren().add(drawnTicket);
             drawnTicket.setOnAction(event -> discardTicket(drawnTicketsContainer, drawnTicket, ticketPosition));
