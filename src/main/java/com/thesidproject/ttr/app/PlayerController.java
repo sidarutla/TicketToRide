@@ -1,0 +1,53 @@
+package com.thesidproject.ttr.app;
+
+import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import javax.websocket.server.PathParam;
+
+@RestController
+@Controller
+public class PlayerController {
+
+    @Autowired
+    SimpMessagingTemplate simpMessagingTemplate;
+
+    @Autowired
+    PlayerManager playerManager;
+
+    private ResponseEntity<JSONObject> returnErrorResponse(String errorMessage) {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("error", errorMessage);
+        return ResponseEntity.badRequest().body(jsonObject);
+    }
+
+    @PostMapping("/players/{playerName}")
+    public ResponseEntity<?> createPlayer(@PathVariable("playerName") String playerName) {
+        MockPlayer player = playerManager.createPlayer(playerName);
+        if (player != null) {
+            return ResponseEntity.ok(player);
+        } else {
+            return returnErrorResponse("Error creating player");
+        }
+    }
+
+    @GetMapping("/players/{playerId}")
+    private ResponseEntity<?> getPlayer(@PathVariable("playerId") String playerId) {
+        MockPlayer player = playerManager.getPlayer(playerId);
+        if (player != null) {
+            return ResponseEntity.ok(player);
+        } else {
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("error", "Player not found");
+            return ResponseEntity.badRequest().body(jsonObject);
+        }
+    }
+}
+
