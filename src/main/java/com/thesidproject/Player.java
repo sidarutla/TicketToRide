@@ -15,7 +15,16 @@ public class Player {
         this.name = name;
         playerID = UUID.randomUUID().toString();
     }
-//    public void print() {
+
+    public String getPlayerID() {
+        return playerID;
+    }
+
+    public String getPlayerName() {
+        return name;
+    }
+
+    //    public void print() {
 //        System.out.println("Player " + name + ", here are your stats:");
 //        System.out.println("score:");
 //        System.out.println(score);

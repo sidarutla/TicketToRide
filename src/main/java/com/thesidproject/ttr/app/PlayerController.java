@@ -1,5 +1,6 @@
 package com.thesidproject.ttr.app;
 
+import com.thesidproject.Player;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -28,7 +29,7 @@ public class PlayerController {
 
     @PostMapping("/players/{playerName}")
     public ResponseEntity<?> createPlayer(@PathVariable("playerName") String playerName) {
-        MockPlayer player = playerManager.createPlayer(playerName);
+        Player player = playerManager.createPlayer(playerName);
         if (player != null) {
             return ResponseEntity.ok(player);
         } else {
@@ -36,9 +37,9 @@ public class PlayerController {
         }
     }
 
-    @GetMapping("/players/{playerId}")
-    private ResponseEntity<?> getPlayer(@PathVariable("playerId") String playerId) {
-        MockPlayer player = playerManager.getPlayer(playerId);
+    @GetMapping("/players/{playerID}")
+    private ResponseEntity<?> getPlayer(@PathVariable("playerID") String playerID) {
+        Player player = playerManager.getPlayer(playerID);
         if (player != null) {
             return ResponseEntity.ok(player);
         } else {

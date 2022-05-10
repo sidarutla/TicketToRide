@@ -60,4 +60,41 @@ public class GamePlayer {
             cardList.remove(0);
         }
     }
+
+
+    public String getPlayerID() {
+        return playerID;
+    }
+
+    public String getPlayerName() {
+        return name;
+    }
+
+    public PlayerColor getPlayerColor() {
+        return playerColor;
+    }
+
+    public int getTracks() {
+        return tracks;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public List<Ticket> getTickets() {
+        return tickets;
+    }
+
+    public List<Ticket> getDrawnTickets() {
+        return drawnTickets;
+    }
+
+    public List<Card> getCards() {
+        return cards;
+    }
+
+    public List<List<String>> getConnectedCities() {
+        return connectedCities;
+    }
 }

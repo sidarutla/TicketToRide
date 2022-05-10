@@ -15,7 +15,7 @@ public class MainClass {
         Player keerthi = new Player("Keerthi");
         Player harshu = new Player("Mr. Badoongyface");
         List<Player> playerArray = Arrays.asList(rama, sid, keerthi, harshu);
-        Board board = new Board(sid);
+        Board board = new Board(sid, "Sid's Board");
         board.shuffleCards();
         board.shuffleTickets();
         board.distributeCards();

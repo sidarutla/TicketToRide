@@ -5,8 +5,12 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.UUID;
 
 public class Board {
+
+    private String boardID;
+    private String boardName;
 
     List<Ticket> ticketList = new BoardBuilder().createTickets();
     List<Card> cardList = new BoardBuilder().createCards();
@@ -21,19 +25,24 @@ public class Board {
     PlayType currentPlayType;
     Boolean isTurnInProgress;
 
-    public Board(Player owner) {
+    public Board(Player owner, String boardName) {
         GamePlayer ownerGamePlayer = new GamePlayer(owner.playerID, owner.name, getUnusedColor());
         gamePlayerList.add(ownerGamePlayer);
         owningPlayerID = owner.playerID;
         gameState = GameState.initializing;
+        boardID = UUID.randomUUID().toString();
+        this.boardName = boardName;
     }
 
-    public String addPlayer(Player player) {
+    public boolean addPlayer(Player player) {
+
+        //TODO: SID: Add player should not add the player, if the player is already in the game and it should return true.
         if (gameState == GameState.initializing && gamePlayerList.size() < 5) {
             GamePlayer gamePlayer = new GamePlayer(player.playerID, player.name, getUnusedColor());
             gamePlayerList.add(gamePlayer);
+            return true;
         }
-        return null;
+        return false;
     }
 
     private GamePlayer getPlayerFromID(String playerID) {
@@ -45,7 +54,7 @@ public class Board {
         return null;
     }
 
-    public void startGame(String playerID) {
+    public boolean startGame(String playerID) {
         if (playerID.equals(owningPlayerID) && gameState == GameState.initializing && gamePlayerList.size() > 1) {
             gameState = GameState.started;
             currentPlayerID = gamePlayerList.get(0).playerID;
@@ -54,7 +63,9 @@ public class Board {
 //            distributeCards();
 //            openFiveCards();
 //            playYourTurn();
+            return true;
         }
+        return false;
     }
 
 
@@ -185,7 +196,7 @@ public class Board {
     }
 
 
-    private boolean pickPlayType(String PlayerID, PlayType playType) {
+    public boolean pickPlayType(String PlayerID, PlayType playType) {
 
         if (round == 1 && playType != PlayType.drawTickets && !isTurnInProgress) {
             return false;
@@ -264,6 +275,67 @@ public class Board {
         currentPlayType = null;
 
         return true;
+    }
+
+
+    public String getBoardID() {
+        return boardID;
+    }
+
+    public void setBoardID(String boardID) {
+        this.boardID = boardID;
+    }
+
+    public String getBoardName() {
+        return boardName;
+    }
+
+    public void setBoardName(String boardName) {
+        this.boardName = boardName;
+    }
+
+    public List<GamePlayer> getPlayers() {
+        return gamePlayerList;
+    }
+
+    public GameState getGameState() {
+        return gameState;
+    }
+
+    public void setGameState(GameState gameState) {
+        this.gameState = gameState;
+    }
+
+    public String getOwningPlayerID() {
+        return owningPlayerID;
+    }
+
+    public void setOwningPlayerID(String owningPlayerID) {
+        this.owningPlayerID = owningPlayerID;
+    }
+
+    public int getRound() {
+        return round;
+    }
+
+    public void setRound(int round) {
+        this.round = round;
+    }
+
+    public String getCurrentPlayerID() {
+        return currentPlayerID;
+    }
+
+    public void setCurrentPlayerID(String currentPlayerID) {
+        this.currentPlayerID = currentPlayerID;
+    }
+
+    public PlayType getCurrentPlayType() {
+        return currentPlayType;
+    }
+
+    public void setCurrentPlayType(PlayType currentPlayType) {
+        this.currentPlayType = currentPlayType;
     }
 }
 

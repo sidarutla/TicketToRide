@@ -7,14 +7,14 @@ public class BoardTest extends TestCase {
     Player sid = new Player("Sid");
 
     public void testBoardCreation() {
-        Board b = new Board(sid);
+        Board b = new Board(sid, "Test");
         assertEquals("Number of players", 1, b.gamePlayerList.size());
         assertEquals("Check owning player", sid.playerID, b.owningPlayerID);
         assertEquals("Check game state", GameState.initializing, b.gameState);
     }
 
     public void testAddPlayer() {
-        Board b = new Board(sid);
+        Board b = new Board(sid, "Test");
         Player bob = new Player("Bob");
         b.addPlayer(bob);
         assertEquals("Number of players,", 2, b.gamePlayerList.size());
@@ -22,7 +22,7 @@ public class BoardTest extends TestCase {
     }
 
     public void testStartGame() {
-        Board b = new Board(sid);
+        Board b = new Board(sid, "Test");
         b.startGame(sid.playerID);
         assertEquals("Starting without enough players,", GameState.initializing, b.gameState);
         Player bob = new Player("Bob");

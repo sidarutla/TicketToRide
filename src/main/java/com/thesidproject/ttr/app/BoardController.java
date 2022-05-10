@@ -1,6 +1,7 @@
 package com.thesidproject.ttr.app;
 
 import com.thesidproject.Board;
+import com.thesidproject.PlayType;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -27,19 +28,19 @@ public class BoardController {
         return ResponseEntity.badRequest().body(jsonObject);
     }
 
-    private void boardcastBoard(MockBoard board) {
-        this.simpMessagingTemplate.convertAndSend("/topic/" + board.getBoardId(), board);
+    private void boardcastBoard(Board board) {
+        this.simpMessagingTemplate.convertAndSend("/topic/" + board.getBoardID(), board);
     }
 
-    private void boardcastBoardState(MockBoard board) {
+    private void boardcastBoardState(Board board) {
         this.simpMessagingTemplate.convertAndSend("/topic/boards", board);
     }
 
 
     @PostMapping("/boards")
     public ResponseEntity<?> createBoard(@RequestBody CrateBoardInput input) {
-        MockBoard board = boardManager.createBoard(input.boardName, input.playerId);
-        if (board != null) {
+        Board board = boardManager.createBoard(input.boardName, input.playerID);
+            if (board != null) {
             boardcastBoard(board);
             boardcastBoardState(board);
             return ResponseEntity.ok(board);
@@ -48,9 +49,9 @@ public class BoardController {
         }
     }
 
-    @PostMapping("/boards/{boardId}/players/{playerId}")
-    public ResponseEntity<?> joinBoard(@PathVariable("boardId") String boardId, @PathVariable("playerId") String playerId) {
-        MockBoard board = boardManager.joinBoard(boardId, playerId);
+    @PostMapping("/boards/{boardID}/players/{playerID}")
+    public ResponseEntity<?> joinBoard(@PathVariable("boardID") String boardID, @PathVariable("playerID") String playerID) {
+        Board board = boardManager.joinBoard(boardID, playerID);
         if (board != null) {
             boardcastBoard(board);
             boardcastBoardState(board);
@@ -62,55 +63,73 @@ public class BoardController {
 
     @GetMapping("/boards")
     public ResponseEntity<?> getBoards() {
-        List<MockBoard> boards = boardManager.getBoards();
+        List<Board> boards = boardManager.getBoards();
         return ResponseEntity.ok(boards);
     }
 
-    @GetMapping("/boards/{boardId}")
-    public ResponseEntity<?> getBoard(@PathVariable("boardId") String boardId) {
-        MockBoard board = boardManager.getBoard(boardId);
+    @GetMapping("/boards/{boardID}")
+    public ResponseEntity<?> getBoard(@PathVariable("boardID") String boardID) {
+        Board board = boardManager.getBoard(boardID);
         if (board != null) {
             return ResponseEntity.ok(board);
         } else {
-            return returnErrorResponse("Couldnot find board");
+            return returnErrorResponse("Could not find board");
         }
     }
 
 
-    @PutMapping("/boards/{boardId}/players/{playerId}/start")
-    public ResponseEntity<?> startGame(@PathVariable("boardId")String boardId, @PathVariable("playerId") String playerId) {
-        MockBoard board = boardManager.startGame(boardId, playerId);
+    @PutMapping("/boards/{boardID}/players/{playerID}/start")
+    public ResponseEntity<?> startGame(@PathVariable("boardID") String boardID, @PathVariable("playerID") String playerID) {
+        Board board = boardManager.startGame(boardID, playerID);
         if (board != null) {
             boardcastBoard(board);
             boardcastBoardState(board);
             return ResponseEntity.ok(board);
         } else {
-            return returnErrorResponse("Couldnot find board");
+            return returnErrorResponse("Could not find board");
         }
     }
 
-    @PutMapping("/game/player/pick-play")
-    public Board pickPlay(String boardId, String playerId, String playType) {
-        return null;
+    @PutMapping("/boards/{boardID}/players/{playerID}/play/{playType}")
+    public ResponseEntity<?> pickPlay(@PathVariable("boardID") String boardID, @PathVariable("playerID") String playerID, @PathVariable("playType") PlayType playType) {
+        Board board = boardManager.pickPlay(boardID, playerID, playType);
+        if (board != null) {
+            boardcastBoard(board);
+            return ResponseEntity.ok(board);
+        } else {
+            return returnErrorResponse("Could not find board");
+        }
     }
 
-    @PutMapping("/game/player/draw-tickets")
-    public Board drawTickets(String boardId, String playerId, String playType) {
-        return null;
+    @PutMapping("/boards/{boardID}/players/{playerID}/play/draw-tickets")
+    public ResponseEntity<?> drawTickets(@PathVariable("boardID") String boardID, @PathVariable("playerID") String playerID) {
+        Board board = boardManager.drawTickets(boardID, playerID);
+        if (board != null) {
+            boardcastBoard(board);
+            return ResponseEntity.ok(board);
+        } else {
+            return returnErrorResponse("Could not find board");
+        }
     }
 
-    @PutMapping("/game/player/return-tickets")
-    public Board returnTickets(String boardId, String playerId, List<String> ticketIds) {
-        return null;
+    @PutMapping("/boards/{boardID}/players/{playerID}/play/return-tickets/{ticketIds}")
+    public ResponseEntity<?> returnTickets(@PathVariable("boardID") String boardID, @PathVariable("playerID") String playerID, @PathVariable("ticketIds") List<String> ticketIds) {
+        Board board = boardManager.returnTickets(boardID, playerID, ticketIds);
+        if (board != null) {
+            boardcastBoard(board);
+            return ResponseEntity.ok(board);
+        } else {
+            return returnErrorResponse("Could not find board");
+        }
     }
 
     @PutMapping("/game/player/draw-card")
-    public Board drawCard(String boardId, String playerId, int cardPosition) {
+    public Board drawCard(String boardID, String playerID, int cardPosition) {
         return null;
     }
 
     @PutMapping("/game/player/build-track")
-    public Board buildConnection(String boardId, String playerId, String connectionId, List<String> cardsToUse) {
+    public Board buildConnection(String boardID, String playerID, String connectionId, List<String> cardsToUse) {
         return null;
     }
 

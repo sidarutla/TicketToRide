@@ -15,16 +15,15 @@ import java.util.UUID;
 @Component
 public class PlayerManager {
 
-    private static Map<String, MockPlayer> players = new HashMap<>();
+    private static Map<String, Player> players = new HashMap<>();
 
-    public MockPlayer createPlayer(String playerName) {
-        String playerId = UUID.randomUUID().toString();
-        MockPlayer player = new MockPlayer(playerId, playerName);
-        players.put(playerId, player);
+    public Player createPlayer(String playerName) {
+        Player player = new Player(playerName);
+        players.put(player.getPlayerID(), player);
         return player;
     }
 
-    public MockPlayer getPlayer(String playerId) {
-        return players.get(playerId);
+    public Player getPlayer(String playerID) {
+        return players.get(playerID);
     }
 }
