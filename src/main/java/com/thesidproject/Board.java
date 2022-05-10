@@ -1,5 +1,7 @@
 package com.thesidproject;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -14,7 +16,10 @@ public class Board {
     List<GamePlayer> gamePlayerList = new ArrayList<>();
     GameState gameState;
     String owningPlayerID = null;
-    int round = 0;
+    int round = 1;
+    String currentPlayerID;
+    PlayType currentPlayType;
+    Boolean isTurnInProgress;
 
     public Board(Player owner) {
         GamePlayer ownerGamePlayer = new GamePlayer(owner.playerID, owner.name, getUnusedColor());
@@ -31,9 +36,19 @@ public class Board {
         return null;
     }
 
+    private GamePlayer getPlayerFromID(String playerID) {
+        for (GamePlayer gamePlayer : gamePlayerList) {
+            if (gamePlayer.playerID.equals(playerID)) {
+                return gamePlayer;
+            }
+        }
+        return null;
+    }
+
     public void startGame(String playerID) {
         if (playerID.equals(owningPlayerID) && gameState == GameState.initializing && gamePlayerList.size() > 1) {
             gameState = GameState.started;
+            currentPlayerID = gamePlayerList.get(0).playerID;
 //            shuffleTickets();
 //            shuffleCards();
 //            distributeCards();
@@ -167,6 +182,88 @@ public class Board {
 
     public boolean isTakeCardValid(TakeCard takeCard, boolean isFirstTurn) {
         return isFirstTurn || takeCard.ordinal() >= 5 || !fiveOpenCards.get(takeCard.ordinal()).isLocomotive();
+    }
+
+
+    private boolean pickPlayType(String PlayerID, PlayType playType) {
+
+        if (round == 1 && playType != PlayType.drawTickets && !isTurnInProgress) {
+            return false;
+        }
+        if (!PlayerID.equals(currentPlayerID) || gameState != GameState.started) {
+            return false;
+        }
+        currentPlayType = playType;
+        isTurnInProgress = false;
+        return true;
+    }
+
+    public boolean drawTickets(String playerID) {
+        if (!playerID.equals(currentPlayerID)) {
+            return false;
+        }
+
+        if (currentPlayType != PlayType.drawTickets) {
+            return false;
+        }
+
+        if (isTurnInProgress) {
+            return false;
+        }
+
+        if (ticketList.size() < 3) {
+            return false;
+        }
+        List<Ticket> drawnTickets = new ArrayList<>(ticketList.subList(0, 3));
+        ticketList.removeAll(drawnTickets);
+        GamePlayer gamePlayer = getPlayerFromID(playerID);
+        gamePlayer.drawnTickets = drawnTickets;
+        isTurnInProgress = true;
+        return true;
+    }
+
+    public boolean returnTickets(String playerID, List<String> returnedTicketIDs) {
+        if (!playerID.equals(currentPlayerID)) {
+            return false;
+        }
+
+        if (currentPlayType != PlayType.drawTickets) {
+            return false;
+        }
+
+        if (!isTurnInProgress) {
+            return false;
+        }
+
+        if (round == 1 && returnedTicketIDs.size() > 1) {
+            return false;
+        }
+
+        if (returnedTicketIDs.size() > 2) {
+            return false;
+        }
+        GamePlayer gamePlayer = getPlayerFromID(playerID);
+        List<Ticket> returnedTickets = new ArrayList<>();
+
+        for (String returnedTicketID : returnedTicketIDs) {
+            for (int j = 0; j < gamePlayer.drawnTickets.size(); j++) {
+                if (returnedTicketID.equals(gamePlayer.drawnTickets.get(j).ticketID)) {
+                    returnedTickets.add(gamePlayer.drawnTickets.get(j));
+                }
+            }
+        }
+
+        gamePlayer.drawnTickets.removeAll(returnedTickets);
+        ticketList.addAll(returnedTickets);
+        shuffleTickets();
+        gamePlayer.tickets.addAll(gamePlayer.drawnTickets);
+        gamePlayer.drawnTickets.clear();
+
+        currentPlayerID = null; //Get next playerId given a playerId.
+        isTurnInProgress = false;
+        currentPlayType = null;
+
+        return true;
     }
 }
 

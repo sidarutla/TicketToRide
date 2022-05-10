@@ -15,7 +15,6 @@ public class Player {
         this.name = name;
         playerID = UUID.randomUUID().toString();
     }
-}
 //    public void print() {
 //        System.out.println("Player " + name + ", here are your stats:");
 //        System.out.println("score:");
@@ -3595,27 +3594,4 @@ public class Player {
 //        return TakeCard.getTakeCard(inputIndex);
 //    }
 //
-//    private PlayType getPlayType() {
-//
-//        boolean isValidInput = false;
-//        int inputIndex = -1;
-//        while (!isValidInput) {
-//
-//            System.out.println("Player " + name + ", pick an action: ");
-//            System.out.println("1 = Draw Cards");
-//            System.out.println("2 = Build Tracks");
-//            System.out.println("3 = Draw Tickets");
-//
-//            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-//            try {
-//                String input = reader.readLine();
-//                inputIndex = Integer.parseInt(input);
-//                if (inputIndex < 4 && inputIndex > 0) {
-//                    isValidInput = true;
-//                }
-//            } catch (Exception e) {
-//            }
-//        }
-//        return PlayType.getPlayType(inputIndex);
-//    }
-//}
+}

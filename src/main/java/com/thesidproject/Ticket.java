@@ -1,15 +1,20 @@
 package com.thesidproject;
 
+import java.util.UUID;
+
 public class Ticket {
 
-    String source;
-    String destination;
-    int value;
+    final String source;
+    final String destination;
+    final int value;
+    final String ticketID;
 
     public Ticket(String source, String destination, int value) {
         this.source = source;
         this.destination = destination;
         this.value = value;
+        this.ticketID = UUID.randomUUID().toString();
+
     }
 
     public static Ticket buildTicket(String source, String destination, int value) {

@@ -14,8 +14,9 @@ public class GamePlayer {
 
     int tracks = 45;
     int score = 0;
-    ArrayList<Ticket> tickets;
-    ArrayList<Card> cards;
+    List<Ticket> tickets;
+    List<Ticket> drawnTickets;
+    List<Card> cards;
     List<List<String>> connectedCities = new ArrayList<>();
 
     public GamePlayer(String playerID, String playerName, PlayerColor inputColor) {
