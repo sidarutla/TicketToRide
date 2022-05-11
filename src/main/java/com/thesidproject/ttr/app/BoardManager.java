@@ -103,8 +103,8 @@ public class BoardManager {
 
         Board board = boards.get(boardID);
         if (board != null) {
-            boolean pickedPlayType = board.returnTickets(playerID, ticketIds);
-            if (pickedPlayType) {
+            boolean returnedTickets = board.returnTickets(playerID, ticketIds);
+            if (returnedTickets) {
                 return board;
             }
         }

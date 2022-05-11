@@ -94,6 +94,9 @@ public class BoardController {
     public ResponseEntity<?> pickPlay(@PathVariable("boardID") String boardID, @PathVariable("playerID") String playerID, @PathVariable("playType") PlayType playType) {
         Board board = boardManager.pickPlay(boardID, playerID, playType);
         if (board != null) {
+            if(playType == PlayType.drawTickets) {
+                board = boardManager.drawTickets(boardID, playerID);
+            }
             boardcastBoard(board);
             return ResponseEntity.ok(board);
         } else {
