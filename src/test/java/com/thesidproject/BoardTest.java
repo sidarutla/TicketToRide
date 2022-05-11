@@ -39,4 +39,26 @@ public class BoardTest extends TestCase {
         b.startGame(sid.playerID);
         assertEquals("Valid start scenario", GameState.started, b.gameState);
     }
+
+    public void testPickPlayType() {
+         Board b = new Board(sid, "Test");
+         b.startGame(sid.playerID);
+
+        assertFalse("Not drawing tickets first round,", b.pickPlayType(sid.playerID, PlayType.drawCards));
+        assertFalse("Not drawing tickets first round,", b.pickPlayType(sid.playerID, PlayType.buildTracks));
+
+        b.isTurnInProgress = true;
+        assertFalse("Turn is in progress", b.pickPlayType(sid.playerID, PlayType.buildTracks));
+        b.isTurnInProgress = false;
+
+        b.gameState = GameState.initializing;
+        assertFalse("Game is not started", b.pickPlayType(sid.playerID, PlayType.drawTickets));
+        b.gameState = GameState.finished;
+        assertFalse("Game is not started", b.pickPlayType(sid.playerID, PlayType.drawTickets));
+        b.gameState = GameState.started;
+
+        Player bob = new Player("Bob");
+        b.addPlayer(bob);
+        assertFalse("Wrong player", b.pickPlayType(bob.playerID, PlayType.drawTickets));
+    }
 }

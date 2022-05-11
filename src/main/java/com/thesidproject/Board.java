@@ -23,7 +23,7 @@ public class Board {
     int round = 1;
     String currentPlayerID;
     PlayType currentPlayType;
-    Boolean isTurnInProgress;
+    Boolean isTurnInProgress = false;
 
     public Board(Player owner, String boardName) {
         GamePlayer ownerGamePlayer = new GamePlayer(owner.playerID, owner.name, getUnusedColor());
@@ -198,10 +198,17 @@ public class Board {
 
     public boolean pickPlayType(String PlayerID, PlayType playType) {
 
-        if (round == 1 && playType != PlayType.drawTickets && !isTurnInProgress) {
+        if (round == 1 && playType != PlayType.drawTickets) {
             return false;
         }
-        if (!PlayerID.equals(currentPlayerID) || gameState != GameState.started) {
+
+        if (isTurnInProgress) {
+            return false;
+        }
+        if (!PlayerID.equals(currentPlayerID)) {
+            return false;
+        }
+        if (gameState != GameState.started) {
             return false;
         }
         currentPlayType = playType;
