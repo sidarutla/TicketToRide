@@ -26,4 +26,20 @@ public class Ticket {
         String string = source + " to " + destination + " for " + value + " points";
         return string;
     }
+
+    public String getSource() {
+        return source;
+    }
+
+    public String getDestination() {
+        return destination;
+    }
+
+    public int getValue() {
+        return value;
+    }
+
+    public String getTicketID() {
+        return ticketID;
+    }
 }
