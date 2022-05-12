@@ -36,16 +36,20 @@ public class Board {
 
     public boolean addPlayer(Player player) {
 
-        //TODO: SID: Add player should not add the player, if the player is already in the game and it should return true.
+        if (getPlayerFromID(player.playerID) != null) {
+            return true;
+        }
+
         if (gameState == GameState.initializing && gamePlayerList.size() < 5) {
             GamePlayer gamePlayer = new GamePlayer(player.playerID, player.name, getUnusedColor());
             gamePlayerList.add(gamePlayer);
             return true;
         }
+
         return false;
     }
 
-    private GamePlayer getPlayerFromID(String playerID) {
+    public GamePlayer getPlayerFromID(String playerID) {
         for (GamePlayer gamePlayer : gamePlayerList) {
             if (gamePlayer.playerID.equals(playerID)) {
                 return gamePlayer;
@@ -71,8 +75,8 @@ public class Board {
 
     private PlayerColor getUnusedColor() {
         PlayerColor[] allColors = PlayerColor.values();
-        boolean isColorUsed = false;
         for (PlayerColor allColor : allColors) {
+            boolean isColorUsed = false;
             for (GamePlayer gamePlayer : gamePlayerList) {
                 if (allColor == gamePlayer.playerColor) {
                     isColorUsed = true;
@@ -264,6 +268,19 @@ public class Board {
         List<Ticket> returnedTickets = new ArrayList<>();
 
         for (String returnedTicketID : returnedTicketIDs) {
+            boolean returnedTicketMatches = false;
+            for (int j = 0; j < gamePlayer.drawnTickets.size(); j++) {
+                if (returnedTicketID.equals(gamePlayer.drawnTickets.get(j).ticketID)) {
+                    returnedTicketMatches = true;
+                    break;
+                }
+            }
+            if (!returnedTicketMatches) {
+                return false;
+            }
+        }
+
+        for (String returnedTicketID : returnedTicketIDs) {
             for (int j = 0; j < gamePlayer.drawnTickets.size(); j++) {
                 if (returnedTicketID.equals(gamePlayer.drawnTickets.get(j).ticketID)) {
                     returnedTickets.add(gamePlayer.drawnTickets.get(j));
@@ -277,11 +294,20 @@ public class Board {
         gamePlayer.tickets.addAll(gamePlayer.drawnTickets);
         gamePlayer.drawnTickets.clear();
 
-        currentPlayerID = null; //Get next playerId given a playerId.
+        endTurn(playerID);
+        return true;
+    }
+
+    public void endTurn(String playerID) {
         isTurnInProgress = false;
         currentPlayType = null;
-
-        return true;
+        int nextPlayerIndex = gamePlayerList.indexOf(getPlayerFromID(playerID)) + 1;
+        if (nextPlayerIndex == gamePlayerList.size()) {
+            currentPlayerID = gamePlayerList.get(0).playerID;
+            round += 1;
+        } else {
+            currentPlayerID = gamePlayerList.get(nextPlayerIndex).playerID;
+        }
     }
 
 

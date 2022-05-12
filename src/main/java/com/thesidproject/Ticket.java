@@ -18,13 +18,11 @@ public class Ticket {
     }
 
     public static Ticket buildTicket(String source, String destination, int value) {
-        Ticket ticket = new Ticket(source, destination, value);
-        return ticket;
+        return new Ticket(source, destination, value);
     }
 
     public String toString() {
-        String string = source + " to " + destination + " for " + value + " points";
-        return string;
+        return source + " to " + destination + " for " + value + " points";
     }
 
     public String getSource() {
