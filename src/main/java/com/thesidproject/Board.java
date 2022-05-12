@@ -26,6 +26,7 @@ public class Board {
     String currentPlayerID;
     PlayType currentPlayType;
     Boolean isTurnInProgress = false;
+//    int cardsDrawn = 0;
 
     public Board(Player owner, String boardName) {
         GamePlayer ownerGamePlayer = new GamePlayer(owner.playerID, owner.name, getUnusedColor());
@@ -64,10 +65,10 @@ public class Board {
         if (playerID.equals(owningPlayerID) && gameState == GameState.initializing && gamePlayerList.size() > 1) {
             gameState = GameState.started;
             currentPlayerID = gamePlayerList.get(0).playerID;
-//            shuffleTickets();
-//            shuffleCards();
-//            distributeCards();
-//            openFiveCards();
+            shuffleTickets();
+            shuffleCards();
+            distributeCards();
+            openFiveCards();
 //            playYourTurn();
             return true;
         }
@@ -302,6 +303,7 @@ public class Board {
     }
 
     public void endTurn(String playerID) {
+//        cardsDrawn = 0;
         isTurnInProgress = false;
         currentPlayType = null;
         int nextPlayerIndex = gamePlayerList.indexOf(getPlayerFromID(playerID)) + 1;
@@ -334,6 +336,36 @@ public class Board {
         if (cardList.size() < 2) {
             return false;
         }
+//        if (index < 5) {
+//            Card wantedCard = fiveOpenCards.get(index);
+//            if (cardsDrawn > 0 && wantedCard.gameColor == GameColor.any) {
+//                return false;
+//            }
+//        }
+//
+//
+//
+//        GamePlayer gamePlayer = getPlayerFromID(playerID);
+//        isTurnInProgress = true;
+//        GamePlayer gamePlayer = getPlayerFromID(playerID);
+//        if(index < 5) {
+//            Card cardWanted = fiveOpenCards.remove(index);
+//            if(cardWanted.gameColor == GameColor.any) {
+//                cardsDrawn += 2;
+//            } else {
+//                cardsDrawn += 1;
+//            }
+//            gamePlayer.cards.add(cardWanted);
+//            openFiveCards();
+//        } else {
+//            Card cardWanted = cardList.remove(0);
+//            gamePlayer.cards.add(cardWanted);
+//            cardsDrawn += 1;
+//        }
+//
+//        if (cardsDrawn == 2) {
+//            endTurn(playerID);
+//        }
 
         GamePlayer gamePlayer = getPlayerFromID(playerID);
 
@@ -420,6 +452,10 @@ public class Board {
 
     public void setCurrentPlayType(PlayType currentPlayType) {
         this.currentPlayType = currentPlayType;
+    }
+
+    public List<Card> getFiveOpenCards() {
+        return fiveOpenCards;
     }
 }
 
