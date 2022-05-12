@@ -14,8 +14,10 @@ public class Board {
 
     List<Ticket> ticketList = new BoardBuilder().createTickets();
     List<Card> cardList = new BoardBuilder().createCards();
+    List<Card> discardedCardList = new ArrayList<>();
     List<Connection> connectionList = new BoardBuilder().createConnections();
     List<Card> fiveOpenCards = new ArrayList<>();
+
 
     List<GamePlayer> gamePlayerList = new ArrayList<>();
     GameState gameState;
@@ -114,26 +116,27 @@ public class Board {
     }
 
     public void openFiveCards() {
-        int locos = 0;
-        boolean threeLocos = true;
+        int missingCards = 5 - fiveOpenCards.size();
+        List<Card> cardsNeeded = new ArrayList<>(cardList.subList(0, missingCards));
+        fiveOpenCards.addAll(cardsNeeded);
+        cardList.removeAll(cardsNeeded);
 
-        while (threeLocos) {
+        while (has3Locos()) {
+            cardList.addAll(fiveOpenCards);
+            shuffleCards();
             fiveOpenCards = new ArrayList<>(cardList.subList(0, 5));
             cardList.removeAll(fiveOpenCards);
+        }
+    }
 
-            for (int i = 0; i < 5; i++) {
-                Card card = fiveOpenCards.get(i);
-                if (card.gameColor == GameColor.any) {
-                    locos += 1;
-                }
-            }
-            if (locos < 3) {
-                threeLocos = false;
-            } else {
-                cardList.addAll(fiveOpenCards);
-                shuffleCards();
+    public boolean has3Locos() {
+        int locos = 0;
+        for (Card card : fiveOpenCards) {
+            if (card.gameColor == GameColor.any) {
+                locos += 1;
             }
         }
+        return locos >= 3;
     }
 
 //    public void playYourTurn() {
@@ -310,6 +313,54 @@ public class Board {
         }
     }
 
+    public boolean drawCard(String playerID, int index) {
+        if (!playerID.equals(currentPlayerID)) {
+            return false;
+        }
+
+        if (currentPlayType != PlayType.drawCards) {
+            return false;
+        }
+
+        if (index < 0 || index > 5) {
+            return false;
+        }
+        if (cardList.size() < 2) {
+            cardList.addAll(discardedCardList);
+            discardedCardList.clear();
+            shuffleCards();
+        }
+
+        if (cardList.size() < 2) {
+            return false;
+        }
+
+        GamePlayer gamePlayer = getPlayerFromID(playerID);
+
+        if (index < 5) {
+            Card wantedCard = fiveOpenCards.get(index);
+            if (isTurnInProgress && wantedCard.gameColor == GameColor.any) {
+                return false;
+            }
+            gamePlayer.cards.add(wantedCard);
+            fiveOpenCards.remove(index);
+            openFiveCards();
+            isTurnInProgress = true;
+            if (wantedCard.gameColor == GameColor.any) {
+                endTurn(playerID);
+                return true;
+            }
+        } else {
+            gamePlayer.cards.add(cardList.get(0));
+            cardList.remove(0);
+            if (isTurnInProgress) {
+                endTurn(playerID);
+                return true;
+            }
+            isTurnInProgress = true;
+        }
+        return true;
+    }
 
     public String getBoardID() {
         return boardID;
