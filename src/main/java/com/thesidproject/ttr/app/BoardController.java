@@ -115,9 +115,9 @@ public class BoardController {
         }
     }
 
-    @PutMapping("/boards/{boardID}/players/{playerID}/play/return-tickets/{ticketIds}")
-    public ResponseEntity<?> returnTickets(@PathVariable("boardID") String boardID, @PathVariable("playerID") String playerID, @PathVariable("ticketIds") List<String> ticketIds) {
-        Board board = boardManager.returnTickets(boardID, playerID, ticketIds);
+    @PutMapping("/boards/{boardID}/players/{playerID}/play/return-tickets")
+    public ResponseEntity<?> returnTickets(@PathVariable("boardID") String boardID, @PathVariable("playerID") String playerID, @RequestBody ReturnTicketsInput returnTicketsInput) {
+        Board board = boardManager.returnTickets(boardID, playerID, returnTicketsInput.ticketIDs);
         if (board != null) {
             boardcastBoard(board);
             return ResponseEntity.ok(board);
@@ -126,9 +126,15 @@ public class BoardController {
         }
     }
 
-    @PutMapping("/game/player/draw-card")
-    public Board drawCard(String boardID, String playerID, int cardPosition) {
-        return null;
+    @PutMapping("/boards/{boardID}/players/{playerID}/play/draw-card/{cardIndex}")
+    public ResponseEntity<?> drawCard(@PathVariable("boardID") String boardID, @PathVariable("playerID") String playerID, @PathVariable("cardIndex") int cardIndex) {
+        Board board = boardManager.drawCard(boardID, playerID, cardIndex);
+        if (board != null) {
+            boardcastBoard(board);
+            return ResponseEntity.ok(board);
+        } else {
+            return returnErrorResponse("Could not find board");
+        }
     }
 
     @PutMapping("/game/player/build-track")

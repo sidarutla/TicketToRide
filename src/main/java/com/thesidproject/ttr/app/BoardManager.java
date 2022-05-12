@@ -112,6 +112,18 @@ public class BoardManager {
     }
 
     public Board drawCard(String boardID, String playerID, int cardPosition) {
+        Player player = playerManager.getPlayer(playerID);
+        if (player == null) {
+            return null;
+        }
+
+        Board board = boards.get(boardID);
+        if (board != null) {
+            boolean returnedTickets = board.drawCard(playerID, cardPosition);
+            if (returnedTickets) {
+                return board;
+            }
+        }
         return null;
     }
 

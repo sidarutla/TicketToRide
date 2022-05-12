@@ -29,4 +29,12 @@ public class Card {
             return false;
         }
     }
+
+    public GameColor getGameColor() {
+        return gameColor;
+    }
+
+    public void setGameColor(GameColor gameColor) {
+        this.gameColor = gameColor;
+    }
 }
