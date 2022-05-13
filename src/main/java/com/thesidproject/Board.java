@@ -2,10 +2,7 @@ package com.thesidproject;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 public class Board {
 
@@ -394,6 +391,11 @@ public class Board {
         return true;
     }
 
+
+    public boolean buildTrack(String playerID, String connectionID, int locosToUse, GameColor colorToUse) {
+        return false;
+    }
+
     public String getBoardID() {
         return boardID;
     }
@@ -456,6 +458,10 @@ public class Board {
 
     public List<Card> getFiveOpenCards() {
         return fiveOpenCards;
+    }
+
+    public List<Connection> getConnections() {
+        return connectionList;
     }
 }
 

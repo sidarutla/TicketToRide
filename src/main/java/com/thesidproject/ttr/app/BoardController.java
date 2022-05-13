@@ -137,9 +137,15 @@ public class BoardController {
         }
     }
 
-    @PutMapping("/game/player/build-track")
-    public Board buildConnection(String boardID, String playerID, String connectionId, List<String> cardsToUse) {
-        return null;
+    @PutMapping("/boards/{boardID}/players/{playerID}/play/build-track")
+    public ResponseEntity<?> buildTrack(@PathVariable("boardID") String boardID, @PathVariable("playerID") String playerID, @RequestBody BuildTrackInput buildTrackInput) {
+        Board board = boardManager.buildTrack(boardID, playerID, buildTrackInput);
+        if (board != null) {
+            boardcastBoard(board);
+            return ResponseEntity.ok(board);
+        } else {
+            return returnErrorResponse("Could not find board");
+        }
     }
 
 }

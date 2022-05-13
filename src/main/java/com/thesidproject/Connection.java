@@ -1,8 +1,11 @@
 package com.thesidproject;
 
 
+import java.util.UUID;
+
 public class Connection {
 
+    String connectionID;
     String source;
     String destination;
     Pathway pathway1;
@@ -13,6 +16,7 @@ public class Connection {
         this.destination = destination;
         this.pathway1 = pathway1;
         this.pathway2 = pathway2;
+        this.connectionID = UUID.randomUUID().toString();
     }
 
     public static Connection buildConnection(String source, String destination, boolean doubleTracks, int tracks, GameColor color1, GameColor color2) {
@@ -28,6 +32,26 @@ public class Connection {
             string += ", " + pathway2;
         }
         return string;
+    }
+
+    public String getConnectionID() {
+        return connectionID;
+    }
+
+    public String getSource() {
+        return source;
+    }
+
+    public String getDestination() {
+        return destination;
+    }
+
+    public Pathway getPathway1() {
+        return pathway1;
+    }
+
+    public Pathway getPathway2() {
+        return pathway2;
     }
 }
 

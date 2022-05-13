@@ -26,4 +26,20 @@ public class Pathway {
         }
         return string;
     }
+
+    public int getTracks() {
+        return tracks;
+    }
+
+    public GameColor getColor() {
+        return color;
+    }
+
+    public boolean isOpen() {
+        return open;
+    }
+
+    public Player getPlayer() {
+        return player;
+    }
 }

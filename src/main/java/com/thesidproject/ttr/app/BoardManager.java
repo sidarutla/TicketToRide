@@ -2,6 +2,7 @@ package com.thesidproject.ttr.app;
 
 
 import com.thesidproject.Board;
+import com.thesidproject.GameColor;
 import com.thesidproject.PlayType;
 import com.thesidproject.Player;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -127,7 +128,18 @@ public class BoardManager {
         return null;
     }
 
-    public Board buildConnection(String boardID, String playerID, String connectionId) {
+    public Board buildTrack(String boardID, String playerID, BuildTrackInput buildTrackInput) {
+        Player player = playerManager.getPlayer(playerID);
+        if (player == null) {
+            return null;
+        }
+        Board board = boards.get(boardID);
+        if (board != null) {
+            boolean returnedTickets = board.buildTrack(playerID, buildTrackInput.connectionID, buildTrackInput.locosToUse, buildTrackInput.colorToUse);
+            if (returnedTickets) {
+                return board;
+            }
+        }
         return null;
     }
 
