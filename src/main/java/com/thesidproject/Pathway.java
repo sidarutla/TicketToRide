@@ -1,31 +1,23 @@
 package com.thesidproject;
 
+import java.util.UUID;
+
 public class Pathway {
 
+    String pathwayID;
     int tracks;
 
     GameColor color;
 
-    boolean open;
+    GamePlayer gamePlayer;
 
-    Player player;
-
-    public Pathway(int tracks, GameColor color, boolean open, Player player) {
+    public Pathway(int tracks, GameColor color, GamePlayer gamePlayer) {
         this.tracks = tracks;
         this.color = color;
-        this.open = open;
-        this.player = player;
+        this.gamePlayer = gamePlayer;
+        this.pathwayID = UUID.randomUUID().toString();
     }
 
-    public String toString() {
-        String string = tracks + ", " + color + ", ";
-        if (open) {
-            string += "open";
-        } else {
-            string += "closed";
-        }
-        return string;
-    }
 
     public int getTracks() {
         return tracks;
@@ -35,11 +27,7 @@ public class Pathway {
         return color;
     }
 
-    public boolean isOpen() {
-        return open;
-    }
-
-    public Player getPlayer() {
-        return player;
+    public GamePlayer getGamePlayer() {
+        return gamePlayer;
     }
 }

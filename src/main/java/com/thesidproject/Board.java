@@ -1,8 +1,9 @@
 package com.thesidproject;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.UUID;
 
 public class Board {
 
@@ -23,7 +24,8 @@ public class Board {
     String currentPlayerID;
     PlayType currentPlayType;
     Boolean isTurnInProgress = false;
-//    int cardsDrawn = 0;
+    int cardsDrawn = 0;
+    String finalPlayerID = null;
 
     public Board(Player owner, String boardName) {
         GamePlayer ownerGamePlayer = new GamePlayer(owner.playerID, owner.name, getUnusedColor());
@@ -58,6 +60,28 @@ public class Board {
         return null;
     }
 
+    public Connection getConnectionFromID(String connectionID) {
+        for (Connection connection : connectionList) {
+            if (connection.connectionID.equals(connectionID)) {
+                return connection;
+            }
+        }
+        return null;
+    }
+
+    public Pathway getPathwayFromID(String pathwayID, Connection connection) {
+        if (connection == null) {
+            return null;
+        }
+        if (connection.pathway1.pathwayID.equals(pathwayID)) {
+            return connection.pathway1;
+        }
+        if (connection.pathway2.pathwayID.equals(pathwayID)) {
+            return connection.pathway2;
+        }
+        return null;
+    }
+
     public boolean startGame(String playerID) {
         if (playerID.equals(owningPlayerID) && gameState == GameState.initializing && gamePlayerList.size() > 1) {
             gameState = GameState.started;
@@ -66,7 +90,6 @@ public class Board {
             shuffleCards();
             distributeCards();
             openFiveCards();
-//            playYourTurn();
             return true;
         }
         return false;
@@ -98,15 +121,6 @@ public class Board {
         Collections.shuffle(cardList);
     }
 
-//    public void distributeTickets() {
-////        for (Player player : gamePlayerList) {
-////            player.drawTickets(ticketList);
-//            for (int j = 0; j < 23; j++) {
-//                System.out.println();
-//            }
-//        }
-//    }
-
     public void distributeCards() {
         for (GamePlayer gamePlayer : gamePlayerList) {
             gamePlayer.addCards(cardList);
@@ -136,41 +150,6 @@ public class Board {
         }
         return locos >= 3;
     }
-
-//    public void playYourTurn() {
-//        boolean isGamePlaying = true;
-//        int i = 0;
-//        List<Integer> scores = new ArrayList<>();
-//        while (isGamePlaying) {
-//            if (gamePlayerList.get(i).tracks <= 2) {
-//                gamePlayerList.get(i).playTurn(this, ticketList, connectionList);
-//                System.out.println(gamePlayerList.get(i));
-//                for (Player player : gamePlayerList) {
-//                    for (int k = 0; k < player.tickets.size(); k++) {
-//                        player.score -= player.tickets.get(k).value;
-//                    }
-//                    System.out.println("Player " + player.name + "'s score: " + player.score);
-//                    scores.add(player.score);
-//                }
-//                int highestScore = Collections.max(scores);
-//                boolean winningPlayerFound = false;
-//                for (Player player : gamePlayerList) {
-//                    if (player.score == highestScore && !winningPlayerFound) {
-//                        System.out.println("Player " + player.name + " wins!");
-//                        winningPlayerFound = true;
-//                    }
-//                }
-//                isGamePlaying = false;
-//            } else {
-//                gamePlayerList.get(i).playTurn(this, ticketList, connectionList);
-//                if (i < gamePlayerList.size() - 1) {
-//                    i++;
-//                } else {
-//                    i = 0;
-//                }
-//            }
-//        }
-//    }
 
     public void checkOpenCards() {
         System.out.println("Open cards:");
@@ -300,15 +279,23 @@ public class Board {
     }
 
     public void endTurn(String playerID) {
-//        cardsDrawn = 0;
+        cardsDrawn = 0;
         isTurnInProgress = false;
         currentPlayType = null;
-        int nextPlayerIndex = gamePlayerList.indexOf(getPlayerFromID(playerID)) + 1;
+        GamePlayer gamePlayer = getPlayerFromID(playerID);
+        int nextPlayerIndex = gamePlayerList.indexOf(gamePlayer) + 1;
         if (nextPlayerIndex == gamePlayerList.size()) {
             currentPlayerID = gamePlayerList.get(0).playerID;
             round += 1;
         } else {
             currentPlayerID = gamePlayerList.get(nextPlayerIndex).playerID;
+        }
+
+        if (playerID.equalsIgnoreCase(finalPlayerID)) {
+           //end the game
+        }
+        if (gamePlayer.tracks <= 2 && finalPlayerID == null) {
+            finalPlayerID = playerID;
         }
     }
 
@@ -333,67 +320,125 @@ public class Board {
         if (cardList.size() < 2) {
             return false;
         }
-//        if (index < 5) {
-//            Card wantedCard = fiveOpenCards.get(index);
-//            if (cardsDrawn > 0 && wantedCard.gameColor == GameColor.any) {
-//                return false;
-//            }
-//        }
-//
-//
-//
-//        GamePlayer gamePlayer = getPlayerFromID(playerID);
-//        isTurnInProgress = true;
-//        GamePlayer gamePlayer = getPlayerFromID(playerID);
-//        if(index < 5) {
-//            Card cardWanted = fiveOpenCards.remove(index);
-//            if(cardWanted.gameColor == GameColor.any) {
-//                cardsDrawn += 2;
-//            } else {
-//                cardsDrawn += 1;
-//            }
-//            gamePlayer.cards.add(cardWanted);
-//            openFiveCards();
-//        } else {
-//            Card cardWanted = cardList.remove(0);
-//            gamePlayer.cards.add(cardWanted);
-//            cardsDrawn += 1;
-//        }
-//
-//        if (cardsDrawn == 2) {
-//            endTurn(playerID);
-//        }
-
-        GamePlayer gamePlayer = getPlayerFromID(playerID);
-
         if (index < 5) {
             Card wantedCard = fiveOpenCards.get(index);
-            if (isTurnInProgress && wantedCard.gameColor == GameColor.any) {
+            if (cardsDrawn > 0 && wantedCard.gameColor == GameColor.any) {
                 return false;
             }
-            gamePlayer.cards.add(wantedCard);
-            fiveOpenCards.remove(index);
+        }
+
+
+        isTurnInProgress = true;
+        GamePlayer gamePlayer = getPlayerFromID(playerID);
+        if (index < 5) {
+            Card cardWanted = fiveOpenCards.remove(index);
+            if (cardWanted.gameColor == GameColor.any) {
+                cardsDrawn += 2;
+            } else {
+                cardsDrawn += 1;
+            }
+            gamePlayer.cards.add(cardWanted);
             openFiveCards();
-            isTurnInProgress = true;
-            if (wantedCard.gameColor == GameColor.any) {
-                endTurn(playerID);
-                return true;
-            }
         } else {
-            gamePlayer.cards.add(cardList.get(0));
-            cardList.remove(0);
-            if (isTurnInProgress) {
-                endTurn(playerID);
-                return true;
-            }
-            isTurnInProgress = true;
+            Card cardWanted = cardList.remove(0);
+            gamePlayer.cards.add(cardWanted);
+            cardsDrawn += 1;
+        }
+
+        if (cardsDrawn == 2) {
+            endTurn(playerID);
         }
         return true;
     }
 
 
-    public boolean buildTrack(String playerID, String connectionID, int locosToUse, GameColor colorToUse) {
-        return false;
+    public boolean buildTrack(String playerID, String connectionID, String pathwayID, GameColor colorToUse, boolean useLocos) {
+        GamePlayer gamePlayer = getPlayerFromID(playerID);
+        Connection connection = getConnectionFromID(connectionID);
+        Pathway pathway = getPathwayFromID(pathwayID, connection);
+        if (!playerID.equals(currentPlayerID)) {
+            return false;
+        }
+
+        if (currentPlayType != PlayType.buildTracks) {
+            return false;
+        }
+
+        if (isTurnInProgress) {
+            return false;
+        }
+
+        if (connection == null || pathway == null) {
+            return false;
+        }
+
+        if (pathway.gamePlayer != null) {
+            return false;
+        }
+
+        if (gamePlayer.tracks < pathway.tracks) {
+            return false;
+        }
+
+        List<Card> usableCards = getUsableCards(gamePlayer, pathway.tracks, colorToUse, useLocos);
+        if (usableCards.size() < pathway.tracks) {
+            return false;
+        }
+
+        pathway.gamePlayer = gamePlayer;
+        gamePlayer.cards.removeAll(usableCards);
+        discardedCardList.addAll(usableCards);
+        gamePlayer.tracks -= pathway.tracks;
+        gamePlayer.score += getPoints(pathway.tracks);
+        endTurn(playerID);
+        return true;
+    }
+
+    public List<Card> getUsableCards(GamePlayer gamePlayer, int tracks, GameColor colorToUse, boolean useLocos) {
+        List<Card> usableCards = new ArrayList<>();
+
+        for (Card card : gamePlayer.cards) {
+            if (card.gameColor == colorToUse) {
+                usableCards.add(card);
+            }
+            if (usableCards.size() == tracks) {
+                return usableCards;
+            }
+        }
+
+
+        if (useLocos) {
+            for (Card card : gamePlayer.cards) {
+                if (card.gameColor == GameColor.any) {
+                    usableCards.add(card);
+                }
+                if (usableCards.size() == tracks) {
+                    break;
+                }
+            }
+        }
+        return usableCards;
+    }
+
+    public int getPoints(int tracks) {
+        if (tracks == 1) {
+            return 1;
+        }
+        if (tracks == 2) {
+            return 2;
+        }
+        if (tracks == 3) {
+            return 4;
+        }
+        if (tracks == 4) {
+            return 7;
+        }
+        if (tracks == 5) {
+            return 10;
+        }
+        else {
+            return 15;
+        }
     }
 
     public String getBoardID() {
