@@ -8,16 +8,15 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.web.servlet.ServletComponentScan;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
 @ComponentScan("com.*")
 @EntityScan("com.*")
-@ServletComponentScan("com")
-public class TicketToRideApplication {
+@ServletComponentScan("com.*")
+public class TicketToRideApplication extends SpringBootServletInitializer {
 
     private static final Logger logger = LoggerFactory.getLogger(TicketToRideApplication.class);
 
