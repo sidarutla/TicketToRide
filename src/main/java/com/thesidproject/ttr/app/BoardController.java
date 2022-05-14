@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = {"http://ttrapp.local.apheliontechnologies.com:4000", "https://ttrapp.apheliontechnologies.com"}, maxAge = 3600)
+@CrossOrigin(maxAge = 3600)
 @RestController
 @Controller
 public class BoardController {
