@@ -26,8 +26,8 @@ public class TicketToRideApplication {
     @Bean
     public CommandLineRunner demo() {
         return (args) -> {
-            System.out.println("************* APP NAME           *** " + appName);
-            System.out.println("************* ACTIVE PROFILES    *** " + activeProfiles);
+            logger.info("************* APP NAME           *** " + appName);
+            logger.info("************* ACTIVE PROFILES    *** " + activeProfiles);
         };
     }
 }
