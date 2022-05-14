@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<!-- <configuration> <include resource="org/springframework/boot/logging/logback/defaults.xml" 
+	/> <include resource="org/springframework/boot/logging/logback/file-appender.xml" 
+	/> <root level="INFO"> <appender-ref ref="FILE" /> </root> </configuration> -->
+
+
+<configuration scan="true" scanPeriod="15 seconds">
+
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%d [%thread] %-5level %logger{36} - _ga=%X{_ga:-NONE} _gid=%X{_gid:-NONE} _ga_as_i=%X{ga_asset_id:-NONE} _ga_as_v=%X{ga_asset_value:-NONE} %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<appender name="FILEOUT" class="ch.qos.logback.core.FileAppender">
+		<file>${LOG_FILE}.log</file>
+		<!-- encoders are assigned the type ch.qos.logback.classic.encoder.PatternLayoutEncoder 
+			by default -->
+		<encoder>
+			<pattern>%d [%thread] %-5level %logger{36} - _ga=%X{_ga:-NONE} _gid=%X{_gid:-NONE} _ga_as_i=%X{ga_asset_id:-NONE} _ga_as_v=%X{ga_asset_value:-NONE} %msg%n</pattern>
+		</encoder>
+	</appender>
+
+
+	<springProfile name="dev">
+ 		<root level="INFO">
+			<appender-ref ref="STDOUT" />
+		</root>
+		
+		<logger name="com.aphe" level="DEBUG" additivity="false">
+			<appender-ref ref="STDOUT" />
+		</logger>
+	</springProfile>
+
+	<springProfile name="qa,e2e,prod,sandbox">	
+		<include resource="org/springframework/boot/logging/logback/defaults.xml" />
+		<include resource="org/springframework/boot/logging/logback/file-appender.xml" />
+
+		<root level="INFO">
+			<appender-ref ref="FILEOUT" />
+		</root>
+		<logger name="com.aphe" level="DEBUG" additivity="false">
+			<appender-ref ref="FILEOUT" />
+		</logger>
+	</springProfile>
+</configuration>
