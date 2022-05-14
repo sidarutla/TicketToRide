@@ -180,7 +180,7 @@ public class Board {
     }
 
 
-    public boolean pickPlayType(String PlayerID, PlayType playType) {
+    public boolean pickPlayType(String playerID, PlayType playType) {
 
         if (round == 1 && playType != PlayType.drawTickets) {
             return false;
@@ -189,7 +189,7 @@ public class Board {
         if (isTurnInProgress) {
             return false;
         }
-        if (!PlayerID.equals(currentPlayerID)) {
+        if (!playerID.equals(currentPlayerID)) {
             return false;
         }
         if (gameState != GameState.started) {
@@ -197,6 +197,18 @@ public class Board {
         }
         currentPlayType = playType;
         isTurnInProgress = false;
+        return true;
+    }
+
+    public boolean resetPlayType(String playerID) {
+        if (!playerID.equals(currentPlayerID)) {
+            return false;
+        }
+        if (isTurnInProgress) {
+            return false;
+        }
+        currentPlayType = null;
+
         return true;
     }
 
