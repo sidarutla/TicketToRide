@@ -9,7 +9,7 @@
     <version>2.6.3</version>
     <relativePath/> <!-- lookup parent from repository -->
   </parent>
-  <groupId>com.thesidproject</groupId>
+  <groupId>com.aphe</groupId>
   <artifactId>ttr</artifactId>
   <version>1.0-SNAPSHOT</version>
 
