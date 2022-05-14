@@ -39,9 +39,11 @@
 		<include resource="org/springframework/boot/logging/logback/file-appender.xml" />
 
 		<root level="INFO">
+			<appender-ref ref="STDOUT" />
 			<appender-ref ref="FILEOUT" />
 		</root>
 		<logger name="com" level="DEBUG" additivity="false">
+			<appender-ref ref="STDOUT" />
 			<appender-ref ref="FILEOUT" />
 		</logger>
 	</springProfile>
