@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.websocket.server.PathParam;
 
-@CrossOrigin(maxAge = 3600)
+@CrossOrigin
 @RestController
 @Controller
 public class PlayerController {
