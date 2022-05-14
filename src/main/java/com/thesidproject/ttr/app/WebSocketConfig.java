@@ -20,7 +20,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
         registry.addEndpoint("/ttr-websocket")
-                .setAllowedOrigins("http://localhost:3001", "http://192.168.86.105:3001")
+                .setAllowedOrigins("http://ttr.local.apheliontechnologies.com:4000/", "https://ttr.apheliontechnologies.com/")
                 .withSockJS();
 
     }

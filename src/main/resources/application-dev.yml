@@ -1,0 +1,24 @@
+appName: ttr-dev
+url: http://ttr.local.apheliontechnologies.com
+name: Ticket To Ride  - Developer Mode
+
+spring:
+    profiles: dev
+
+aphe:
+    product:
+        appId: domain-dev
+        appName: 1099SmartFile-Dev
+        url: http://ttrapp.local.1099smartfile.com:3001
+    auth:
+        allowedHosts: http://ttr.local.apheliontechnologies.com:4000
+
+server:
+    port: 9080
+
+security:
+   require-ssl: false
+
+logging:
+    file:
+        path: "target/ttr"

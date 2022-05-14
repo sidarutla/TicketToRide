@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.websocket.server.PathParam;
 
-@CrossOrigin(origins = {"http://localhost:3001", "http://192.168.86.105:3001"}, maxAge = 3600)
+@CrossOrigin(origins = {"http://ttr.local.apheliontechnologies.com:4000", "https://ttr.apheliontechnologies.com"}, maxAge = 3600)
 @RestController
 @Controller
 public class PlayerController {

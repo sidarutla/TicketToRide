@@ -1,0 +1,13 @@
+appName: ttr-prod
+url: https://ttr.apheliontechnologies.com
+name: Tikcet To Ride
+
+spring:
+    profiles: prod
+
+aphe:
+    auth:
+        allowedHosts: https://ttrapp.apheliontechnologies.com
+logging:
+    file:
+        name: /usr/local/tomcat/logs/ttr

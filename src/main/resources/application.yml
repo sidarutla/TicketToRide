@@ -1,0 +1,22 @@
+# App specific properties.
+spring:
+    main:
+        allow-circular-references: true
+
+aphe:
+    product:
+        appId: domain
+        appName: Ticket To Ride
+        url: https://ttrapp.apheliontechnologies.com
+
+management:
+    endpoints:
+        web:
+            base-path: /badbadbadfeed
+            exposure:
+                include: loggers,health,info,env,threaddump
+    endpoint:
+        health.show-details: always
+        loggers:
+            enabled: true
+    info.git.mode: full

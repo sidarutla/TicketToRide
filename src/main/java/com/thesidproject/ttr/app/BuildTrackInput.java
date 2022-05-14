@@ -4,6 +4,6 @@ import com.thesidproject.GameColor;
 
 public class BuildTrackInput {
     public String connectionID;
-    public int locosToUse;
     public GameColor colorToUse;
+    public boolean useLocos;
 }
