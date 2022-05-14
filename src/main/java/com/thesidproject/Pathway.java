@@ -30,4 +30,8 @@ public class Pathway {
     public GamePlayer getGamePlayer() {
         return gamePlayer;
     }
+
+    public String getPathwayID() {
+        return pathwayID;
+    }
 }

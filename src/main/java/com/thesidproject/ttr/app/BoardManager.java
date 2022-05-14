@@ -127,35 +127,35 @@ public class BoardManager {
         return null;
     }
 
-//    public Board buildTrack(String boardID, String playerID, BuildTrackInput buildTrackInput) {
-//        Player player = playerManager.getPlayer(playerID);
-//        if (player == null) {
-//            return null;
-//        }
-//        Board board = boards.get(boardID);
-//        if (board != null) {
-//            boolean returnedTickets = board.buildTrack(playerID, buildTrackInput.connectionID, buildTrackInput.colorToUse, buildTrackInput.useLocos);
-//            if (returnedTickets) {
-//                return board;
-//            }
-//        }
-//        return null;
-//    }
+    public Board buildTrack(String boardID, String playerID, BuildTrackInput buildTrackInput) {
+        Player player = playerManager.getPlayer(playerID);
+        if (player == null) {
+            return null;
+        }
+        Board board = boards.get(boardID);
+        if (board != null) {
+            boolean returnedTickets = board.buildTrack(playerID, buildTrackInput.connectionID, buildTrackInput.pathwayID, buildTrackInput.colorToUse, buildTrackInput.useLocos);
+            if (returnedTickets) {
+                return board;
+            }
+        }
+        return null;
+    }
 
-//    public Board changePlayType(String boardID, String playerID) {
-//        Player player = playerManager.getPlayer(playerID);
-//        if (player == null) {
-//            return null;
-//        }
-//        Board board = boards.get(boardID);
-//        if (board != null) {
-//            boolean returnedTickets = board.changePlayType(playerID);
-//            if (returnedTickets) {
-//                return board;
-//            }
-//        }
-//        return null;
-//    }
+    public Board resetPlayType(String boardID, String playerID) {
+        Player player = playerManager.getPlayer(playerID);
+        if (player == null) {
+            return null;
+        }
+        Board board = boards.get(boardID);
+        if (board != null) {
+            boolean returnedTickets = board.resetPlayType(playerID);
+            if (returnedTickets) {
+                return board;
+            }
+        }
+        return null;
+    }
 
     public Board getBoard(String boardID) {
         return boards.get(boardID);

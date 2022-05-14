@@ -104,16 +104,16 @@ public class BoardController {
         }
     }
 
-//    @PutMapping("/boards/{boardID}/players/{playerID}/play/change-play-type")
-//    public ResponseEntity<?> changePlayType(@PathVariable("boardID") String boardID, @PathVariable("playerID") String playerID) {
-//        Board board = boardManager.changePlayType(boardID, playerID);
-//        if (board != null) {
-//            boardcastBoard(board);
-//            return ResponseEntity.ok(board);
-//        } else {
-//            return returnErrorResponse("Could not find board");
-//        }
-//    }
+    @PutMapping("/boards/{boardID}/players/{playerID}/play/reset-play-type")
+    public ResponseEntity<?> resetPlayType(@PathVariable("boardID") String boardID, @PathVariable("playerID") String playerID) {
+        Board board = boardManager.resetPlayType(boardID, playerID);
+        if (board != null) {
+            boardcastBoard(board);
+            return ResponseEntity.ok(board);
+        } else {
+            return returnErrorResponse("Could not find board");
+        }
+    }
 
     @PutMapping("/boards/{boardID}/players/{playerID}/play/draw-tickets")
     public ResponseEntity<?> drawTickets(@PathVariable("boardID") String boardID, @PathVariable("playerID") String playerID) {
@@ -148,16 +148,16 @@ public class BoardController {
         }
     }
 
-//    @PutMapping("/boards/{boardID}/players/{playerID}/play/build-track")
-//    public ResponseEntity<?> buildTrack(@PathVariable("boardID") String boardID, @PathVariable("playerID") String playerID, @RequestBody BuildTrackInput buildTrackInput) {
-//        Board board = boardManager.buildTrack(boardID, playerID, buildTrackInput);
-//        if (board != null) {
-//            boardcastBoard(board);
-//            return ResponseEntity.ok(board);
-//        } else {
-//            return returnErrorResponse("Could not find board");
-//        }
-//    }
+    @PutMapping("/boards/{boardID}/players/{playerID}/play/build-track")
+    public ResponseEntity<?> buildTrack(@PathVariable("boardID") String boardID, @PathVariable("playerID") String playerID, @RequestBody BuildTrackInput buildTrackInput) {
+        Board board = boardManager.buildTrack(boardID, playerID, buildTrackInput);
+        if (board != null) {
+            boardcastBoard(board);
+            return ResponseEntity.ok(board);
+        } else {
+            return returnErrorResponse("Could not find board");
+        }
+    }
 
 }
 
