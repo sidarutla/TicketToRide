@@ -29,7 +29,7 @@
 			<appender-ref ref="STDOUT" />
 		</root>
 		
-		<logger name="com.aphe" level="DEBUG" additivity="false">
+		<logger name="com" level="DEBUG" additivity="false">
 			<appender-ref ref="STDOUT" />
 		</logger>
 	</springProfile>
@@ -41,7 +41,7 @@
 		<root level="INFO">
 			<appender-ref ref="FILEOUT" />
 		</root>
-		<logger name="com.aphe" level="DEBUG" additivity="false">
+		<logger name="com" level="DEBUG" additivity="false">
 			<appender-ref ref="FILEOUT" />
 		</logger>
 	</springProfile>
