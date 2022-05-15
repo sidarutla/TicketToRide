@@ -18,6 +18,7 @@ public class Board {
 
 
     List<GamePlayer> gamePlayerList = new ArrayList<>();
+    List<GamePlayer> leaderboard = new ArrayList<>();
     GameState gameState;
     String owningPlayerID = null;
     int round = 1;
@@ -311,6 +312,11 @@ public class Board {
         }
     }
 
+    public void endGame() {
+        gameState = GameState.finished;
+        leaderboard.addAll(gamePlayerList);
+    }
+
     public boolean drawCard(String playerID, int index) {
         if (!playerID.equals(currentPlayerID)) {
             return false;
@@ -519,6 +525,10 @@ public class Board {
 
     public List<Connection> getConnections() {
         return connectionList;
+    }
+
+    public List<GamePlayer> getLeaderboard() {
+        return leaderboard;
     }
 }
 
