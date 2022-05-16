@@ -101,7 +101,7 @@ public class BoardBuilder {
         Connection cn33 = Connection.buildConnection("Denver", "Kansas City", true, 4, GameColor.black, GameColor.orange);
         Connection cn34 = Connection.buildConnection("Denver", "Omaha", false, 4, GameColor.pink, null);
         Connection cn35 = Connection.buildConnection("Santa Fe", "Oklahoma City", false, 3, GameColor.blue, null);
-        Connection cn36 = Connection.buildConnection("Duluth", " Saint St. Marie", false, 3, GameColor.any, null);
+        Connection cn36 = Connection.buildConnection("Duluth", "Saint St. Marie", false, 3, GameColor.any, null);
         Connection cn37 = Connection.buildConnection("Duluth", "Toronto", false, 6, GameColor.pink, null);
         Connection cn38 = Connection.buildConnection("Duluth", "Chicago", false, 3, GameColor.red, null);
         Connection cn39 = Connection.buildConnection("Duluth", "Omaha", true, 2, GameColor.any, GameColor.any);
