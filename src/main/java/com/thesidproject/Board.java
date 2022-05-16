@@ -304,7 +304,7 @@ public class Board {
             currentPlayerID = gamePlayerList.get(nextPlayerIndex).playerID;
         }
 
-        if (playerID.equalsIgnoreCase(finalPlayerID) || round == 5) {
+        if (playerID.equalsIgnoreCase(finalPlayerID)) {
             endGame();;
         }
         if (gamePlayer.tracks <= 2 && finalPlayerID == null) {
