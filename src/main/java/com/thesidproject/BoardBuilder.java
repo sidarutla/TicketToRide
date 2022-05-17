@@ -75,7 +75,7 @@ public class BoardBuilder {
         Connection cn7 = Connection.buildConnection("Portland", "Salt Lake City", false, 6, GameColor.blue, null);
         Connection cn8 = Connection.buildConnection("San Francisco", "Los Angeles", true, 3, GameColor.yellow, GameColor.pink);
         Connection cn9 = Connection.buildConnection("San Francisco", "Salt Lake City", true, 5, GameColor.orange, GameColor.white);
-        Connection cn10 = Connection.buildConnection("Los Angeles", "Las Vegas", false, 2, GameColor.orange, null);
+        Connection cn10 = Connection.buildConnection("Los Angeles", "Las Vegas", false, 2, GameColor.any, null);
         Connection cn11 = Connection.buildConnection("Los Angeles", "Phoenix", false, 3, GameColor.any, null);
         Connection cn12 = Connection.buildConnection("Los Angeles", "El Paso", false, 6, GameColor.black, null);
         Connection cn13 = Connection.buildConnection("Las Vegas", "Salt Lake City", false, 3, GameColor.orange, null);
