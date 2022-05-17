@@ -314,6 +314,9 @@ public class Board {
 
     public void endGame() {
         gameState = GameState.finished;
+        for (GamePlayer gamePlayer : gamePlayerList) {
+            gamePlayer.updateScoreWithTickets();
+        }
         leaderboard.addAll(gamePlayerList);
     }
 

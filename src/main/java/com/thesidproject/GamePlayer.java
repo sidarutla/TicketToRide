@@ -1,10 +1,7 @@
 package com.thesidproject;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 public class GamePlayer {
 
@@ -96,5 +93,56 @@ public class GamePlayer {
 
     public List<List<String>> getConnectedCities() {
         return connectedCities;
+    }
+
+    public void compileConnectedCities(Connection connection) {
+
+        List<String> newCities = new ArrayList<>();
+        newCities.add(connection.source);
+        newCities.add(connection.destination);
+        connectedCities.add(newCities);
+
+        for (int i = 0; i < connectedCities.size(); i++) {
+            for (int j = 0; j < connectedCities.get(i).size(); j++) {
+                for (int k = 0; k < connectedCities.size(); k++) {
+                    for (int l = 0; l < connectedCities.get(k).size(); l++) {
+                        if (i != k || j != l) {
+                            if (connectedCities.get(i).get(j).equals(connectedCities.get(k).get(l))) {
+                                connectedCities.get(i).addAll(connectedCities.get(k));
+                                connectedCities.remove(connectedCities.get(k));
+                                i = 0;
+                                j = 0;
+                                k = 0;
+                                l = 0;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    public void updateScoreWithTickets() {
+        for (Ticket ticket : tickets) {
+            boolean sourceFound = false;
+            boolean destinationFound = false;
+            for (List<String> list : connectedCities) {
+                for (String city : list) {
+                    if (ticket.source.equals(city)) {
+                        sourceFound = true;
+                        break;
+                    }
+                    if (ticket.destination.equals(city)) {
+                        destinationFound = true;
+                        break;
+                    }
+                }
+            }
+            if (sourceFound && destinationFound) {
+                score += ticket.value;
+            } else {
+                score -= ticket.value;
+            }
+        }
     }
 }
