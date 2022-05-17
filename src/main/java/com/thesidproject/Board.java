@@ -18,9 +18,8 @@ public class Board {
 
 
     List<GamePlayer> gamePlayerList = new ArrayList<>();
-    List<GamePlayer> leaderboard = new ArrayList<>();
     GameState gameState;
-    String owningPlayerID = null;
+    String owningPlayerID;
     int round = 1;
     String currentPlayerID;
     PlayType currentPlayType;
@@ -315,9 +314,8 @@ public class Board {
     public void endGame() {
         gameState = GameState.finished;
         for (GamePlayer gamePlayer : gamePlayerList) {
-            gamePlayer.updateScoreWithTickets();
+            gamePlayer.scoreTickets();
         }
-        leaderboard.addAll(gamePlayerList);
     }
 
     public boolean drawCard(String playerID, int index) {
@@ -407,6 +405,7 @@ public class Board {
         }
 
         pathway.gamePlayer = gamePlayer;
+        gamePlayer.compileConnectedCities(connection);
         gamePlayer.cards.removeAll(usableCards);
         discardedCardList.addAll(usableCards);
         gamePlayer.tracks -= pathway.tracks;
@@ -528,10 +527,6 @@ public class Board {
 
     public List<Connection> getConnections() {
         return connectionList;
-    }
-
-    public List<GamePlayer> getLeaderboard() {
-        return leaderboard;
     }
 }
 

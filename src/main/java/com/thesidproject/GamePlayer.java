@@ -95,6 +95,17 @@ public class GamePlayer {
         return connectedCities;
     }
 
+    public boolean hasCommonCity(List<String> cityList1, List<String> cityList2) {
+        for (String city1 : cityList1) {
+            for (String city2 : cityList2) {
+                if (city1.equals(city2)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     public void compileConnectedCities(Connection connection) {
 
         List<String> newCities = new ArrayList<>();
@@ -103,46 +114,55 @@ public class GamePlayer {
         connectedCities.add(newCities);
 
         for (int i = 0; i < connectedCities.size(); i++) {
-            for (int j = 0; j < connectedCities.get(i).size(); j++) {
-                for (int k = 0; k < connectedCities.size(); k++) {
-                    for (int l = 0; l < connectedCities.get(k).size(); l++) {
-                        if (i != k || j != l) {
-                            if (connectedCities.get(i).get(j).equals(connectedCities.get(k).get(l))) {
-                                connectedCities.get(i).addAll(connectedCities.get(k));
-                                connectedCities.remove(connectedCities.get(k));
-                                i = 0;
-                                j = 0;
-                                k = 0;
-                                l = 0;
-                            }
-                        }
-                    }
+            for (int j = i + 1; j < connectedCities.size(); j++) {
+                if (hasCommonCity(connectedCities.get(i), connectedCities.get(j))) {
+                    connectedCities.get(i).addAll(connectedCities.get(j));
+                    connectedCities.get(j).clear();
+                    i = 0;
+                    break;
                 }
             }
         }
+        List<List<String>> newConnectedCities = new ArrayList<>();
+        for (List<String> cityList: connectedCities) {
+            if (cityList.size() != 0) {
+                newConnectedCities.add(cityList);
+            }
+        }
+        connectedCities = newConnectedCities;
     }
 
-    public void updateScoreWithTickets() {
+    public void scoreTickets() {
         for (Ticket ticket : tickets) {
-            boolean sourceFound = false;
-            boolean destinationFound = false;
-            for (List<String> list : connectedCities) {
-                for (String city : list) {
-                    if (ticket.source.equals(city)) {
-                        sourceFound = true;
-                        break;
-                    }
-                    if (ticket.destination.equals(city)) {
-                        destinationFound = true;
-                        break;
-                    }
+            boolean isTicketFinished = false;
+            for (List<String> cityList : connectedCities) {
+                if (checkFinishedTicket(ticket.source, ticket.destination, cityList)) {
+                    isTicketFinished = true;
+                    break;
                 }
             }
-            if (sourceFound && destinationFound) {
+            if (isTicketFinished) {
                 score += ticket.value;
             } else {
                 score -= ticket.value;
             }
         }
+    }
+
+    public boolean checkFinishedTicket(String source, String destination, List<String> cityList) {
+        boolean sourceFound = false;
+        boolean destinationFound = false;
+        for (String city : cityList) {
+            if (source.equals(city)) {
+                sourceFound = true;
+            }
+            if (destination.equals(city)) {
+                destinationFound = true;
+            }
+            if (sourceFound && destinationFound) {
+                break;
+            }
+        }
+        return sourceFound && destinationFound;
     }
 }
