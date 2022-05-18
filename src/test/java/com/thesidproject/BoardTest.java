@@ -101,4 +101,35 @@ public class BoardTest extends TestCase {
         b.returnTickets(bob.playerID, returnedticketIDList2);
         assertEquals(b.currentPlayerID, sid.playerID);
     }
+
+    public void testConnectedCitiesAndTickets() {
+        GamePlayer sid = new GamePlayer("123", "Sid", PlayerColor.green);
+
+        Connection cn1 = Connection.buildConnection("Vancouver", "Seattle", true, 1, GameColor.any, GameColor.any);
+        sid.compileConnectedCities(cn1);
+        assertEquals(sid.connectedCities.size(), 1);
+        assertEquals(sid.connectedCities.get(0).size(), 2);
+        Connection cn2 = Connection.buildConnection("Vancouver", "Calgary", false, 3, GameColor.any, null);
+        sid.compileConnectedCities(cn2);
+        assertEquals(sid.connectedCities.size(), 1);
+        assertEquals(sid.connectedCities.get(0).size(), 4);
+        Connection cn6 = Connection.buildConnection("Portland", "San Francisco", true, 5, GameColor.green, GameColor.pink);
+        sid.compileConnectedCities(cn6);
+        assertEquals(sid.connectedCities.size(), 2);
+        assertEquals(sid.connectedCities.get(0).size(), 4);
+        assertEquals(sid.connectedCities.get(1).size(), 2);
+        Connection cn3 = Connection.buildConnection("Seattle", "Portland", true, 1, GameColor.any, GameColor.any);
+        sid.compileConnectedCities(cn3);
+        assertEquals(sid.connectedCities.size(), 1);
+        assertEquals(sid.connectedCities.get(0).size(), 8);
+        Ticket t30 = Ticket.buildTicket("Vancouver", "Portland", 10);
+        sid.tickets.add(t30);
+        sid.scoreTickets();
+        assertEquals(sid.score, 10);
+
+
+
+
+
+    }
 }

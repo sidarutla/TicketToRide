@@ -118,7 +118,7 @@ public class GamePlayer {
                 if (hasCommonCity(connectedCities.get(i), connectedCities.get(j))) {
                     connectedCities.get(i).addAll(connectedCities.get(j));
                     connectedCities.get(j).clear();
-                    i = 0;
+                    i = -1;
                     break;
                 }
             }
