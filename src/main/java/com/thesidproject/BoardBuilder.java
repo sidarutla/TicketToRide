@@ -62,7 +62,7 @@ public class BoardBuilder {
         Ticket t28 = Ticket.buildTicket("Vancouver", "Santa Fe", 13);
         Ticket t29 = Ticket.buildTicket("Winnipeg", "Houston", 12);
         Ticket t30 = Ticket.buildTicket("Winnipeg", "Little Rock", 11);
-        return new ArrayList<>(Arrays.asList(t23, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17, t18, t19, t20, t21, t22, t23, t24, t25, t26, t27, t28, t29, t30));
+        return new ArrayList<>(Arrays.asList(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17, t18, t19, t20, t21, t22, t23, t24, t25, t26, t27, t28, t29, t30));
     }
 
     public List<Connection> createConnections() {
