@@ -427,7 +427,7 @@ public class Board {
         }
 
 
-        if (useLocos) {
+        if (useLocos && colorToUse != GameColor.any) {
             for (Card card : gamePlayer.cards) {
                 if (card.gameColor == GameColor.any) {
                     usableCards.add(card);
