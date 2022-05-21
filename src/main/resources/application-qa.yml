@@ -1,5 +1,5 @@
 appName: ttr-qa
-url: https://ttrapi-qa.apheliontechnologies.com
+url: http://ttrapi-qa.arutla.com
 name: Tikcet To Ride
 
 spring:
@@ -7,7 +7,7 @@ spring:
 
 aphe:
     auth:
-        allowedHosts: https://ttr-qa.apheliontechnologies.com
+        allowedHosts: http://ttr-qa.arutla.com
 logging:
     file:
         name: /usr/local/tomcat/logs/ttr-qa

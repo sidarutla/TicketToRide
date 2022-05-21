@@ -7,11 +7,11 @@ spring:
 
 aphe:
     product:
-        appId: domain-dev
-        appName: 1099SmartFile-Dev
-        url: http://ttrapp.local.1099smartfile.com:3001
+        appId: ttr-dev
+        appName: Ticket To Ride - Dev
+        url: http://ttr.local.arutla.com:3001
     auth:
-        allowedHosts: http://ttr.local.apheliontechnologies.com:4000
+        allowedHosts: http://ttr.local.arutla.com:4000
 
 server:
     port: 9080

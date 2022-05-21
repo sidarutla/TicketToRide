@@ -5,9 +5,9 @@ spring:
 
 aphe:
     product:
-        appId: domain
+        appId: ttr
         appName: Ticket To Ride
-        url: https://ttrapp.apheliontechnologies.com
+        url: http://ttr.arutla.com
 
 management:
     endpoints:
