@@ -7,7 +7,7 @@ spring:
 
 aphe:
     auth:
-        allowedHosts: https://ttrapp-qa.apheliontechnologies.com
+        allowedHosts: https://ttr-qa.apheliontechnologies.com
 logging:
     file:
         name: /usr/local/tomcat/logs/ttr-qa
