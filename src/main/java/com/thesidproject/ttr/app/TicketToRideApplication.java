@@ -11,6 +11,8 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @SpringBootApplication
 @ComponentScan("com.*")
@@ -26,6 +28,9 @@ public class TicketToRideApplication extends SpringBootServletInitializer {
     @Value("${spring.profiles.active:}")
     private String activeProfiles;
 
+    @Value("${aphe.auth.allowedHosts}")
+    private String allowedHosts;
+
     public static void main(String[] args) {
         SpringApplication.run(TicketToRideApplication.class, args);
     }
@@ -35,6 +40,17 @@ public class TicketToRideApplication extends SpringBootServletInitializer {
         return (args) -> {
             logger.info("************* APP NAME           *** " + appName);
             logger.info("************* ACTIVE PROFILES    *** " + activeProfiles);
+        };
+    }
+
+
+    @Bean
+    public WebMvcConfigurer corsConfigurer() {
+        return new WebMvcConfigurer() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("/**").allowedOrigins(allowedHosts);
+            }
         };
     }
 }
