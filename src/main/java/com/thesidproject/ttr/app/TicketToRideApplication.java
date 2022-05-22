@@ -49,7 +49,9 @@ public class TicketToRideApplication extends SpringBootServletInitializer {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**").allowedOrigins(allowedHosts);
+                registry.addMapping("/**")
+                        .allowedOrigins(allowedHosts)
+                        .allowedMethods("OPTIONS", "HEAD", "GET", "POST",  "PUT" );
             }
         };
     }
