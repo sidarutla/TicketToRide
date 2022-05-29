@@ -409,8 +409,9 @@ public class Board {
         gamePlayer.cards.removeAll(usableCards);
         discardedCardList.addAll(usableCards);
         gamePlayer.tracks -= pathway.tracks;
-        gamePlayer.score += getPoints(pathway.tracks);
-        gamePlayer.scoreFromTracks += getPoints(pathway.tracks);
+        int points = getPoints(pathway.tracks);
+        gamePlayer.score += points;
+        gamePlayer.scoreFromTracks += points;
         endTurn(playerID);
         return true;
     }

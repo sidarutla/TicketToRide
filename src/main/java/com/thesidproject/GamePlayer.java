@@ -1,7 +1,9 @@
 package com.thesidproject;
 
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 public class GamePlayer {
 
@@ -12,9 +14,8 @@ public class GamePlayer {
     int tracks = 45;
     int score = 0;
     int scoreFromTracks;
-    int scoreFromTickets;
-    int scoreSubtracted;
-    //scoreSubtracted is a positive number
+    int scoreFromFinishedTickets;
+    int scoreFromUnfinishedTickets;
     List<Ticket> tickets = new ArrayList<>();
     List<Ticket> drawnTickets = new ArrayList<>();
     List<Card> cards = new ArrayList<>();
@@ -128,12 +129,24 @@ public class GamePlayer {
             }
         }
         List<List<String>> newConnectedCities = new ArrayList<>();
-        for (List<String> cityList: connectedCities) {
+        for (List<String> cityList : connectedCities) {
             if (cityList.size() != 0) {
                 newConnectedCities.add(cityList);
             }
         }
         connectedCities = newConnectedCities;
+
+
+        for (List<String> cityList : connectedCities) {
+            for (int i = 0; i < cityList.size(); i++) {
+                for (int j = i + 1; j < cityList.size(); j++) {
+                    if (cityList.get(i).equals(cityList.get(j))) {
+                        cityList.remove(j);
+                        i = -1;
+                    }
+                }
+            }
+        }
     }
 
     public void scoreTickets() {
@@ -147,10 +160,10 @@ public class GamePlayer {
             }
             if (isTicketFinished) {
                 score += ticket.value;
-                scoreFromTickets += ticket.value;
+                scoreFromFinishedTickets += ticket.value;
             } else {
                 score -= ticket.value;
-                scoreSubtracted += ticket.value;
+                scoreFromUnfinishedTickets -= ticket.value;
             }
         }
     }
@@ -170,5 +183,36 @@ public class GamePlayer {
             }
         }
         return sourceFound && destinationFound;
+    }
+
+    public List<String> findConnectedCities(List<Connection> connectionList, String city) {
+        List <String> nextCities = new ArrayList<>();
+        for (Connection connection : connectionList) {
+            if (connection.source.equals(city)) {
+                nextCities.add(connection.destination);
+            }
+            if (connection.destination.equals(city)) {
+                nextCities.add(connection.destination);
+            }
+        }
+        return nextCities;
+    }
+
+    public int getLongestRoute(List<Connection> connectionList) {
+        List<String> checkedCities;
+        int maxLength = 0;
+        for (List<String> cityList: connectedCities) {
+            for (String city : cityList) {
+
+                for (String possibleNextCity : cityList) {
+                    for (String nextCity : findConnectedCities(connectionList, city)) {
+                        if (possibleNextCity.equals(nextCity)) {
+
+                        }
+                    }
+                }
+            }
+        }
+        return maxLength;
     }
 }
