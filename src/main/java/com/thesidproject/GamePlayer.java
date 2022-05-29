@@ -84,6 +84,18 @@ public class GamePlayer {
         return score;
     }
 
+    public int getScoreFromTracks() {
+        return scoreFromTracks;
+    }
+
+    public int getScoreFromFinishedTickets() {
+        return scoreFromFinishedTickets;
+    }
+
+    public int getScoreFromUnfinishedTickets() {
+        return scoreFromUnfinishedTickets;
+    }
+
     public List<Ticket> getTickets() {
         return tickets;
     }
