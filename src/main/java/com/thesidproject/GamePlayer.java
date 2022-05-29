@@ -11,6 +11,10 @@ public class GamePlayer {
 
     int tracks = 45;
     int score = 0;
+    int scoreFromTracks;
+    int scoreFromTickets;
+    int scoreSubtracted;
+    //scoreSubtracted is a positive number
     List<Ticket> tickets = new ArrayList<>();
     List<Ticket> drawnTickets = new ArrayList<>();
     List<Card> cards = new ArrayList<>();
@@ -143,8 +147,10 @@ public class GamePlayer {
             }
             if (isTicketFinished) {
                 score += ticket.value;
+                scoreFromTickets += ticket.value;
             } else {
                 score -= ticket.value;
+                scoreSubtracted += ticket.value;
             }
         }
     }

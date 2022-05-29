@@ -410,6 +410,7 @@ public class Board {
         discardedCardList.addAll(usableCards);
         gamePlayer.tracks -= pathway.tracks;
         gamePlayer.score += getPoints(pathway.tracks);
+        gamePlayer.scoreFromTracks += getPoints(pathway.tracks);
         endTurn(playerID);
         return true;
     }
