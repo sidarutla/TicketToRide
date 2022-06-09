@@ -155,6 +155,7 @@ public class GamePlayer {
                     if (cityList.get(i).equals(cityList.get(j))) {
                         cityList.remove(j);
                         i = -1;
+                        break;
                     }
                 }
             }
