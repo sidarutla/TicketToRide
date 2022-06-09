@@ -133,11 +133,21 @@ public class Board {
         fiveOpenCards.addAll(cardsNeeded);
         cardList.removeAll(cardsNeeded);
 
+        int timesReshuffled = 0;
         while (has3Locos()) {
             cardList.addAll(fiveOpenCards);
             shuffleCards();
             fiveOpenCards = new ArrayList<>(cardList.subList(0, 5));
             cardList.removeAll(fiveOpenCards);
+            timesReshuffled += 1;
+
+            if (timesReshuffled == 10) {
+                cardList.addAll(discardedCardList);
+                discardedCardList.clear();
+            }
+            if (timesReshuffled == 20) {
+                break;
+            }
         }
     }
 

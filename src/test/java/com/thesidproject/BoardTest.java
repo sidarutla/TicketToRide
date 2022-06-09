@@ -126,10 +126,47 @@ public class BoardTest extends TestCase {
         sid.tickets.add(t30);
         sid.scoreTickets();
         assertEquals(sid.score, 10);
+    }
 
+    public void testOutOfCards() {
+        List<String> returnTickets1 = new ArrayList<>();
+        List<String> returnTickets2 = new ArrayList<>();
+        Board b = new Board(sid, "test");
+        Player bob = new Player("bob");
+        b.addPlayer(bob);
+        b.startGame(sid.playerID);
+        b.pickPlayType(sid.playerID, PlayType.drawTickets);
+        b.drawTickets(sid.playerID);
+        b.returnTickets(sid.playerID, returnTickets1);
+        b.pickPlayType(bob.playerID, PlayType.drawTickets);
+        b.drawTickets(bob.playerID);
+        assertTrue(b.returnTickets(bob.playerID, returnTickets2));
 
+        for (int i = 0; i < 97; i++) {
+           b.discardedCardList.add(b.cardList.get(0));
+           b.cardList.remove(0);
+        }
+        b.pickPlayType(sid.playerID, PlayType.drawCards);
+        assertTrue(b.drawCard(sid.playerID, 0));
+        if (b.getPlayerFromID(sid.playerID).cards.get(4).gameColor != GameColor.any) {
+            if (b.fiveOpenCards.get(0).gameColor != GameColor.any)
+            assertTrue(b.drawCard(sid.playerID, 0));
+        } else {
+            assertTrue(b.drawCard(sid.playerID, 1));
+        }
 
+        assertEquals(b.fiveOpenCards.size(), 5);
 
+        b.pickPlayType(bob.playerID, PlayType.drawCards);
+        assertTrue(b.drawCard(bob.playerID, 0));
+        if (b.getPlayerFromID(bob.playerID).cards.get(4).gameColor != GameColor.any) {
+            if (b.fiveOpenCards.get(0).gameColor != GameColor.any)
+                assertTrue(b.drawCard(bob.playerID, 0));
+        } else {
+            assertTrue(b.drawCard(bob.playerID, 1));
+        }
+
+        assertEquals(b.fiveOpenCards.size(), 5);
 
     }
 }
