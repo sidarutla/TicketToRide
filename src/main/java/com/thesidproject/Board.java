@@ -540,6 +540,10 @@ public class Board {
     public List<Connection> getConnections() {
         return connectionList;
     }
+
+    public String getFinalPlayerID() {
+        return finalPlayerID;
+    }
 }
 
 
