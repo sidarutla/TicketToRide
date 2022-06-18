@@ -143,14 +143,14 @@ public class BoardTest extends TestCase {
         assertTrue(b.returnTickets(bob.playerID, returnTickets2));
 
         for (int i = 0; i < 97; i++) {
-           b.discardedCardList.add(b.cardList.get(0));
-           b.cardList.remove(0);
+            b.discardedCardList.add(b.cardList.get(0));
+            b.cardList.remove(0);
         }
         b.pickPlayType(sid.playerID, PlayType.drawCards);
         assertTrue(b.drawCard(sid.playerID, 0));
         if (b.getPlayerFromID(sid.playerID).cards.get(4).gameColor != GameColor.any) {
             if (b.fiveOpenCards.get(0).gameColor != GameColor.any)
-            assertTrue(b.drawCard(sid.playerID, 0));
+                assertTrue(b.drawCard(sid.playerID, 0));
         } else {
             assertTrue(b.drawCard(sid.playerID, 1));
         }
@@ -168,5 +168,62 @@ public class BoardTest extends TestCase {
 
         assertEquals(b.fiveOpenCards.size(), 5);
 
+    }
+
+    public void testBuildWithLocos() {
+        List<String> returnTickets1 = new ArrayList<>();
+        List<String> returnTickets2 = new ArrayList<>();
+        Board b = new Board(sid, "test");
+        Player bob = new Player("bob");
+        b.addPlayer(bob);
+        b.startGame(sid.playerID);
+        b.pickPlayType(sid.playerID, PlayType.drawTickets);
+        b.drawTickets(sid.playerID);
+        b.returnTickets(sid.playerID, returnTickets1);
+        b.pickPlayType(bob.playerID, PlayType.drawTickets);
+        b.drawTickets(bob.playerID);
+        assertTrue(b.returnTickets(bob.playerID, returnTickets2));
+        int locos = 0;
+        for (Card card : b.getPlayerFromID(sid.playerID).cards) {
+            if (card.gameColor == GameColor.any) {
+                locos += 1;
+            }
+        }
+        while (locos != 6) {
+            Card card = new Card(GameColor.any);
+            b.getPlayerFromID(sid.playerID).cards.add(card);
+            locos += 1;
+        }
+        assertEquals(locos, 6);
+        assertTrue(b.pickPlayType(sid.playerID, PlayType.buildTracks));
+    }
+
+    public void testTakeBothPathways() {
+        List<String> returnTickets1 = new ArrayList<>();
+        List<String> returnTickets2 = new ArrayList<>();
+        Board b = new Board(sid, "test");
+        Player bob = new Player("bob");
+        b.addPlayer(bob);
+        b.startGame(sid.playerID);
+        b.pickPlayType(sid.playerID, PlayType.drawTickets);
+        b.drawTickets(sid.playerID);
+        b.returnTickets(sid.playerID, returnTickets1);
+        b.pickPlayType(bob.playerID, PlayType.drawTickets);
+        b.drawTickets(bob.playerID);
+        assertTrue(b.returnTickets(bob.playerID, returnTickets2));
+        for (int i = 0; i < 6; i++) {
+            Card card = new Card(GameColor.red);
+            b.getPlayerFromID(sid.playerID).cards.add(card);
+        }
+        b.pickPlayType(sid.playerID, PlayType.buildTracks);
+        Connection connection = b.connectionList.get(0);
+        Pathway pathway1 = connection.pathway1;
+        Pathway pathway2 = connection.pathway2;
+        assertTrue(b.buildTrack(sid.playerID, connection.connectionID, pathway2.pathwayID, GameColor.red, false));
+        b.pickPlayType(bob.playerID, PlayType.drawCards);
+        assertTrue(b.drawCard(bob.playerID, 5));
+        assertTrue(b.drawCard(bob.playerID, 5));
+        b.pickPlayType(sid.playerID, PlayType.buildTracks);
+        assertTrue(b.buildTrack(sid.playerID, connection.connectionID, pathway1.pathwayID, GameColor.red, false));
     }
 }

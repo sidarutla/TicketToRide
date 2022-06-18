@@ -409,6 +409,15 @@ public class Board {
             return false;
         }
 
+        if (connection.pathway2 != null) {
+            if (pathway == connection.pathway1 && connection.pathway2.gamePlayer == gamePlayer) {
+                return false;
+            }
+            if (pathway == connection.pathway2 && connection.pathway1.gamePlayer == gamePlayer) {
+                return false;
+            }
+        }
+
         List<Card> usableCards = getUsableCards(gamePlayer, pathway.tracks, colorToUse, useLocos);
         if (usableCards.size() < pathway.tracks) {
             return false;
