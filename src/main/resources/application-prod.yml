@@ -10,4 +10,4 @@ aphe:
         allowedHosts: http://ttr.arutla.com
 logging:
     file:
-        name: /usr/local/tomcat/logs/ttr
+        name: /data/logs/ttr_prod_app
